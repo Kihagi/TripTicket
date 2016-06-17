@@ -5,17 +5,30 @@
   <artifactId>TripTicket</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>TripTicket Maven Webapp</name>
+  <name>TripTicket - Ticketing Application</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+	    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>7.0</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>TripTicket</finalName>
+    <plugins>
+		<plugin>
+			<groupId>org.wildfly.plugins</groupId>
+			<artifactId>wildfly-maven-plugin</artifactId>
+			<version>1.0.0.Final</version>
+		</plugin>
+	</plugins>
   </build>
 </project>

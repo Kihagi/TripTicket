@@ -1,3 +1,4 @@
+package tripticket.company.api;
 import javax.ws.rs.Path;
 
 import tripticket.company.bean.CompanyBeanI;

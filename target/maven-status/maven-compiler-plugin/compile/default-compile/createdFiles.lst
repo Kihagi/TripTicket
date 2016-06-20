@@ -1,0 +1,8 @@
+tripticket/company/dao/CompanyDaoI.class
+tripticket/common/action/CompanyAction.class
+tripticket/company/api/CompanyApi.class
+tripticket/company/model/Company.class
+tripticket/common/model/Address.class
+tripticket/company/dao/CompanyDao.class
+tripticket/company/bean/CompanyBeanI.class
+tripticket/company/bean/CompanyBean.class

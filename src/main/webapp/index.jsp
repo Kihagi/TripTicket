@@ -10,51 +10,7 @@
 
     <title>Welcome to TripTicket</title>
     
-    <script type="text/javascript">
-    
-    var location = {
-    		list: function(){
-    	    	var ajax = new XMLHttpRequest();
-    	    	
-    	    	ajax.onreadystatechange = function(){
-    	    		
-    	    		if(ajax.readyState == 4){
-    	    			if(ajax.status == 200){
-    	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
-    	    			}
-    	    		}
-    	    	}
-    	    	
-    	    	ajax.open("GET", "./location", true);
-    	    	ajax.send();
-    		},
-    		add: function(){
-    	    	var ajax = new XMLHttpRequest();
-    	    	
-    	    	ajax.onreadystatechange = function(){
-    	    		
-    	    		if(ajax.readyState == 4){
-    	    			if(ajax.status == 200){
-    	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
-    	    			}
-    	    		}
-    	    	}
-    	    	
-    	    	ajax.open("GET", "./location/addlocation.jsp", true);
-    	    	ajax.send();
-    		},
-    		remove: function(){
-    			console.log("this removes a location");
-    		}
-    }
-    
-    (function init(){
-    	location.list();
-    })();
-
-    
-    </script>
-
+   
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -90,11 +46,15 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item active" onclick="company.list()">Companies</a>
                     <a href="#" class="list-group-item" onclick="listRoutes()">Routes</a>
+<<<<<<< 4e35c1df5d7b1c65cb3dcdf5f1c4da917a1edfc7
 <<<<<<< 70c1cb448102e91a3c3cb473b43e6480539dca6d
                     <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
 =======
                     <a href="#" class="list-group-item " onclick="location.list()">Locations</a>
 >>>>>>> MozzayTrial
+=======
+                    <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
+>>>>>>> locationThings
                 </div>
             </div>
 
@@ -127,8 +87,13 @@
     </div>
     <!-- /.container -->
 
+<<<<<<< 4e35c1df5d7b1c65cb3dcdf5f1c4da917a1edfc7
     <script src="js/app/company.js"></script>
      <script src="js/app/ticket.js"></script>
+=======
+	<script src="js/app/company.js"></script>
+    <script src="js/app/location.js"></script>
+>>>>>>> locationThings
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

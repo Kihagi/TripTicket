@@ -25,7 +25,5 @@ public class LocationBean implements LocationBeanI {
 	public List<Location> list() {
 		return locationDao.list(new Location());
 	}
-	
-	
 
 }

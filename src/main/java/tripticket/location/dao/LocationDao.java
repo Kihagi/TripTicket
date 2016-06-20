@@ -25,26 +25,32 @@ public class LocationDao implements LocationDaoI {
 		location.setName("Nairobi");
 		location.setId(1);
 		locations.add(location);
-		
+	
+		location = new Location();
 		location.setName("Mombasa");
 		location.setId(2);
 		locations.add(location);
 		
+		location = new Location();
 		location.setName("Kisumu");
 		location.setId(3);
 		locations.add(location);
 		
+		location = new Location();
 		location.setName("Kampala");
 		location.setId(4);
 		locations.add(location);
 		
+		location = new Location();
 		location.setName("Malindi");
 		location.setId(5);
 		locations.add(location);
 		
+		location = new Location();
 		location.setName("Kakamega");
 		location.setId(6);
 		locations.add(location);
+		
 		return locations;
 	}
 

@@ -47,7 +47,7 @@ public class CompanyAction extends HttpServlet{
 	    	resp.println("</div>");
 	    	
 	    	resp.println("<div class=\"text-right\">");
-	        resp.println("<a class=\"btn btn-success\"  onclick=\"location.list()\">location</a>");
+	        resp.println("<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>");
 	        resp.println("</div>");
 	    }
 	}

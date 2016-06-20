@@ -15,17 +15,17 @@ import trioticket.location.model.Location;
 import tripticket.location.bean.LocationBeanI;
 
 @SuppressWarnings("serial")
-@WebServlet( "./location" )
+@WebServlet( "/location" )
 public class LocationAction extends HttpServlet{
 	
 	@EJB	
-	private LocationBeanI LocationBean;
+	private LocationBeanI locationBean;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	 throws ServletException, IOException{
 		
 		PrintWriter resp = response.getWriter();
-	    List<Location> locations = LocationBean.list();
+	    List<Location> locations = locationBean.list();
 	    
         resp.println("<div class=\"text-right\">");
         resp.println("<a class=\"btn btn-success\"  onclick=\"location.add()\">Add</a>");

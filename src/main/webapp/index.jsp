@@ -44,7 +44,7 @@
             <div class="col-md-3">
                 <div class="list-group">
                     <a href="#" class="list-group-item active" onclick="company.list()">Companies</a>
-                    <a href="#" class="list-group-item" onclick="listRoutes()">Routes</a>
+                    <a href="#" class="list-group-item active" onclick="route.list()">Routes</a>
                     <a href="#" class="list-group-item">Trips</a>
                 </div>
             </div>
@@ -78,10 +78,12 @@
     </div>
     <!-- /.container -->
 
-    <script src="js/app/company.js"></script>
+    <script src="js/app/company.js">  </script>
+    <script src="js/app/route.js"></script>
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

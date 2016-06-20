@@ -2,84 +2,90 @@
 
 <head>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<title>Welcome to TripTicket</title>
+    <title>Welcome to TripTicket</title>
 
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom CSS -->
-<link href="css/shop-item.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/shop-item.css" rel="stylesheet">
 </head>
 
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">TripTicket</a>
-			</div>
-		</div>
-		<!-- /.container -->
-	</nav>
-	<!-- Page Content -->
-	<div class="container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">TripTicket</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
 
-		<div class="row">
+    <!-- Page Content -->
+    <div class="container">
 
-			<div class="col-md-3">
-				<div class="list-group">
-					<a href="#" class="list-group-item active" onclick="company.list()">Companies</a>
-					<a href="#" class="list-group-item" onclick="listRoutes()">Routes</a>
-					<a href="#" class="list-group-item">Trips</a> 
-					<a href="#" class="list-group-item glyphicon glyphicon-user" onclick="passenger.list()">  Passengers</a>
-				</div>
-			</div>
+        <div class="row">
 
-			<div class="col-md-9">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active" onclick="company.list()">Companies</a>
+                    <a href="#" class="list-group-item" onclick="listRoutes()">Routes</a>
+                    <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
+                </div>
+            </div>
 
-				<div class="well" id="ajax-content"></div>
+            <div class="col-md-9">
+            
+                <div class="well" id="ajax-content">
 
-			</div>
+                </div>
 
-		</div>
+            </div>
 
-	</div>
-	<!-- /.container -->
+        </div>
 
-	<div class="container">
+    </div>
+    <!-- /.container -->
 
-		<hr>
+    <div class="container">
 
-		<!-- Footer -->
-		<footer>
-			<div class="row">
-				<div class="col-lg-12">
-					<p>Copyright &copy; 2016</p>
-				</div>
-			</div>
-		</footer>
+        <hr>
 
-	</div>
-	<!-- /.container -->
-	<script src="js/app/passenger.js"></script>
-	<script src="js/app/company.js"></script><!-- jQuery -->
-	<script src="js/jquery.js"></script>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; 2016</p>
+                </div>
+            </div>
+        </footer>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+    </div>
+    <!-- /.container -->
+
+    <script src="js/app/company.js"></script>
+     <script src="js/app/ticket.js"></script>
+    
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 

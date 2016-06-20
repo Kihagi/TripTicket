@@ -42,5 +42,3 @@ function listRoutes(){
 (function init(){
 	company.list();
 })();
-
-	

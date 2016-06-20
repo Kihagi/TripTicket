@@ -46,7 +46,6 @@ public class CompanyAction extends HttpServlet{
 	    	resp.println("</div>");
 	    	resp.println("</div>");
 	    }
-	    
 	}
 	
 }

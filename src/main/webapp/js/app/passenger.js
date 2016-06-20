@@ -1,4 +1,4 @@
-var company = {
+var passenger={
 		list: function(){
 	    	var ajax = new XMLHttpRequest();
 	    	
@@ -11,9 +11,12 @@ var company = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("GET", "./company", true);
+	    	ajax.open("GET", "./passengers", true);
 	    	ajax.send();
 		},
+		
+
+		
 		add: function(){
 	    	var ajax = new XMLHttpRequest();
 	    	
@@ -26,21 +29,7 @@ var company = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("GET", "./company/add.jsp", true);
+	    	ajax.open("GET", "./passengers/addpassengers.jsp", true);
 	    	ajax.send();
-		},
-		remove: function(){
-			console.log("this removes company");
 		}
 }
-
-function listRoutes(){
-	document.getElementById('ajax-content').innerHTML = 'We will load routes here!';
-}
-
-
-(function init(){
-	company.list();
-})();
-
-	

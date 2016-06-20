@@ -33,13 +33,14 @@ var company = {
 			console.log("this removes company");
 		}
 }
+
 function listRoutes(){
 	document.getElementById('ajax-content').innerHTML = 'We will load routes here!';
 }
+
 
 (function init(){
 	company.list();
 })();
 
-
-
+	

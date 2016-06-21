@@ -27,22 +27,28 @@ public class LocationAction extends HttpServlet{
 		PrintWriter resp = response.getWriter();
 	    List<Location> locations = locationBean.list();
 	    
-        resp.println("<div class=\"text-right\">");
-        resp.println("<a class=\"btn btn-success\"  onclick=\"location.add()\">Add</a>");
+	    resp.println("<div class=\"text-right\">");
+        resp.println("<a class=\"btn btn-info Button\"  onclick=\"tripLocation.remove()\">Show in Maps</a>");
         resp.println("</div>");
         
 	    for(Location location : locations){
 	    	resp.println("<hr>");
 	    	resp.println("<div class=\"row\">");
 	    	resp.println("<div class=\"col-md-12\">");
+	    	resp.println("<p>Our offices can be found: </p>");
 	    	resp.println(location.getName() + " : " + location.getId());
 	    	resp.println("</div>");
 	    	resp.println("</div>");
 	    	
 	    	resp.println("<div class=\"text-right\">");
-	        resp.println("<a class=\"btn btn-success\"  onclick=\"location.add()\">Show in Maps</a>");
+	        resp.println("<a class=\"btn btn-success\"  onclick=\"tripLocation.add()\">New Office</a>");
 	        resp.println("</div>");
 	    }
+	    
+	    resp.println("<hr>");
+	    resp.println("<div class=\"text-right\">");
+        resp.println("<a class=\"btn btn-info\"  onclick=\"tripLocation.add()\">Add</a>");
+        resp.println("</div>");
 	}
 	
 

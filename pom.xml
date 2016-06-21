@@ -7,6 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>TripTicket - Ticketing Application</name>
   <url>http://maven.apache.org</url>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -20,15 +21,26 @@
 	    <artifactId>javaee-api</artifactId>
 	    <version>7.0</version>
 	</dependency>
+	
   </dependencies>
+  
   <build>
     <finalName>TripTicket</finalName>
     <plugins>
+
 		<plugin>
 			<groupId>org.wildfly.plugins</groupId>
 			<artifactId>wildfly-maven-plugin</artifactId>
 			<version>1.0.0.Final</version>
 		</plugin>
+		
+		<plugin>
+	  	 	<groupId>com.google.appengine</groupId>
+	 	 	<artifactId>appengine-maven-plugin</artifactId>
+	   		<version>1.9.38</version>
+		</plugin>
+	
 	</plugins>
+	
   </build>
 </project>

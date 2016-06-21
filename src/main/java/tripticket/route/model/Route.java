@@ -1,4 +1,4 @@
-package tripticket.company.model;
+package tripticket.route.model;
 
 /*
  * @Sam Kiragu
@@ -56,3 +56,4 @@ public class Route {
 	}
 	
 }
+

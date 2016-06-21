@@ -1,4 +1,4 @@
-package tripticket.company.api;
+package tripticket.route.api;
 
 /*
  * Sam Kiragu
@@ -6,8 +6,8 @@ package tripticket.company.api;
 
 import javax.ws.rs.Path;
 
-import tripticket.company.bean.RouteBeanI;
-import tripticket.company.model.Route;
+import tripticket.route.bean.RouteBeanI;
+import tripticket.route.model.Route;
 
 @Path("/route")
 public class RouteApi {
@@ -23,3 +23,4 @@ public class RouteApi {
 	
 
 }
+

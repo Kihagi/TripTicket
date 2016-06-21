@@ -1,4 +1,4 @@
-package tripticket.company.dao;
+package tripticket.route.dao;
 
 /*
  * @Sam Kiragu
@@ -7,7 +7,7 @@ package tripticket.company.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import tripticket.company.model.Route;
+import tripticket.route.model.Route;;
 
 public class RouteDao implements RouteDaoI{
 
@@ -86,3 +86,4 @@ public class RouteDao implements RouteDaoI{
 	
 
 }
+

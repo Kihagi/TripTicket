@@ -1,12 +1,12 @@
-package tripticket.company.bean;
+package tripticket.route.bean;
 
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import tripticket.company.dao.RouteDaoI;
-import tripticket.company.model.Route;
+import tripticket.route.dao.RouteDaoI;
+import tripticket.route.model.Route;
 
 @Stateless
 public class RouteBean implements RouteBeanI{
@@ -26,3 +26,4 @@ public class RouteBean implements RouteBeanI{
 	}
 
 }
+

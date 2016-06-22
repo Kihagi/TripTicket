@@ -1,4 +1,4 @@
-package tripticket.company.dao;
+package tripticket.route.dao;
 
 /*
  * @Sam Kiragu
@@ -6,7 +6,7 @@ package tripticket.company.dao;
 
 import java.util.List;
 
-import tripticket.company.model.Route;
+import tripticket.route.model.Route;
 
 public interface RouteDaoI {
 	
@@ -19,3 +19,4 @@ public interface RouteDaoI {
 	void delete(Long fromLocationId, Long toLocationId);
 
 }
+

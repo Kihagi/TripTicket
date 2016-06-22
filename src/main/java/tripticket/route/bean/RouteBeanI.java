@@ -1,4 +1,4 @@
-package tripticket.company.bean;
+package tripticket.route.bean;
 
 /*
  * @Sam Kiragu
@@ -6,7 +6,7 @@ package tripticket.company.bean;
 
 import java.util.List;
 
-import tripticket.company.model.Route;;
+import tripticket.route.model.Route;;
 
 public interface RouteBeanI {
 	

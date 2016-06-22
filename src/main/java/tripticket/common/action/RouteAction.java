@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tripticket.company.bean.RouteBeanI;
-import tripticket.company.model.Company;
-import tripticket.company.model.Route;
+import tripticket.route.bean.RouteBeanI;
+import tripticket.route.model.Route;
+import tripticket.route.model.Route;
 
 /*
  * @Sam Kiragu
@@ -33,27 +33,27 @@ public class RouteAction extends HttpServlet{
 		PrintWriter resp = response.getWriter();
 		List<Route> routes = routeBean.list();
 		
-		resp.println("<div class=\"text-right\">");
-        resp.println("<a class=\"btn btn-success\"  onclick=\"route.add()\">Add Route</a>");
-        resp.println("</div>");
+		resp.println("<p>Select Your Route from the list given</p>");
         
 	    for(Route route : routes){
 	    	resp.println("<hr>");
 	    	
 	    	resp.println("<div class=\"row\">");
 	    	resp.println("<div class=\"col-md-12\">");
-	    	/*
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println(" <span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star-empty\"></span>");
-	    	*/
-	    	resp.println("From Location"+route.getFromLocationId()+ " To Location"+route.getToLocationId());
-	    	resp.println("<span class=\"pull-right\">10 days ago</span>");
-	    	resp.println("<p>This route is short and the road is very good. I would definitely recomend it to someone else.</p>");
+
+	    	resp.println("From Location"+route.getFromLocationId()+ " To Location"+route.getToLocationId()+"</br>");
+	    	
+	    	resp.println("The company is :"+route.getCompanyId()+"</br>");
+	    	
+	    	resp.println("The approximate distance is : :"+route.getDistance()+"</br>");
+	    	
+	    	resp.println("The approximate time is :"+route.getApproxTime());
+	    	
 	    	resp.println("</div>");
 	    	resp.println("</div>");
+	    	resp.println("<div class=\"text-right\">");
+	        resp.println("<a class=\"btn btn-success\"  onclick=\"route.add()\">Select Route</a>");
+	        resp.println("</div>");
 	    }
 		
 	}

@@ -29,6 +29,26 @@ var company = {
 	    	ajax.open("GET", "./company/add.jsp", true);
 	    	ajax.send();
 		},
+		save: function(){
+	    	var ajax = new XMLHttpRequest();
+	    	
+	    	var companyName = document.getElementById('company-name').value;
+	    	var companyRegNo = document.getElementById('company-regno').value;
+	    	
+	    	var params = 'name=' + companyName + '&regNo=' + companyRegNo;
+	    	
+	    	ajax.onreadystatechange = function(){
+	    		
+	    		if(ajax.readyState == 4){
+	    			if(ajax.status == 200){
+	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
+	    			}
+	    		}
+	    	}
+	    	
+	    	ajax.open("POST", "./company/add", true);
+	    	ajax.send(params);
+		},
 		remove: function(){
 			console.log("this removes company");
 		}

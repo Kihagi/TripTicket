@@ -1,16 +1,29 @@
 package tripticket.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
+@Embeddable
 public class Address {
 	
+	@Column
 	private String town;
 	
+	@Column
 	private String country;
 	
+	@Column
 	private String box;
 	
+	@Column
 	private String email;
 	
+	@Column(name = "phone_no")
 	private String phoneNo;
+	
+	@Transient
+	private String fullAddress;
 
 	public String getTown() {
 		return town;
@@ -51,4 +64,13 @@ public class Address {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+
+	public String getFullAddress() {
+		return fullAddress;
+	}
+
+	public void setFullAddress(String fullAddress) {
+		this.fullAddress = fullAddress;
+	}
+	
 }

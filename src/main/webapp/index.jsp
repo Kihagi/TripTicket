@@ -50,6 +50,8 @@
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item " onclick="passenger.list()">Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
+                    <a href="#" class="list-group-item " onclick="person.list()">Persons</a>
+                   
                 </div>
             </div>
 
@@ -89,6 +91,7 @@
     <script src="js/app/route.js"></script>
     <script src="js/app/trip.js"></script>
     <script src="js/app/passenger.js"></script>
+    <script src="js/app/person.js"></script>
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

@@ -15,8 +15,7 @@
 
 	<!-- Custom CSS -->
 	<link href="css/shop-item.css" rel="stylesheet">
-	
-	
+	<link href="css/datepicker3.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -52,7 +51,6 @@
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item " onclick="passenger.list()">Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
-
                     <a href="#" class="list-group-item " onclick="person.list()">Persons</a>
                    
 
@@ -98,17 +96,53 @@
     <script src="js/app/route.js"></script>
     <script src="js/app/trip.js"></script>
     <script src="js/app/passenger.js"></script>
+<<<<<<< HEAD
 
     <script src="js/app/person.js"></script>
 
     <script src="js/app/parcel.js"></script>
 
+=======
+    <script src="js/app/person.js"></script>
+
+    <script src="js/app/parcel.js"></script>
+>>>>>>> d6b252b963d980167ce71064a8345ab791137522
     
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    
+	
+	
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    
+    
+    <script>
+		$(document).ready(function(){
+			var date_input=$('input[name="dateofpayment"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'yyyy-mm-dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			var date_input=$('input[name="travelDate"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'yyyy-mm-dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>
 
 </body>
 

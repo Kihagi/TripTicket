@@ -1,4 +1,4 @@
-package tripticket.commlocation.action;
+package tripticket.location.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,9 +40,6 @@ public class LocationAction extends HttpServlet{
 	    	resp.println("</div>");
 	    	resp.println("</div>");
 	    	
-	    	resp.println("<div class=\"text-right\">");
-	        resp.println("<a class=\"btn btn-success\"  onclick=\"tripLocation.add()\">New Office</a>");
-	        resp.println("</div>");
 	    }
 	    
 	    resp.println("<hr>");

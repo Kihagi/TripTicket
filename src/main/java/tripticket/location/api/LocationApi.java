@@ -14,9 +14,9 @@ public class LocationApi {
 	@Path("/add")
 	public String add(Location location){
 		
-		locationBean.add(location);
+		locationBean.add(location) ;
 		
-		return "{success: true}";
+		return "{success: true}" ;
 	}
 	
 }

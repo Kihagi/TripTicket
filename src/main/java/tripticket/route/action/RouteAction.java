@@ -1,4 +1,4 @@
-package tripticket.common.action;
+package tripticket.route.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,7 +52,7 @@ public class RouteAction extends HttpServlet{
 	    	resp.println("</div>");
 	    	resp.println("</div>");
 	    	resp.println("<div class=\"text-right\">");
-	        resp.println("<a class=\"btn btn-success\"  onclick=\"route.add()\">Select Route</a>");
+	        resp.println("<a class=\"btn btn-success\"  onclick=\"route.select()\">Select Route</a>");
 	        resp.println("</div>");
 	    }
 		
@@ -61,3 +61,4 @@ public class RouteAction extends HttpServlet{
 	
 
 }
+

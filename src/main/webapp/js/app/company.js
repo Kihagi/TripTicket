@@ -11,7 +11,7 @@ var company = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("GET", "./company", true);
+	    	ajax.open("GET", "./company/action", true);
 	    	ajax.send();
 		},
 		add: function(){
@@ -30,23 +30,28 @@ var company = {
 	    	ajax.send();
 		},
 		save: function(){
+			var me = this;
 	    	var ajax = new XMLHttpRequest();
 	    	
 	    	var companyName = document.getElementById('company-name').value;
 	    	var companyRegNo = document.getElementById('company-regno').value;
 	    	
-	    	var params = 'name=' + companyName + '&regNo=' + companyRegNo;
+	    	var params = 'name=' + encodeURIComponent(companyName) 
+	    		+ '&regNo=' + encodeURIComponent(companyRegNo);
+	    	
+	    	console.log(params);
 	    	
 	    	ajax.onreadystatechange = function(){
 	    		
 	    		if(ajax.readyState == 4){
 	    			if(ajax.status == 200){
-	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
+	    				me.list();
 	    			}
 	    		}
 	    	}
 	    	
-	    	ajax.open("POST", "./company/add", true);
+	    	ajax.open("POST", "./company/action/add", true);
+	    	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	    	ajax.send(params);
 		},
 		remove: function(){

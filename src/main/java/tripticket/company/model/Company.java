@@ -1,5 +1,7 @@
 package tripticket.company.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,8 +14,10 @@ import tripticket.common.model.Address;
 
 @Entity
 @Table(name = "comp_companies")
-public class Company {
+public class Company implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	

@@ -11,19 +11,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import tripticket.company.bean.CompanyBeanI;
 import tripticket.company.model.Company;
 
 @SuppressWarnings("serial")
-@WebServlet("/company")
+@WebServlet("/company/action/*")
 public class CompanyAction extends HttpServlet{
+	
+	private Logger log  = Logger.getLogger(getClass());
 	
 	@EJB	
 	private CompanyBeanI companyBean;
-
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	 throws ServletException, IOException{
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+/*		
+		if(path.equalsIgnoreCase("add"))
+			this.add(request, response);
+		else*/
+		this.list(response);
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
 		
+		Company company = new Company();
+		company.setName(request.getParameter("name"));
+		company.setRegNo(request.getParameter("regNo"));
+		
+		companyBean.add(company);
+		
+	}
+	
+	private void list(HttpServletResponse response) 
+			throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
 	    List<Company> companies = companyBean.list();
 	    
@@ -50,6 +75,7 @@ public class CompanyAction extends HttpServlet{
 	        resp.println("<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>");
 	        resp.println("</div>");
 	    }
+	
 	}
 	
 }

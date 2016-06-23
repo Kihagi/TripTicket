@@ -1,15 +1,21 @@
 package tripticket.company.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import tripticket.company.model.Company;
 
 public class CompanyDao implements CompanyDaoI{
+	
+	private EntityManager em;
 
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+	
 	public Company add(Company company) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(company);
 	}
 
 	public Company load(Company company) {
@@ -17,47 +23,14 @@ public class CompanyDao implements CompanyDaoI{
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Company> list(Company filter) {
-		List<Company>  companies = new ArrayList<Company>();
-		Company company = new Company();
-		
-		company.setName("Modern Cost");
-		company.setRegNo("MC-1");
-		companies.add(company);
-		
-		company = new Company();
-		company.setName("Horizon");
-		company.setRegNo("HR-1");
-		companies.add(company);
-		
-		company = new Company();
-		company.setName("Mash Poa");
-		company.setRegNo("MP-1");
-		companies.add(company);
-		
-		company = new Company();
-		company.setName("Spanish");
-		company.setRegNo("SP-1");
-		companies.add(company);
-		
-		company = new Company();
-		company.setName("Mbukinya");
-		company.setRegNo("Mk-1");
-		companies.add(company);
-		
-		company = new Company();
-		company.setName("Easy Coach");
-		company.setRegNo("EC-1");
-		companies.add(company);
-		
-		return companies;
+		return em.createQuery("from Company c").getResultList();
 	}
 
 	public void delete(Long companyId) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 
 }

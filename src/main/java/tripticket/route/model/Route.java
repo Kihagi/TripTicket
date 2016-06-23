@@ -1,20 +1,36 @@
 package tripticket.route.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /*
  * @Sam Kiragu
  */
-
+@Entity
+@Table(name = "route_routes")
 public class Route {
-	Long  fromLocationId;
 	
-	Long toLocationId;
+	@Id@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(name = "from_location")
+	private Long  fromLocationId;
 	
-	Double distance;
+	@Column(name = "to_location")
+	private Long toLocationId;
 	
-	Double ApproxTime;
+	@Column(name = "approx_distance")
+	private Double distance;
 	
-	Long companyId;
-
+	@Column(name = "approx_time")
+	private Double ApproxTime;
+	
+	@Column(name = "comp_id")
+	private Long companyId;
+	
 	public Long getFromLocationId() {
 		return fromLocationId;
 	}

@@ -1,4 +1,4 @@
-var route = {
+var parcel = {
 		list: function(){
 	    	var ajax = new XMLHttpRequest();
 	    	
@@ -11,10 +11,10 @@ var route = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("GET", "./route", true);
+	    	ajax.open("GET", "./parcel", true);
 	    	ajax.send();
 		},
-		select: function(){
+		add: function(){
 	    	var ajax = new XMLHttpRequest();
 	    	
 	    	ajax.onreadystatechange = function(){
@@ -26,11 +26,10 @@ var route = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("GET", "./route/select.jsp", true);
+	    	ajax.open("GET", "./parcel/addParcel.jsp", true);
 	    	ajax.send();
-		}
+		},
+		
 		
 }
-
-
 

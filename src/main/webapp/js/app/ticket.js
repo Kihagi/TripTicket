@@ -15,7 +15,7 @@ var ticket = {
 	    	ajax.send();
 		},
 		
-		vehicles: function(){
+		proceedToTrips: function(){
 			var ajax = new XMLHttpRequest();
 			
 			ajax.onreadystatechange = function(){
@@ -25,10 +25,10 @@ var ticket = {
 					}
 				}
 			}
-			ajax.open("GET", "./companyvehicles", true);
+			ajax.open("GET", "./viewtrips", true);
 			ajax.send();
 		},
-		bookVehicle: function(){
+		bookVehicle: function(tripId){
 			var ajax = new XMLHttpRequest();
 			
 			ajax.onreadystatechange = function(){
@@ -38,7 +38,7 @@ var ticket = {
 					}
 				}
 			}
-			ajax.open("GET", "./ticket/book.jsp", true);
+			ajax.open("GET", "./book.jsp?trip="+tripId, true);
 			ajax.send();
 		},
 		complete: function(){
@@ -65,8 +65,8 @@ function ticketselectVehicle(){
 	ticket.vehicles();
 }
 
-function ticketBookVehicle(){
-	ticket.bookVehicle();
+function ticketBookVehicle(tripId){
+	ticket.bookVehicle(tripId);
 }
 
 function completeBooking(){

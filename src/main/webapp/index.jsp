@@ -98,11 +98,11 @@
     <script src="js/app/route.js"></script>
     <script src="js/app/trip.js"></script>
     <script src="js/app/passenger.js"></script>
-<<<<<<< HEAD
+
     <script src="js/app/person.js"></script>
-=======
+
     <script src="js/app/parcel.js"></script>
->>>>>>> 9f41419ccbb75f3bd42e69ee46f927d2e20d733d
+
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

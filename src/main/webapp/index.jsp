@@ -15,6 +15,8 @@
 
 	<!-- Custom CSS -->
 	<link href="css/shop-item.css" rel="stylesheet">
+	
+	
 </head>
 
 <body>
@@ -50,7 +52,9 @@
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item " onclick="passenger.list()">Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
+                    <a href="#" class="list-group-item " onclick="parcel.list()">Parcel</a>
                 </div>
+                 
             </div>
 
             <div class="col-md-9">
@@ -89,6 +93,7 @@
     <script src="js/app/route.js"></script>
     <script src="js/app/trip.js"></script>
     <script src="js/app/passenger.js"></script>
+    <script src="js/app/parcel.js"></script>
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

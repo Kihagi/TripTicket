@@ -15,6 +15,12 @@
 
 	<!-- Custom CSS -->
 	<link href="css/shop-item.css" rel="stylesheet">
+	
+	
+	
+	<link href="css/datepicker3.min.css" rel="stylesheet">
+	
+	
 </head>
 
 <body>
@@ -50,6 +56,21 @@
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item " onclick="passenger.list()">Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
+                    
+                    <form>
+                    	<div class="form-group">
+	                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dateofpayment">Date of Payment: <span class="required">*</span>
+	                        </label>
+	                        <div class="col-md-6 col-sm-6 col-xs-12">
+	                            <input type="text" id="dateofpayment" name="dateofpayment" placeholder="yyyy-mm-dd" value="<?php echo $date ?>" class="form-control col-md-7 col-xs-12 has-feedback-left">
+	                             <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+	                        </div>
+	                    </div>
+	                    
+	                    
+	                    
+                    </form>
+                    
                 </div>
             </div>
 
@@ -91,10 +112,40 @@
     <script src="js/app/passenger.js"></script>
     
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    
+	
+	
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    
+    
+    <script>
+		$(document).ready(function(){
+			var date_input=$('input[name="dateofpayment"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'yyyy-mm-dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			var date_input=$('input[name="travelDate"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'yyyy-mm-dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>
 
 </body>
 

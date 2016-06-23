@@ -1,30 +1,61 @@
 package tripticket.ticket.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class SelectVehicleModel {
+@Entity
+@Table(name = "tic_bookings")
+
+public class CompleteBookingModel {
 	
-	private String vehRegNo;
-	private int vehCapacity;
-	private String description;
+	@Column
+	private String phone;
+	@Column
+	private String idNumber;
+	@Column
+	private String fullname;
+	@Column
+	private int tripId;
+	@Column
+	private int seat;
 	
-	public String getVehRegNo() {
-		return vehRegNo;
-	}
-	public void setVehRegNo(String vehRegNo) {
-		this.vehRegNo = vehRegNo;
-	}
-	public int getVehCapacity() {
-		return vehCapacity;
-	}
-	public void setVehCapacity(int vehCapacity) {
-		this.vehCapacity = vehCapacity;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	@Id@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getIdNumber() {
+		return idNumber;
+	}
+	public void setIdNumber(String idNumber) {
+		this.idNumber = idNumber;
+	}
+	public String getFullname() {
+		return fullname;
+	}
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+	public int getTripId() {
+		return tripId;
+	}
+	public void setTripId(int tripId) {
+		this.tripId = tripId;
+	}
+	public int getSeat() {
+		return seat;
+	}
+	public void setSeat(int seat) {
+		this.seat = seat;
+	}
+		
 	
 	
 }

@@ -4,25 +4,20 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
-import tripticket.ticket.dao.SelectVehicleDAOInterface;
-import tripticket.ticket.model.SelectVehicleModel;
+import tripticket.ticket.dao.CompleteBookingDAOInterface;
+import tripticket.ticket.model.CompleteBookingModel;
 
-@Stateless
-public class SelectVehicleBEAN implements SelectVehicleBEANInt {
+public class CompleteBookingBEAN implements CompleteBookingBEANInt {
 	
-	@Inject
-	private SelectVehicleDAOInterface selectVehicleDao;
+	private CompleteBookingDAOInterface completeBooking;
 	
-	public void add(SelectVehicleModel vehicle){
-		if(vehicle == null || vehicle.getVehRegNo() == null)
-			return;
-		
-		selectVehicleDao.add(vehicle);
+	@Transactional
+	public void add(CompleteBookingModel ticket) {
+		// TODO Auto-generated method stub
+		completeBooking.add(ticket);
 	}
-	
-	public List<SelectVehicleModel> list(){
-		return selectVehicleDao.list(new SelectVehicleModel());
-	}
+                           
 	
 }

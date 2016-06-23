@@ -2,11 +2,8 @@ package tripticket.ticket.bean;
 
 import java.util.List;
 
-import tripticket.ticket.model.SelectVehicleModel;
+import tripticket.ticket.model.CompleteBookingModel;
 
-public interface SelectVehicleBEANInt {
-	
-	void add(SelectVehicleModel vehicle);
-	
-	List<SelectVehicleModel> list();
+public interface CompleteBookingBEANInt {
+	public void add(CompleteBookingModel ticket);
 }

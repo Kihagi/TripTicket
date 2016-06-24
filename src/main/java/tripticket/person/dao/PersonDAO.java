@@ -1,82 +1,62 @@
 package tripticket.person.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import tripticket.common.model.Address;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.hibernate.criterion.Restrictions;
+
+import tripticket.common.model.User;
 import tripticket.person.model.Person;
-import tripticket.vehicle.model.Vehicle;
 
 public class PersonDAO implements PersonDaoI{
+	
+	private EntityManager manager;
 
 	public Person view(Person person) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Person create(Person person) {
-		// TODO Auto-generated method stub
-		return null;
+	public User create(User user) {
+		return manager.merge(user);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Person> list(Person filter) {
-		List<Person> persons = new ArrayList<Person>();
-		
-		Address adress = new Address();
-		adress.setCountry("Germany");
-		adress.setEmail("hitler@gmail.com");
-		adress.setFullAddress("Ong Bak Road, 7th Avenue");
-		adress.setPhoneNo("0713653112");
-		adress.setTown("Sin City");
-		
-		Person person = new Person();
-		
-		person.setFirstname("Adolf");
-		person.setLastname("Hitler");
-		person.setAddress(adress);
-		persons.add(person);
-		
-		person = new Person();
-		
-		person.setFirstname("Adolf");
-		person.setLastname("Hitler");
-		person.setAddress(adress);
-		persons.add(person);
-		
-		
-		person = new Person();
-		
-		person.setFirstname("Adolf");
-		person.setLastname("Hitler");
-		person.setAddress(adress);
-		persons.add(person);
-		
-		person = new Person();
-		
-		person.setFirstname("Adolf");
-		person.setLastname("Hitler");
-		person.setAddress(adress);
-		persons.add(person);
-		
-		person = new Person();
-		
-		person.setFirstname("Adolf");
-		person.setLastname("Hitler");
-		person.setAddress(adress);
-		persons.add(person);
-		
-		return persons;
-		
+		return manager.createQuery("from Person p").getResultList();
 	}
 
 	public void delete(Long personId) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Person create(Person person) {
+		return manager.merge(person);
+	}
 
 	public Boolean login(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String hql = "FROM Person P WHERE P.getUser().getUsername() = "+username+" and P.getUser().getPassword() = "+password;
+		Query query = manager.createQuery(hql);
+		List<Person> results = query.getResultList();
+		
+		
+		
+		if (results.isEmpty())
+			return false;
+		else
+			return true;
+		
 	}
+
+	public void setEm(EntityManager manager) {
+		this.manager = manager;
+		
+	}
+
+	
 
 }

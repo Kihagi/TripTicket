@@ -1,6 +1,9 @@
 package tripticket.person.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +16,10 @@ import tripticket.common.model.User;
 
 @Entity
 @Table(name = "psn_persons")
-public class Person {
+@Embeddable
+public class Person  implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,13 +31,21 @@ public class Person {
 	private String lName;
 	
 	@Column(unique = true)
-	private int personId;
+	private String personId;
 	
 	@Embedded
 	private Address address;
 	
 	@Embedded
 	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Address getAddress() {
 		return address;
@@ -57,11 +71,11 @@ public class Person {
 		this.lName = lastname;
 	}
 
-	public int getId() {
+	public String getId() {
 		return personId;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.personId = id;
 	}
 

@@ -1,23 +1,45 @@
 package tripticket.trip.model;
 
-import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import tripticket.route.model.Route;
+
+
+@Entity
+@Table(name = "comp_trips")
 public class Trip{
 	
+	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private int tripId;
 	
-	private Date depatureTime;
+	@Column(name = "depature_time")
+	private String depatureTime;
 	
-	private Date arrivalTime;
+	@Column(name = "arrival_time")
+	private String arrivalTime;
 	
-	private String vehicle;
-	
+	@Column(name = "route")
 	private String route;
 	
+	@Column(name = "vehicle")
+	private String vehicle;
+	
+	@Column(name = "price",columnDefinition = "DOUBLE")
 	private double price;
 	
-	Date tDate = new Date(1403685555600L);
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "route_id")
+	private Route route_id;
 
+	
 	public int getTripId() {
 		return tripId;
 	}
@@ -42,19 +64,19 @@ public class Trip{
 		this.price = price;
 	}
 
-	public Date getDepatureTime() {
+	public String getDepatureTime() {
 		return depatureTime;
 	}
 
-	public void setDepatureTime(Date depatureTime) {
+	public void setDepatureTime(String depatureTime) {
 		this.depatureTime = depatureTime;
 	}
 	
-	public Date getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Date arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 

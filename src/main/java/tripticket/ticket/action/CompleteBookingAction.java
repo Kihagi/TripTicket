@@ -25,6 +25,7 @@ public class CompleteBookingAction extends HttpServlet {
 	@EJB
 	private CompleteBookingBEANInt completeBookingBean;
 	
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String[] pathBooking = request.getRequestURI().split("/");
 		String path = pathBooking[pathBooking.length-1];
@@ -34,6 +35,7 @@ public class CompleteBookingAction extends HttpServlet {
 		
 	}
 	
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		CompleteBookingModel booking = new CompleteBookingModel();
 		booking.setFullname(request.getParameter("name").toUpperCase());

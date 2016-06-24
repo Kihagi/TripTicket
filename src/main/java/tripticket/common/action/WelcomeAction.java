@@ -26,27 +26,40 @@ public class WelcomeAction extends HttpServlet {
 		String password = req.getParameter("password");
 		
 		PrintWriter response = resp.getWriter();
+		Boolean loginStatus;
 		
-		Boolean loginStatus = personBean.login(username, password);
+		RequestDispatcher rq = req.getRequestDispatcher("index.jsp");
+		//rq.forward(req, resp);
 		
-		if(loginStatus == true)
-		{
-			
-			response.println("<p>Login success, redirecting...</p>");
-			
-			RequestDispatcher rq = req.getRequestDispatcher("index.jsp");
-			rq.forward(req, resp);
-			
 	
-			//redirect to homepage
-		}
-		else
-		{
-			
-			
-			response.println("<p>Login failure, please provide a username or password...</p>");
+	
 		
+		
+		try{
+			loginStatus = personBean.login(username, password);
+			
+			if(loginStatus == true)
+			{
+				
+			
+				rq.forward(req, resp);
+				response.println("<p>Ilogin succesful</p>");
+				
+			}
+			else
+			{
+				response.println("<p>Invalid login credentials</p>");
+			}
+			
+			
+			
 		}
+		catch(Exception e)
+		{
+			response.println("<p>An error occured: "+e.getMessage()+"</p>");
+			
+		}
+
 		
 	}
 	

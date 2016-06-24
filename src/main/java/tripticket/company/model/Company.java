@@ -32,6 +32,14 @@ public class Company implements Serializable{
 	
 	@Embedded
 	private Address address;
+	
+	public Company() {
+	}
+	
+	public Company(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;

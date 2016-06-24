@@ -46,7 +46,7 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item active" onclick="company.list()">Companies</a>
                     <a href="#" class="list-group-item" onclick="route.list()">Routes</a>
-                    <a href="#" class="list-group-item" onclick="ticket.list()">Ticket</a>
+                    <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
                     <a href="#" class="list-group-item " onclick="trip.list()">Trip</a>
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.list()">Passenger</a>
@@ -96,17 +96,17 @@
     <script src="js/app/route.js"></script>
     <script src="js/app/trip.js"></script>
     <script src="js/app/passenger.js"></script>
-<<<<<<< HEAD
+
 
     <script src="js/app/person.js"></script>
 
     <script src="js/app/parcel.js"></script>
 
-=======
+
     <script src="js/app/person.js"></script>
 
     <script src="js/app/parcel.js"></script>
->>>>>>> d6b252b963d980167ce71064a8345ab791137522
+
     
     <!-- jQuery -->
     <script src="js/jquery-1.10.2.min.js"></script>

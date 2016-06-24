@@ -1,4 +1,6 @@
 package tripticket.ticket.model;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tic_bookings")
 
-public class CompleteBookingModel {
+public class CompleteBookingModel implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Column
 	private String phone;

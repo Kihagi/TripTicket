@@ -1,15 +1,22 @@
 package tripticket.location.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import trioticket.location.model.Location;
 
 public class LocationDao implements LocationDaoI {
+	
+	private EntityManager em;
+	
+	public void setEm(EntityManager em) {
+		this.em = em;
+		
+	}
 
 	public Location add(Location location) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(location);
 	}
 
 	public Location remove(Location location) {
@@ -17,46 +24,16 @@ public class LocationDao implements LocationDaoI {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Location> list(Location filter) {
-		
-		List<Location>  locations = new ArrayList<Location>();
-		Location location = new Location();
-		
-		location.setName("Nairobi");
-		location.setId(1);
-		locations.add(location);
-	
-		location = new Location();
-		location.setName("Mombasa");
-		location.setId(2);
-		locations.add(location);
-		
-		location = new Location();
-		location.setName("Kisumu");
-		location.setId(3);
-		locations.add(location);
-		
-		location = new Location();
-		location.setName("Kampala");
-		location.setId(4);
-		locations.add(location);
-		
-		location = new Location();
-		location.setName("Malindi");
-		location.setId(5);
-		locations.add(location);
-		
-		location = new Location();
-		location.setName("Kakamega");
-		location.setId(6);
-		locations.add(location);
-		
-		return locations;
+		return em.createQuery("from Location l").getResultList();
 	}
 
 	public void delete(Long locationId) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

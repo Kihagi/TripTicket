@@ -37,6 +37,12 @@ public class CompanyBean implements CompanyBeanI{
 	
 	public List<Company> list(){
 		return companyDao.list(new Company());
+	}
+
+	public boolean delete(Long id) {
+		companyDao.delete(id);
+		
+		return true;
 	}	
 
 }

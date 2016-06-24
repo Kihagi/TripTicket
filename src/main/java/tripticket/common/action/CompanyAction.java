@@ -47,6 +47,14 @@ public class CompanyAction extends HttpServlet{
 		
 	}
 	
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		Long companyId = Long.parseLong(request.getParameter("id"));
+		System.out.println("what is the ID ====================== " + companyId);
+		companyBean.delete(companyId);
+		
+	}
+	
 	private void list(HttpServletResponse response) 
 			throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
@@ -72,6 +80,7 @@ public class CompanyAction extends HttpServlet{
 	    	resp.println("</div>");
 	    	
 	    	resp.println("<div class=\"text-right\">");
+	    	resp.println("<a class=\"btn btn-danger\"  onclick=\"company.remove(" + company.getId() + ")\">Delete</a>");
 	        resp.println("<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>");
 	        resp.println("</div>");
 	    }

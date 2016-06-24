@@ -40,7 +40,7 @@ public class SelectCompanyAndRoute extends HttpServlet{
         resp.println("<form action=\"#\" method=\"get\">");
        
         resp.print("<div class=\"form-group\"><label for=\"selectedCompany\">Select Company:</label><br>");
-        resp.println("<select name=\"selectedCompany\" id=\"selectedCompany\" class=\"form-control\">");
+        resp.println("<select name=\"selectedCompany\" id=\"selectedCompany\" required class=\"form-control\">");
         
 	        for(Company company : companies){
 	        	
@@ -52,7 +52,7 @@ public class SelectCompanyAndRoute extends HttpServlet{
         resp.println("</div>");
         
         resp.print("<div class=\"form-group\"><label for=\"selectedRoute\">Select Route:</label><br>");
-        resp.println("<select name=\"selectedRoute\" id=\"selectedRoute\" class=\"form-control\">");
+        resp.println("<select name=\"selectedRoute\" id=\"selectedRoute\" required class=\"form-control\">");
         
 	        for(Route route : routes){
 	        	
@@ -72,7 +72,7 @@ public class SelectCompanyAndRoute extends HttpServlet{
         
         resp.println("<div class=\"form-group\">");
         	resp.println("<label for=\"travelDate\">Date</label>");
-        	resp.println("<input type=\"text\" name=\"travelDate\" placeholder=\"yyyy-mm-dd\" class=\"form-control\" id=\"travelDate\">");
+        	resp.println("<input type=\"text\" name=\"travelDate\" placeholder=\"yyyy-mm-dd\" class=\"form-control\" required id=\"travelDate\">");
         resp.println("</div>");
         
        

@@ -6,6 +6,8 @@ package tripticket.route.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import tripticket.route.model.Route;
 
 public interface RouteDaoI {
@@ -17,6 +19,8 @@ public interface RouteDaoI {
 	List<Route> list(Route filter);
 	
 	void delete(Long fromLocationId, Long toLocationId);
+
+	void setEmm(EntityManager emm);
 
 }
 

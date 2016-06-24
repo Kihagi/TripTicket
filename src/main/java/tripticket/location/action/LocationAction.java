@@ -41,6 +41,13 @@ public class LocationAction extends HttpServlet{
 		locationBean.add(location);
 		
 	}
+		
+		public void doDelete(HttpServletRequest request, HttpServletResponse response) 
+				throws ServletException, IOException{
+			Long locationId = Long.parseLong(request.getParameter("id"));
+			locationBean.delete(locationId);
+			
+	}
 	
 
 	private void list(HttpServletResponse response) 

@@ -1,5 +1,6 @@
 package tripticket.location.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,22 @@ public class LocationDao implements LocationDaoI {
 
 	@SuppressWarnings("unchecked")
 	public List<Location> list(Location filter) {
-		return em.createQuery("from Location l").getResultList();
+		List<Object[]> results = em.createQuery("from Location l").getResultList();
+		
+		List<Location> locations = new ArrayList<Location>();
+		Location location;
+		
+		for (Object [] result : results){
+			location = new Location();
+			location.setLocNo(result[0] == null ? null : (String) result[0]);
+			location.setName(result[1] == null ? null : (String) result[1]);
+			location.setDescr(result[1] == null ? null : (String) result[1]);
+			
+			locations.add(location);
+						
+		}
+		
+		return locations;
 	}
 
 	public void delete(Long locationId) {

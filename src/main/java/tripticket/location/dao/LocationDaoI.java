@@ -10,12 +10,12 @@ public interface LocationDaoI {
 	
 	Location add(Location location);
 	
-	void delete(Long locationId);
-	
 	Location remove(Location location);
 	
 	List<Location> list(Location filter);
 
 	void setEm(EntityManager em);
+	
+	void delete(Long locationId);
 
 }

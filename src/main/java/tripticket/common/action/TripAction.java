@@ -11,20 +11,54 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import tripticket.trip.bean.TripBeanI;
 import tripticket.trip.model.Trip;
 
 @SuppressWarnings("serial")
-@WebServlet("/trips")
+@WebServlet("/trips/action/*")
 public class TripAction extends HttpServlet {
+	
+	private Logger log  = Logger.getLogger(getClass());
 
 	@EJB
 	private TripBeanI tripBean;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			 throws ServletException, IOException{
+				String [] pathCmp = request.getRequestURI().split("/");
+				String path = pathCmp[pathCmp.length-1];
+				this.list(response);
+			}
+	
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		
+		Trip trip = new Trip();
+		trip.setDepatureTime(request.getParameter("depatureDate"));
+		trip.setArrivalTime(request.getParameter("arrivalDate"));
+		trip.setRoute(request.getParameter("route"));
+		trip.setVehicle(request.getParameter("vehicle"));
+		trip.setPrice(Double.parseDouble(request.getParameter("price")));
+		
+		tripBean.add(trip);
+		
+	}
+	
+	
+	public void list(HttpServletResponse response) 
+			throws ServletException, IOException {
+		
 		PrintWriter resp = response.getWriter();
 		List<Trip> trips = tripBean.list();
+		
+		resp.println("<div class=\"text-right\">");
+		resp.println("<a class=\"btn btn-info\"  onclick=\"trip.add()\">Create A Trip</a>");
+		resp.println("</div>");
+
 
 		for (Trip trip : trips) {
 			resp.println("<hr>");
@@ -42,11 +76,10 @@ public class TripAction extends HttpServlet {
 			resp.println("<br>___________________________________________________________________");
 			resp.println("</div>");
 			resp.println("</div>");
+			
+			
 		}
-		resp.println("<div class=\"text-right\">");
-		resp.println("<a class=\"btn btn-info\"  onclick=\"trip.add()\">Create A Trip</a>");
-		resp.println("</div>");
-
+		
 	}
 
 }

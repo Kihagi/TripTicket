@@ -16,7 +16,6 @@ import tripticket.common.model.User;
 
 @Entity
 @Table(name = "psn_persons")
-@Embeddable
 public class Person  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

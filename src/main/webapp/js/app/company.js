@@ -72,17 +72,17 @@ var company = {
 		  document.getElementById('ajax-content').innerHTML = form;
 		  
 		},
-		submit: true,
+		submitForm: true,
 		save: function(){
 			var me = this;
 	    	var ajax = new XMLHttpRequest();
-	    	me.submit = true;
+	    	me.submitForm = true;
 	    	
 	    	var params = '';
 	    	me.cmp.forEach(function(el){
 	    		var val = document.getElementById(el.id).value;
 	    		if(!val)
-	    			me.submit = false;
+	    			me.submitForm = false;
 	    			
 	    		params += el.name +'=' + encodeURIComponent(val) + '&';
 	    	});
@@ -96,16 +96,27 @@ var company = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("POST", "./company/action/add", true);
+	    	ajax.open("POST", "./company/action/", true);
 	    	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	    	
-	    	console.log('About to submit ' + me.submit);
-	    	
-	    	if(me.submit)
+	    	if(me.submitForm)
 	    		ajax.send(params);
 		},
-		remove: function(){
-			console.log("this removes company");
+		remove: function(id){
+			var me = this;
+	    	var ajax = new XMLHttpRequest();
+	    	
+	    	ajax.onreadystatechange = function(){
+	    		
+	    		if(ajax.readyState == 4){
+	    			if(ajax.status == 200){
+	    				me.list();
+	    			}
+	    		}
+	    	}
+	    	
+	    	ajax.open("DELETE", "./company/action/?id="+id, true);
+	    	ajax.send();
 		}
 }
 

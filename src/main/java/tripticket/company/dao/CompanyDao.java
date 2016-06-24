@@ -46,9 +46,8 @@ public class CompanyDao implements CompanyDaoI{
 		return companies;
 	}
 
-	public void delete(Long companyId) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Long companyId) { 
+		em.remove(em.find(Company.class, companyId));
 	}
 
 }

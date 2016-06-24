@@ -9,5 +9,7 @@ public interface CompanyBeanI {
 	void add(Company company);
 
 	List<Company> list();
+	
+	boolean delete(Long id);
 
 }

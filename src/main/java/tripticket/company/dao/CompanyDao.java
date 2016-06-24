@@ -1,9 +1,11 @@
 package tripticket.company.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import tripticket.common.model.Address;
 import tripticket.company.model.Company;
 
 public class CompanyDao implements CompanyDaoI{
@@ -25,7 +27,23 @@ public class CompanyDao implements CompanyDaoI{
 
 	@SuppressWarnings("unchecked")
 	public List<Company> list(Company filter) {
-		return em.createQuery("from Company c").getResultList();
+		List<Object[]> results = em.createQuery("select c.id,c.name,c.address.email from Company c")
+				.getResultList();
+		
+		List<Company> companies = new ArrayList<Company>();
+		Company company;
+		for(Object [] result : results){
+			company = new Company();
+			company.setAddress(new Address());
+			
+			company.setId(result[0] == null ? null : (Long) result[0]);
+			company.setName(result[1] == null ? null : (String) result[1]);
+			company.getAddress().setEmail(result[2] == null ? null : (String) result[2]);
+			
+			companies.add(company);
+		}
+		
+		return companies;
 	}
 
 	public void delete(Long companyId) {

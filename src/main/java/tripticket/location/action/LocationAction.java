@@ -15,14 +15,36 @@ import trioticket.location.model.Location;
 import tripticket.location.bean.LocationBeanI;
 
 @SuppressWarnings("serial")
-@WebServlet( "/location" )
+@WebServlet( "/location/*" )
 public class LocationAction extends HttpServlet{
 	
 	@EJB	
 	private LocationBeanI locationBean;
-
+	
+	
+	@SuppressWarnings("unused")
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
-	 throws ServletException, IOException{
+			 throws ServletException, IOException{
+				String [] locpath = request.getRequestURI().split("/");
+				String path = locpath[locpath.length-1];
+				this.list(response);
+			}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		
+		Location location = new Location();
+		location.setName(request.getParameter("name"));
+		location.setLocNo(request.getParameter("number"));
+		location.setDescr(request.getParameter("Description"));
+		
+		locationBean.add(location);
+		
+	}
+	
+
+	private void list(HttpServletResponse response) 
+			throws ServletException, IOException{
 		
 		PrintWriter resp = response.getWriter();
 	    List<Location> locations = locationBean.list();
@@ -37,8 +59,13 @@ public class LocationAction extends HttpServlet{
 	    	resp.println("<div class=\"col-md-12\">");
 	    	resp.println("<p>Our offices can be found: </p>");
 	    	resp.println(location.getName() + " : " + location.getId());
+	    	resp.println(location.getDescr());
 	    	resp.println("</div>");
 	    	resp.println("</div>");
+	    	
+	    	resp.println("<div class=\"text-right\">");
+	        resp.println("<a class=\"btn btn-danger\">Delete</a>");
+	        resp.println("</div>");
 	    	
 	    }
 	    

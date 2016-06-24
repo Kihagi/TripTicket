@@ -1,4 +1,4 @@
-<h4>CHOOSE A ROUTE </h4><hr>
+<h4>Enter Details here </h4><hr>
 <form >
   <div class="form-group">
     <label for="routeFrom">FROM :</label>
@@ -20,6 +20,7 @@
   </div>
   
   <div class="form-group">
+  
    <label for="routeCompany">COMPANY :</label>
     <input type="text" class="form-control" id="route-company" name="companyId" placeholder="COMPANY" required>
   </div>

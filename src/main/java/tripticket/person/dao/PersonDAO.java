@@ -39,7 +39,7 @@ public class PersonDAO implements PersonDaoI{
 
 	public Boolean login(String username, String password) {
 		
-		String hql = "FROM Person P WHERE P.getUser().getUsername() = "+username+" and P.getUser().getPassword() = "+password;
+		String hql = "FROM Person P WHERE P.user.username =:"+username+" and P.user.password = "+password;
 		Query query = manager.createQuery(hql);
 		List<Person> results = query.getResultList();
 		

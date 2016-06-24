@@ -1,21 +1,30 @@
 package tripticket.ticket.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
 
-import tripticket.company.model.Company;
 import tripticket.ticket.model.CompleteBookingModel;
 
 public class CompleteBookingDAO implements CompleteBookingDAOInterface {
 	
-	private SessionFactory session;
+	private EntityManager em;
 	
-	public void add(CompleteBookingModel ticket) {
-		// TODO Auto-generated method stub
-		session.getCurrentSession().save(ticket);
+	public void setEM(EntityManager em){
+		this.em = em;
 	}
 	
+	public CompleteBookingModel add(CompleteBookingModel ticket){
+		return em.merge(ticket);
+	}
+	
+	public CompleteBookingModel load(CompleteBookingModel ticket){
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CompleteBookingModel> list (CompleteBookingModel filter){
+		return em.createQuery("from CompleteBookingModel t").getResultList();
+	}
 	
 }

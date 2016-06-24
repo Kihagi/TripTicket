@@ -1,20 +1,20 @@
 <h4>Step 3: Fill your personal Details </h4><hr>
-<form method="post" action="completebooking">
+<form>
   <div class="form-group">
     <label for="idNumber">National Id</label>
-    <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="Id Number">
+    <input type="text" class="form-control" id="idNumber" required name="idNumber" placeholder="Id Number">
   </div>
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
+    <input type="text" class="form-control" id="name" required name="name" placeholder="Full Name">
   </div>
   <div class="form-group">
     <label for="phone">Cell Phone</label>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+    <input type="text" class="form-control" id="phone" required name="phone" placeholder="Phone Number">
   </div>
   <div class="form-group">
     <label for="seat">Select Seat</label>
-    <select name="seat" id="seat" class="form-control">
+    <select name="seat" id="seat" required class="form-control">
     	<option value="1">Seat No. 1</option>
     	<option value="2">Seat No. 2</option>
     	<option value="3">Seat No. 3</option>
@@ -47,5 +47,9 @@
     	<option value="30">Seat No. 30</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-default" onClick="completeBooking()">Complete Booking</button>
+  <div class="form-group">
+    <label for="tripId">Trip Id</label>
+    <input type="text" class="form-control" required contenteditable="false" readonly id="tripId" name="tripId" value="<%= request.getParameter("trip") %>" placeholder="Trip Id">
+  </div>
 </form>
+<a class="btn btn-success"  onclick="ticket.complete()">Complete Booking</a>

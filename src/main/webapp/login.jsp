@@ -57,6 +57,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form id="login-form" action="${pageContext.request.contextPath}/welcome" method="post" role="form" style="display: block;">
+								<!-- action = ${pageContext.request.contextPath}/welcome -->
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
@@ -70,7 +71,9 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+												<input type="submit" name="login-submit" 
+												id="login-submit" tabindex="4" class="form-control btn btn-register" value="Login">
+											
 											</div>
 										</div>
 									</div>
@@ -93,23 +96,35 @@
 								</form>
 								<form id="register-form" action="#" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="fname" required id="regfname" tabindex="1" class="form-control" placeholder="First Name" value="">
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+										<input type="email" name="lname" required id="reglname" tabindex="1" class="form-control" placeholder="Last Name" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="text" name="id" required id="regid" tabindex="1" class="form-control" placeholder="ID/Passport" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+										<input type="text" name="username" required id="regusername" tabindex="1" class="form-control" placeholder="Username" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="password" required id="regpassword" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<input type="password" name="confpass" required id="regconfirmpass" tabindex="2" class="form-control" placeholder="Confirm Password">
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" 
-												id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+												<!-- <input type="submit" name="register-submit" 
+												id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">-->
+												<a class="form-control btn btn-register"  onclick="person.save()">Register Now</a>
 											</div>
+											
+											<div id="register-ajax-content" class="well col-sm-6 col-sm-offset-3" style="background-color: #FFF; border: 0px">
+										               
+										
+										    </div>
 										</div>
 									</div>
 								</form>
@@ -122,13 +137,6 @@
 		</div>
 	</div>
 	
-	<script src="js/app/company.js"></script>
-    <script src="js/app/ticket.js"></script>
-    <script src="js/app/location.js"></script>
-    <script src="js/app/vehicle.js"></script>
-    <script src="js/app/route.js"></script>
-    <script src="js/app/trip.js"></script>
-    <script src="js/app/passenger.js"></script>
      <script src="js/app/person.js"></script>
     
     <!-- jQuery -->

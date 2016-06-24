@@ -34,14 +34,14 @@ public class PersonBean implements PersonBeanI {
 
 	public Boolean login(String username, String password) {
 		
-		
-		if(username.equals("") || password.equals("")){
-			return false;			
+		Boolean authentication = personDao.login(username, password);
+		if(authentication == true){
+			return true;			
 		}
 		else
 		{
-			personDao.login(username, password);
-			return true;			
+			
+			return false;			
 		}
 		
 	}

@@ -6,7 +6,7 @@ import tripticket.trip.model.Trip;
 
 
 
-@Path("/trip")
+@Path("/trips")
 public class TripApi {
 	
 	private TripBeanI tripBean;

@@ -11,14 +11,29 @@ import javax.persistence.Table;
 @Table(name = "loc_location")
 public class Location {
 	
+	@SuppressWarnings("unused")
+	private static final long serialVersionUID = 1L;
+	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private int Id;
 	
 	@Column(name = "name")
 	private String name;
     
-	@Column(name = "descr")
+	@Column(name = "descr", columnDefinition = "TEXT")
 	private String Descr;
+	
+	@Column(name = "loc_number", unique = true)
+	private String locNo;
+	
+
+	public String getLocNo() {
+		return locNo;
+	}
+
+	public void setLocNo(String locNo) {
+		this.locNo = locNo;
+	}
 
 	public String getDescr() {
 		return Descr;

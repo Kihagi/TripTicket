@@ -21,6 +21,7 @@ public class SelectTrip extends HttpServlet {
 	@EJB
 	private TripBeanI tripBean;
 	
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
 		List<Trip> trips = tripBean.list();
@@ -44,7 +45,7 @@ public class SelectTrip extends HttpServlet {
 			
 			resp.println("<h2> Price : " + trip.getPrice() + "</h2>");
 			
-			resp.println("<a style=\"float:right\" class=\"btn btn-success\"  onclick=\"ticketBookVehicle("+trip.getTripId()+")\">Book Now</a>");
+			resp.println("<a style=\"float:right\" class=\"btn btn-success\"  onclick=\"ticket.book()\">Book Now</a>");
 			resp.println("</div>");
 			resp.println("</div>");
 	    	

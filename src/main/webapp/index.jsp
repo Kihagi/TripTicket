@@ -49,7 +49,7 @@
                     <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
                     <a href="#" class="list-group-item " onclick="trip.list()">Trip</a>
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
-                    <a href="#" class="list-group-item " onclick="passenger.list()">Passenger</a>
+                    <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.list()"> Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
                     <a href="#" class="list-group-item " onclick="person.list()">Persons</a>
                    

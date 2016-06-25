@@ -1,19 +1,21 @@
 <form>
   <fieldset class="form-group">
-    <input type="text" class="form-control" id="parcelTo" placeholder="To..." required>
+    <input type="text" class="form-control" id="parcel-to" placeholder="To..." require="required">
   </fieldset>
   <fieldset class="form-group">
-    <input type="text" class="form-control" id="parcelFrom" placeholder="From..." required>
+    <input type="text" class="form-control" id="parcel-from" placeholder="From..." required="required">
   </fieldset>
   <fieldset class="form-group">
-    <input type="text" class="form-control" id="parcelDescription" placeholder="Describe parcel.." required>
+    <input type="text" class="form-control" id="parcel-description" placeholder="Describe parcel.." required>
   </fieldset>
   <fieldset class="form-group">
-    <input type="text" class="form-control" id="parcelRoute" placeholder="Route..." required>
+    <input type="text" class="form-control" id="parcel-route" placeholder="Route..." required>
   </fieldset>
    
    <fieldset class="form-group">
-    <input type="number" class="form-control" id="parcelCost" placeholder="e.g 456" required>
+    <input type="number" class="form-control" id="parcel-cost" placeholder="e.g 456" required>
   </fieldset>
-  <button class="btn btn-large btn-success" id="submit">  Submit</button>
+ 
+ 
 </form>
+ <button class="btn btn-large btn-success" id="submit"  onclick="parcel.save()">  Submit</button>

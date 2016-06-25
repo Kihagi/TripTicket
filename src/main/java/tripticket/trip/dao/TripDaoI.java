@@ -2,6 +2,8 @@ package tripticket.trip.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import tripticket.trip.model.Trip;
 
 public interface TripDaoI {
@@ -13,5 +15,7 @@ public interface TripDaoI {
 	List<Trip> list(Trip filter);
 	
 	void delete(Long tripId);
+	
+	void setEm(EntityManager em);
 
 }

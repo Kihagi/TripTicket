@@ -21,6 +21,7 @@ public class SelectTrip extends HttpServlet {
 	@EJB
 	private TripBeanI tripBean;
 	
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
 		List<Trip> trips = tripBean.list();

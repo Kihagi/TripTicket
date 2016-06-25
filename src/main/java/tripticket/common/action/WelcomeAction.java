@@ -40,10 +40,7 @@ public class WelcomeAction extends HttpServlet {
 			
 			if(loginStatus == true)
 			{
-				
-			
 				rq.forward(req, resp);
-				response.println("<p>Ilogin succesful</p>");
 				
 			}
 			else

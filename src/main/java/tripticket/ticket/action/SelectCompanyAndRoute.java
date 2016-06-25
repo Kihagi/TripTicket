@@ -24,6 +24,7 @@ public class SelectCompanyAndRoute extends HttpServlet{
 	@EJB
 	private RouteBeanI routeBean;
 	
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		PrintWriter resp = response.getWriter();

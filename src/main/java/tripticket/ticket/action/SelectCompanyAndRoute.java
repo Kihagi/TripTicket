@@ -77,7 +77,7 @@ public class SelectCompanyAndRoute extends HttpServlet{
         resp.println("</div>");
         
        
-        resp.println("<a class=\"btn btn-success\"  onclick=\"ticket.proceedToTrips()\">Proceed</a>");
+        resp.println("<a class=\"btn btn-success\"  onclick=\"proceedToTrips()\">Proceed</a>");
        
         
         resp.println("</form>");

@@ -52,4 +52,4 @@
     <input type="text" class="form-control" required contenteditable="false" readonly id="tripId" name="tripId" value="<%= request.getParameter("trip") %>" placeholder="Trip Id">
   </div>
 </form>
-<a class="btn btn-success"  onclick="ticket.complete()">Complete Booking</a>
+<a class="btn btn-success"  onclick="completeBooking()">Complete Booking</a>

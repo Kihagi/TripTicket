@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import tripticket.passenger.bean.PassengerBeanI;
 import tripticket.passenger.model.Passenger;
 
-@WebServlet("/passengers")
+@WebServlet("/passengers/action/*")
 public class PassengerAction extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -20,11 +20,26 @@ public class PassengerAction extends HttpServlet{
 	@EJB
 	private PassengerBeanI passengerBean;
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	
+		this.list(response);
 		
-		PrintWriter out=resp.getWriter();
-		resp.setContentType("text/html");
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		Passenger passenger= new Passenger();
+		passenger.setFirstname(req.getParameter("firstname"));
+		passenger.setLastname(req.getParameter("lastname"));
+		passengerBean.add(passenger);
+	}
+	private void list(HttpServletResponse response) 
+			throws ServletException, IOException{
+		
+		
+		PrintWriter out=response.getWriter();
+		response.setContentType("text/html");
 		
 		List <Passenger> passengerList= passengerBean.list();
 

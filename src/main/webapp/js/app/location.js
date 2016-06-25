@@ -5,28 +5,6 @@ var tripLocation = {
 			ajax.open("GET",ajaxURL , true);
 			
 			ajax.onreadystatechange = function(){
-		
-		loc: [{
-			id: 'loc_Id',
-			label: 'Location Number',
-			name: 'locNo',
-			type: 'text',
-		},{
-			id: 'loc_Name',
-			label: 'Location Name',
-			name: 'name',
-			type: 'text',
-		},{
-			id: 'loc_Descr',
-			label: 'Description',
-			name: 'Descr',
-			type: 'text',
-		}],
-		
-		list: function(){
-	    	var ajax = new XMLHttpRequest();
-	    	
-	    	ajax.onreadystatechange = function(){
 	    		
 	    		if(ajax.readyState == 4){
 	    			if(ajax.status == 200){

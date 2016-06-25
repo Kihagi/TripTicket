@@ -27,22 +27,7 @@ public class LocationDao implements LocationDaoI {
 
 	@SuppressWarnings("unchecked")
 	public List<Location> list(Location filter) {
-		List<Object[]> results = em.createQuery("from Location l").getResultList();
-		
-		List<Location> locations = new ArrayList<Location>();
-		Location location;
-		
-		for (Object [] result : results){
-			location = new Location();
-			location.setLocNo(result[0] == null ? null : (String) result[0]);
-			location.setName(result[1] == null ? null : (String) result[1]);
-			location.setDescr(result[1] == null ? null : (String) result[1]);
-			
-			locations.add(location);
-						
-		}
-		
-		return locations;
+		return em.createQuery("from Location l").getResultList();
 	}
 
 	public void delete(Long locationId) {

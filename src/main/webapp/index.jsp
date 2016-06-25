@@ -89,6 +89,7 @@
     </div>
     <!-- /.container -->
 
+	<script src="js/app/base.app.js"></script>
     <script src="js/app/company.js"></script>
     <script src="js/app/ticket.js"></script>
     <script src="js/app/location.js"></script>

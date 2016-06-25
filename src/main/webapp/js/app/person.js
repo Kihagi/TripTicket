@@ -11,7 +11,7 @@ var person = {
 	    		}
 	    	}
 	    	
-	    	ajax.open("GET", "./person", true);
+	    	ajax.open("GET", "./person/action", true);
 	    	ajax.send();
 		},
 		add: function(){
@@ -98,15 +98,22 @@ var person = {
 		    	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    	ajax.send(params);
 	    		
-	    	
-	    	
-	    		
-	    	
-	    	
-	    	
 		},
-		remove: function(){
-			console.log("this removes company");
+		remove: function(id){
+			var me = this;
+	    	var ajax = new XMLHttpRequest();
+	    	
+	    	ajax.onreadystatechange = function(){
+	    		
+	    		if(ajax.readyState == 4){
+	    			if(ajax.status == 200){
+	    				me.list();
+	    			}
+	    		}
+	    	}
+	    	
+	    	ajax.open("DELETE", "./person/action/?id="+id, true);
+	    	ajax.send();
 		}
 }
 

@@ -26,6 +26,13 @@ public class CompleteBookingModel implements Serializable {
 	private String fullname;
 	@Column
 	private int tripId;
+
+	/*
+	 * @ManyToOne
+	    @JoinColumn(name = "tripId")
+	    private Question question;
+	 */
+	
 	@Column
 	private int seat;
 	

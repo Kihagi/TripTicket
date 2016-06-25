@@ -9,5 +9,7 @@ public interface LocationBeanI {
 	void add(Location location);
 
 	List<Location> list();
+	
+	boolean delete(Long id);
 
 }

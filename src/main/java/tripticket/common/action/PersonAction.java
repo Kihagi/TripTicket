@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tripticket.common.model.User;
+import tripticket.company.model.Company;
 import tripticket.person.bean.PersonBeanI;
 import tripticket.person.model.Person;
 
@@ -27,28 +28,37 @@ public class PersonAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		PrintWriter writer = resp.getWriter();
+		this.list(resp);
+	
+	}
+
+	private void list(HttpServletResponse response) throws ServletException, IOException{
+		PrintWriter resp = response.getWriter();
 	    List<Person> persons = personBean.list();
 	    
-	    writer.println("<div class=\"text-right\">");
-	    writer.println("<a class=\"btn btn-success\"  onclick=\"person.add()\">Add</a>");
-	    writer.println("</div>");
+        resp.println("<div class=\"text-right\">");
+        resp.println("<a class=\"btn btn-success\"  onclick=\"person.add()\">Add</a>");
+        resp.println("</div>");
         
 	    for(Person person : persons){
-	    	writer.println("<hr>");
-	    	writer.println("<div class=\"row\">");
-	    	writer.println("<div class=\"col-md-12\">");
+	    	resp.println("<hr>");
+	    	resp.println("<div class=\"row\">");
+	    	resp.println("<div class=\"col-md-12\">");
+	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
+	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
+	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
+	    	resp.println(" <span class=\"glyphicon glyphicon-star\"></span>");
+	    	resp.println("<span class=\"glyphicon glyphicon-star-empty\"></span>");
+	    	resp.println(person.getFirstname()+ person.getLastname() + " : " + person.getId());
 	    	
-	    	writer.println(person.getFirstname() + " " + person.getLastname());
+	    	resp.println("</div>");
+	    	resp.println("</div>");
 	    	
-	    	writer.println("<p>"+person.getAddress().getCountry()+"</p>");
-	    	writer.println("<p>"+person.getAddress().getFullAddress()+"</p>");
-	    	writer.println("<p>"+person.getAddress().getPhoneNo()+"</p>");
-	    	writer.println("<p>"+person.getAddress().getTown()+"</p>");
-	    	writer.println("</div>");
-	    	writer.println("</div>");
+	    	resp.println("<div class=\"text-right\">");
+	    	resp.println("<a class=\"btn btn-danger\"  onclick=\"person.remove(" + person.getId() + ")\">Delete</a><br/>");
+	        resp.println("<span class=\"pull-right\">Status: Active</span>");
+	        resp.println("</div>");
 	    }
-		
 	}
 
 	@Override

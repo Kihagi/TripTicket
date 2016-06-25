@@ -1,15 +1,15 @@
-<form>
+<form method="post" action="./trips/action">
   <div class="form-group">
-    <label for="exampleInputEmail1">Depature Date</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Date">
+    <label>Depature Date</label>
+    <input name="depatureDate" required="required" type="text" class="form-control" id="depatureDate" placeholder="Date">
   </div>
    <div class="form-group">
-    <label for="exampleInputEmail1">Arrival Date</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Date">
+    <label>Arrival Date</label>
+    <input name="arrivalDate" type="text" class="form-control" id="arrivalDate" placeholder="Date">
   </div>
    <div class="form-group">
   <label for="sel1">Select route:</label>
-  <select class="form-control" id="sel1">
+  <select name="route" class="form-control" id="route">
    <option>---select routes---</option>
     <option>NAIROBI - MOMBASA</option>
     <option>MAMBASA - NAIROBI</option>
@@ -18,7 +18,7 @@
 </div>
   <div class="form-group">
   <label for="sel1">Select Vehicle:</label>
-  <select class="form-control" id="sel1">
+  <select name="vehicle" class="form-control" id="vehicle">
   <option>---select vehicle---</option>
     <option>KCE 333F</option>
     <option>KCE 333F</option>
@@ -30,15 +30,10 @@
     <label class="sr-only" for="exampleInputAmount">Price (in KSH)</label>
     <div class="input-group">
       <div class="input-group-addon">$</div>
-      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+      <input name="price" type="text" class="form-control" id="price" placeholder="Amount">
       <div class="input-group-addon">.00</div>
     </div>
   </div>
- 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox">Keep History
-    </label>
-  </div>
-  <button type="submit" class="btn btn-success">Create</button>
+  
 </form>
+ <a class="btn btn-success" onclick="trip.save()">Create</a>

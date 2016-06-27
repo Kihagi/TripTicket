@@ -32,8 +32,10 @@ App.Cmp = {
 	    	}
 	    	
 	    	xhr.open(me.httpMethod, me.httpUrl, me.async);
-	    	if(me.requestParams)
+	    	if(me.requestParams){
+	    		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	    		xhr.send(me.requestParams);
+	    	}
 	    	else
 	    		xhr.send();
 		},
@@ -108,3 +110,14 @@ App.Cmp = {
 (function(){
 	App.Cmp.table("./company/action");
 })();
+
+
+
+var list = {
+		company: function (){
+			App.Cmp.table("./company/action");
+		}, 
+		route : function (){
+			App.Cmp.table("./route/action");
+		}
+		}

@@ -14,7 +14,7 @@ App.Cmp = {
 		httpMethod: 'GET',
 		async: true,
 		httpUrl: '',
-		requestParams: [],
+		requestParams: '',
 		updateTarget: function(resp){
 			document.getElementById(this.responseTarget).innerHTML = resp;
 		},
@@ -32,9 +32,10 @@ App.Cmp = {
 	    	}
 	    	
 	    	xhr.open(me.httpMethod, me.httpUrl, me.async);
-	    	xhr.send();
-	    	
-	    	return 
+	    	if(me.requestParams)
+	    		xhr.send(me.requestParams);
+	    	else
+	    		xhr.send();
 		},
 		fromFields: [],
 		form:  function(){
@@ -46,9 +47,6 @@ App.Cmp = {
 					+ '<div class="input-group">'
 					+ '<div class="input-group-addon">' + el.label + '</div>';
 				
-				console.log(el.label);
-				console.log(el.type);
-				console.log(el.options);
 				if(el.type == 'select' && el.options){
 					form += '<select class="form-control">';
 						el.options.forEach(function(opt){
@@ -62,10 +60,41 @@ App.Cmp = {
 			    form += '</div></div>';
 			})
 			
-		  form +=  '</form><a class="btn btn-success">Save</a>';
+		  form +=  '</form><a class="btn btn-success" id="' + me.formId+ '-save">Save</a>';
 				
-			
 		  me.updateTarget(form);
+		  
+		  document.getElementById(me.formId+ '-save').addEventListener("click", function(){
+			  me.submitForm();
+		  });
+	},
+	formId: '',
+	formUrl: '',
+	submitForm: function(){
+		var me = this;
+		
+		var formValues = me.fromFields.filter(function(el){
+			var formEl = document.getElementById(el.id);
+			if(formEl && formEl.value)
+				return el;
+			
+		}).map(function(el){
+			var formEl = document.getElementById(el.id);
+			return encodeURIComponent(el.name) + '=' 
+				+ encodeURIComponent(formEl.value);
+			
+		}).join('&');
+		
+		me.ajaxRequest.call({
+			httpMethod: 'POST',
+			httpUrl: me.formUrl,
+			requestParams: formValues,
+			responseTarget: me.responseTarget,
+			updateTarget: function(resp){
+				document.getElementById(me.responseTarget).innerHTML = resp;
+			}
+		});
+		
 	},
 	tableStore: '',
 	table: function(tableUrl){

@@ -61,7 +61,7 @@ public class CompanyAction extends HttpServlet{
 	    List<Company> companies = companyBean.list();
 	    
         resp.println("<div class=\"text-right\">");
-        resp.println("<a class=\"btn btn-success\"  onclick=\"companyX.form()\">Add</a>");
+        resp.println("<a class=\"btn btn-success\"  onclick=\"company.form()\">Add</a>");
         resp.println("</div>");
         
 	    for(Company company : companies){

@@ -12,4 +12,6 @@ public interface CompanyBeanI {
 	
 	boolean delete(Long id);
 
+	String listInJson();
+
 }

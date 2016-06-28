@@ -38,6 +38,27 @@ public class CompanyBean implements CompanyBeanI{
 	public List<Company> list(){
 		return companyDao.list(new Company());
 	}
+	
+	public String listInJson(){
+		List<Company> companies = this.list();
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = companies.size();
+		for(Company company : companies){
+			sb.append(company.getJson());
+			
+			if(count != 1)
+				sb.append(",");
+			
+				count--;
+				
+		}
+		
+		sb.append("]");
+		
+		return sb.toString();
+	}
 
 	public boolean delete(Long id) {
 		companyDao.delete(id);

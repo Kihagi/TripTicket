@@ -15,8 +15,12 @@ App.Cmp = {
 		async: true,
 		httpUrl: '',
 		requestParams: '',
+		getEl: function(elId){
+			return document.getElementById(elId);
+		},
 		updateTarget: function(resp){
-			document.getElementById(this.responseTarget).innerHTML = resp;
+			var me = this;
+			me.getEl(me.responseTarget).innerHTML = resp;
 		},
 		ajaxRequest: function(){
 			var me = this;
@@ -32,9 +36,10 @@ App.Cmp = {
 	    	}
 	    	
 	    	xhr.open(me.httpMethod, me.httpUrl, me.async);
-	    	if(me.requestParams)
+	    	if(me.requestParams){
+	    		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	    		xhr.send(me.requestParams);
-	    	else
+			}else
 	    		xhr.send();
 		},
 		fromFields: [],
@@ -64,7 +69,7 @@ App.Cmp = {
 				
 		  me.updateTarget(form);
 		  
-		  document.getElementById(me.formId+ '-save').addEventListener("click", function(){
+		  me.getEl(me.formId+ '-save').addEventListener("click", function(){
 			  me.submitForm();
 		  });
 	},
@@ -74,12 +79,12 @@ App.Cmp = {
 		var me = this;
 		
 		var formValues = me.fromFields.filter(function(el){
-			var formEl = document.getElementById(el.id);
+			var formEl = me.getEl(el.id);
 			if(formEl && formEl.value)
 				return el;
 			
 		}).map(function(el){
-			var formEl = document.getElementById(el.id);
+			var formEl = me.getEl(el.id);
 			return encodeURIComponent(el.name) + '=' 
 				+ encodeURIComponent(formEl.value);
 			
@@ -91,7 +96,8 @@ App.Cmp = {
 			requestParams: formValues,
 			responseTarget: me.responseTarget,
 			updateTarget: function(resp){
-				document.getElementById(me.responseTarget).innerHTML = resp;
+				if(me.aftersubmit)
+					me.aftersubmit();
 			}
 		});
 		
@@ -99,9 +105,17 @@ App.Cmp = {
 	tableStore: '',
 	table: function(tableUrl){
 		var me = this;
-		me.responseTarget = 'ajax-content';
-		me.httpUrl = tableUrl;
-		me.ajaxRequest();
+		
+		me.ajaxRequest.call({
+			httpMethod: 'GET',
+			httpUrl: tableUrl,
+			responseTarget: me.responseTarget,
+			updateTarget: function(resp){
+				JSON.parse(resp).forEach(function(el){
+					console.log(el.name);
+				})
+			}
+		});
 	}
 };
 

@@ -42,6 +42,10 @@ var company = App.extend(App.Cmp, {
 		label: 'P.O BOX',
 		name: 'box',
 		type: 'text'
-	}]
+	}],
+	aftersubmit: function(){
+		App.Cmp.table("./company/action");
+	},
+	removeRecord: true
 
 });

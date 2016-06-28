@@ -58,33 +58,7 @@ public class CompanyAction extends HttpServlet{
 	private void list(HttpServletResponse response) 
 			throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
-	    List<Company> companies = companyBean.list();
-	    
-        resp.println("<div class=\"text-right\">");
-        resp.println("<a class=\"btn btn-success\"  onclick=\"company.form()\">Add</a>");
-        resp.println("</div>");
-        
-	    for(Company company : companies){
-	    	resp.println("<hr>");
-	    	resp.println("<div class=\"row\">");
-	    	resp.println("<div class=\"col-md-12\">");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println(" <span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star-empty\"></span>");
-	    	resp.println(company.getName() + " : " + company.getRegNo());
-	    	resp.println("<span class=\"pull-right\">10 days ago</span>");
-	    	resp.println("<p>This trip was great in terms of services. I would definitely recomend it to someone else.</p>");
-	    	resp.println("</div>");
-	    	resp.println("</div>");
-	    	
-	    	resp.println("<div class=\"text-right\">");
-	    	resp.println("<a class=\"btn btn-danger\"  onclick=\"company.remove(" + company.getId() + ")\">Delete</a>");
-	        resp.println("<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>");
-	        resp.println("</div>");
-	    }
-	
+        resp.println(companyBean.listInJson());
 	}
 	
 }

@@ -80,4 +80,17 @@ public class Company implements Serializable{
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"id\": \"").append(getId()).append("\",")
+			.append("\"name\": \"").append(getName()).append("\",")
+			.append("\"regNo\": \"").append(getRegNo()).append("\",")
+			.append("\"desc\": \"").append(getDesc()).append("\"")
+		.append("}");
+		
+		return sb.toString();
+		
+	}
 }

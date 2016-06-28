@@ -1,3 +1,50 @@
+var ticket =  App.extend(App.Cmp, {
+		formId: 'ticket',
+		formUrl: './../bookings',
+		responseTarget: 'customer-zone',
+		
+		fromFields:[{
+			id: 'idNumber',
+			label: 'Id Number',
+			name: 'idNumber',
+			placeholder: 'Id Number',
+			type: 'text'
+		},{
+			id: 'name',
+			label: 'Full Name',
+			name: 'name',
+			placeholder: 'Full Name',
+			type: 'text'
+		},{
+			id: 'phone',
+			label: 'Cell Phone',
+			name: 'phone',
+			placeholder: 'Cell Phone',
+			type: 'text'
+		},{
+			id: 'seat',
+			label: 'Seat Number',
+			name: 'seat',
+			placeholder: 'Seat',
+			type: 'text'
+		},{
+			id: 'tripId',
+			label: 'Trip Id',
+			name: 'tripId',
+			placeholder: 'Trip Id',
+			type: 'text'
+		}]
+});
+
+
+
+//view bookings
+function viewbookings(){
+	App.Cmp.table("./bookings");
+};
+
+
+
 var ticketGet = {
 		generalFunction: function(uri){
 	    	var ajax = new XMLHttpRequest();
@@ -6,7 +53,7 @@ var ticketGet = {
 	    		
 	    		if(ajax.readyState == 4){
 	    			if(ajax.status == 200){
-	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
+	    				document.getElementById('customer-zone').innerHTML = ajax.responseText;
 	    			}
 	    		}
 	    	}
@@ -19,11 +66,11 @@ var ticketGet = {
 
 
 function ticketCompanies(){
-	ticketGet.generalFunction("./ticket");
+	ticketGet.generalFunction("./ticket/ticket/*");
 }
 
 function proceedToTrips(){
-	ticketGet.generalFunction("./viewtrips");
+	ticketGet.generalFunction("./../viewtrips");
 }
 
 function ticketBookVehicle(tripId){
@@ -64,60 +111,5 @@ function completeBooking(){
 }
 
 function successBooking(){
-	ticketGet.generalFunction("./ticket/action/*");
-}
-
-
-var ticket = {
-		details: [{
-			id: 'idNumber',
-			label: 'Id Number',
-			name: 'idNumber',
-			placeholder: 'Id Number',
-			type: 'text'
-		},{
-			id: 'name',
-			label: 'Full Name',
-			name: 'name',
-			placeholder: 'Full Name',
-			type: 'text'
-		},{
-			id: 'phone',
-			label: 'Cell Phone',
-			name: 'phone',
-			placeholder: 'Cell Phone',
-			type: 'text'
-		},{
-			id: 'seat',
-			label: 'Seat Number',
-			name: 'seat',
-			placeholder: 'Seat',
-			type: 'text'
-		},{
-			id: 'tripId',
-			label: 'Trip Id',
-			name: 'tripId',
-			value: '1004',
-			placeholder: 'Trip Id',
-			type: 'text'
-		}],
-		
-		book: function(){
-			var me = this;
-			var form = '<form>';
-			
-			me.details.forEach(function(el){
-				form += '<div class="form-group">'
-					  + '  <label>' + el.label + '</label>'
-					  + '  <input type="' + el.type + '" name="' + el.name + '" class="form-control" id="' + el.id + '" placeholder="' + el.placeholder + '" value="' + el.value + '">'
-					  + ' </div>';
-			})
-			
-		  form +=  '</form>'
-		  + '<a class="btn btn-success"  onclick="completeBooking()">Complete Booking</a>';
-				
-		  document.getElementById('ajax-content').innerHTML = form;
-		  
-		}
-		
+	ticketGet.generalFunction("./../ticket/action/*");
 }

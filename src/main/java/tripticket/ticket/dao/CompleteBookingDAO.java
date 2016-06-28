@@ -27,4 +27,8 @@ public class CompleteBookingDAO implements CompleteBookingDAOInterface {
 		return em.createQuery("from CompleteBookingModel t").getResultList();
 	}
 	
+	public void delete(Long ticketId){
+		em.remove(em.find(CompleteBookingModel.class, ticketId));
+	}
+	
 }

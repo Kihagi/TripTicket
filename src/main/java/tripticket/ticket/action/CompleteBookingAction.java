@@ -17,7 +17,7 @@ import tripticket.ticket.bean.CompleteBookingBEANInt;
 import tripticket.ticket.model.CompleteBookingModel;
 
 @SuppressWarnings("serial")
-@WebServlet("/ticket/action/*")
+@WebServlet("/bookings")
 public class CompleteBookingAction extends HttpServlet {
 	
 	private Logger log = Logger.getLogger(getClass());
@@ -59,22 +59,45 @@ public class CompleteBookingAction extends HttpServlet {
 		List<CompleteBookingModel> tickets = completeBookingBean.list();
 
 		resp.println("<div class=\"text-center\">");
-		resp.println("<h4>Thank you for booking!</h4>");
+		resp.println("<h4>Bookings Made!</h4>");
 		resp.println("</div>");
 		
-		for(CompleteBookingModel ticket : tickets){
-			resp.println("<hr>");
-			resp.println("<div class=\"row\">");
-			resp.println("<div class=\"col-md-12\">");
-			resp.println("Trip Identification: "+ticket.getTripId()+"<br><br>");
-			resp.println("Full Name: "+ticket.getFullname()+"<br><br>");
-			resp.println("Cell Phone: "+ticket.getPhone()+"<br><br>");
-			resp.println("Seat: "+ticket.getSeat()+"<br><br>");
-			resp.println("Identification Number: "+ticket.getIdNumber()+"<br><br>");
-			resp.println("</div>");
-			resp.println("</div>");
-		}
+		resp.println("<table id='transactions' class='table table-striped responsive-utilities jambo_table' style='font-size:11px'>");
+		resp.println("<thead>");
+			resp.println("<tr class='headings'>");
+			resp.println("<tr class='headings'>"
+					+ "<th>National Id</th>"
+					+ "<th>Full Name</th>"
+					+ "<th>Phone</th>"
+					+ "<th>Seat No</th>"
+					+ "<th>Trip Id</th>"
+					+ "<th class='no-link last'><span class='nobr'>Action</span></th>"
+					+ "</tr>"
+					+ "</thead>");
+			
+			resp.println("<tbody style='font-size:12px'>");
+			
+			for(CompleteBookingModel ticket : tickets){
+				resp.println("<tr>");
+				
+				resp.println("<td>"+ticket.getIdNumber()+"</td>");
+				resp.println("<td>"+ticket.getFullname()+"</td>");
+				resp.println("<td>"+ticket.getPhone()+"</td>");
+				resp.println("<td>"+ticket.getSeat()+"</td>");
+				resp.println("<td>"+ticket.getTripId()+"</td>");
+				resp.println("<td><a class=\"btn btn-danger\"  onclick=\"ticket.deleteEntry(" + ticket.getId() + ")\">Cancel</a></td>");
+				resp.println("</tr>");
+			}
+		
+		resp.println("</tbody>");
+		resp.println("</table>");
 		
 
 	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		Long ticketId = Long.parseLong(request.getParameter("id"));
+		completeBookingBean.delete(ticketId);
+	}
+	
 }

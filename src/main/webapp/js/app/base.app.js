@@ -32,8 +32,10 @@ App.Cmp = {
 	    	}
 	    	
 	    	xhr.open(me.httpMethod, me.httpUrl, me.async);
-	    	if(me.requestParams)
+	    	if(me.requestParams){
+	    		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	    		xhr.send(me.requestParams);
+	    	}
 	    	else
 	    		xhr.send();
 		},
@@ -102,9 +104,20 @@ App.Cmp = {
 		me.responseTarget = 'ajax-content';
 		me.httpUrl = tableUrl;
 		me.ajaxRequest();
+	},
+	deleteEntry : function(id){
+		var me = this;
+		me.ajaxRequest.call({
+			httpMethod : 'DELETE',
+			httpUrl : "./bookings?id="+id,
+			responseTarget : function(resp){
+				document.getElementById(me.responseTarget).innerHTML = resp;
+			}
+		});
+		
 	}
 };
 
 (function(){
-	App.Cmp.table("./company/action");
+	App.Cmp.table("./company/action/*");
 })();

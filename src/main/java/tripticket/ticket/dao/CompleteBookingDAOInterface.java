@@ -14,4 +14,6 @@ public interface CompleteBookingDAOInterface {
 	void setEM(EntityManager em);
 
 	List<CompleteBookingModel> list(CompleteBookingModel filter); 
+	
+	void delete(Long ticketId);
 }

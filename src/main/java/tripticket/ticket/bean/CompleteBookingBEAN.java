@@ -38,6 +38,10 @@ public class CompleteBookingBEAN implements CompleteBookingBEANInt {
 		// TODO Auto-generated method stub
 		return completeBooking.list(new CompleteBookingModel());
 	}
+	
+	public void delete(Long ticketId){
+		completeBooking.delete(ticketId);
+	}
                            
 	
 }

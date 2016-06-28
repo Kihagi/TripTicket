@@ -26,28 +26,30 @@ public class SelectTrip extends HttpServlet {
 		PrintWriter resp = response.getWriter();
 		List<Trip> trips = tripBean.list();
 
-		resp.println("<div class=\"text-left\">");
-		resp.println("<h4>Step 2: Now select a Trip</h4>");
-	    resp.println("</div>");
-	    
+		
 	    for(Trip trip : trips){
 	    	
-	    	resp.println("<hr>");
-			resp.println("<div class=\"row\">");
-			resp.println("<div class=\"col-md-12\">");
-			resp.println("<br>");
-			resp.println("Trip ID 		: " + trip.getTripId());
-			
-			resp.println("Depature Time : " + trip.getDepatureTime());
-			resp.println("Arrival  Time : " + trip.getArrivalTime());
-			resp.println("Route 	 	: " + trip.getRoute());
-			resp.println("Vehicle No	: " + trip.getVehicle());
-			
-			resp.println("<h2> Price : " + trip.getPrice() + "</h2>");
-			
-			resp.println("<a style=\"float:right\" class=\"btn btn-success\"  onclick=\"ticket.book()\">Book Now</a>");
-			resp.println("</div>");
-			resp.println("</div>");
+	    	resp.println("<section>");
+		    resp.println("<ul id=\"da-thumbs\" class=\"da-thumbs\">");
+		    		resp.println("<li>");
+			    		resp.println("Trip ID 		: " + trip.getTripId());
+			    		resp.println("<br>");
+						resp.println("Depature Time : " + trip.getDepatureTime());
+						resp.println("<br>");
+						resp.println("Arrival  Time : " + trip.getArrivalTime());
+						resp.println("<br>");
+						resp.println("Route 	 	: " + trip.getRoute());
+						resp.println("<br>");
+						resp.println("Vehicle No	: " + trip.getVehicle());
+						
+						resp.println("<h2> Fare : $" + trip.getPrice() + "</h2>");
+						
+						resp.println("<a style=\"float:right\" class=\"btn btn-success\"  onclick=\"ticket.form()\">Book Now</a>");
+			    				
+		    		resp.println("</li>");
+					
+		    resp.println("</ul>");
+		    resp.println("</section>");
 	    	
         }
 	}

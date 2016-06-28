@@ -1,6 +1,6 @@
 var company = App.extend(App.Cmp, {
-	formId: 'company-save',
-	formUrl: './company/action/add',
+	formId: 'company',
+	formUrl: './company/action/*',
 	responseTarget: 'ajax-content',
 	fromFields:[{
 		id: 'company-name',

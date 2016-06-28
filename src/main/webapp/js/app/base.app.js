@@ -39,12 +39,7 @@ App.Cmp = {
 	    	if(me.requestParams){
 	    		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	    		xhr.send(me.requestParams);
-<<<<<<< HEAD
 			}else
-=======
-	    	}
-	    	else
->>>>>>> f03e1ca4f5ef513f2d9072b51f0f9be0376e4c09
 	    		xhr.send();
 		},
 		fromFields: [],
@@ -110,7 +105,6 @@ App.Cmp = {
 	tableStore: '',
 	table: function(tableUrl){
 		var me = this;
-<<<<<<< HEAD
 		
 		me.ajaxRequest.call({
 			httpMethod: 'GET',
@@ -122,35 +116,9 @@ App.Cmp = {
 				})
 			}
 		});
-=======
-		me.responseTarget = 'ajax-content';
-		me.httpUrl = tableUrl;
-		me.ajaxRequest();
-	},
-	deleteEntry : function(id){
-		var me = this;
-		me.ajaxRequest.call({
-			httpMethod : 'DELETE',
-			httpUrl : "./bookings?id="+id,
-			responseTarget : function(resp){
-				document.getElementById(me.responseTarget).innerHTML = resp;
-			}
-		});
-		
->>>>>>> f03e1ca4f5ef513f2d9072b51f0f9be0376e4c09
 	}
 };
 
 (function(){
-	App.Cmp.table("./company/action/*");
+	App.Cmp.table("./company/action");
 })();
-
-
-var list = {
-		company: function (){
-			App.Cmp.table("./company/action");
-		}, 
-		route : function (){
-			App.Cmp.table("./route/action");
-		}
-		}

@@ -121,3 +121,13 @@ App.Cmp = {
 (function(){
 	App.Cmp.table("./company/action/*");
 })();
+
+
+var list = {
+		company: function (){
+			App.Cmp.table("./company/action");
+		}, 
+		route : function (){
+			App.Cmp.table("./route/action");
+		}
+		}

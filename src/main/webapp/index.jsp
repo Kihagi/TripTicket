@@ -44,10 +44,16 @@
 
             <div class="col-md-3">
                 <div class="list-group">
+
                     <a href="#" class="list-group-item active" onclick="company.list()">Companies</a>
                     <a href="#" class="list-group-item" onclick="route.list()">Routes</a>
                     <a href="#" class="list-group-item" onclick="viewbookings()">Tickets</a>
                     <a href="ticket/index.jsp" target="_blank" class="list-group-item">Customer Zone</a>
+
+                    <a href="#" class="list-group-item active" onclick="list.company()">Companies</a>
+                    <a href="#" class="list-group-item" onclick="list.route()">Routes</a>
+                    <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
+
                     <a href="#" class="list-group-item " onclick="trip.list()">Trip</a>
                     <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.list()"> Passenger</a>

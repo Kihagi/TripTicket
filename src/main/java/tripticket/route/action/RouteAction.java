@@ -63,7 +63,7 @@ public class RouteAction extends HttpServlet{
 			List<Route> routes = routeBean.list();
 	    
 	    resp.println("<div class=\"text-right\">");
-        resp.println("<a class=\"btn btn-success\"  onclick=\"route.add()\">Add Route</a>");
+        resp.println("<a class=\"btn btn-success\"  onclick=\"route.form()\">Add Route</a>");
         resp.println("</div>");
         
 	    for(Route route : routes){

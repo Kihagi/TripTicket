@@ -44,8 +44,13 @@ var company = App.extend(App.Cmp, {
 		type: 'text'
 	}],
 	aftersubmit: function(){
-		App.Cmp.table("./company/action");
+		var me = this;
+		me.table("./company/action");
 	},
 	removeRecord: true
 
 });
+
+(function(){
+	company.init();
+})();

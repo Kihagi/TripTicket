@@ -111,14 +111,54 @@ App.Cmp = {
 			httpUrl: tableUrl,
 			responseTarget: me.responseTarget,
 			updateTarget: function(resp){
-				JSON.parse(resp).forEach(function(el){
-					console.log(el.name);
+				/*var table = '<table class="table">';
+				table += '<tr>';
+				
+				me.fromFields.forEach(function(model){
+					table += '<th>' + model.label + '</th>';
 				});
+				table += '</tr>';
+				
+				JSON.parse(resp).forEach(function(el){
+					table += '<tr>';
+						me.fromFields.forEach(function(model){
+							table += '<td>' + el[model.name] + '</td>';
+						});
+					table += '</tr>';
+				});
+				
+				table += '</table>';*/
+				
+				var table = "<div class=\"text-right\">";
+				table += "<a class=\"btn btn-success\"  onclick=\"company.form()\">Add</a>";
+				table += "</div>";
+		
+				JSON.parse(resp).forEach(function(el){
+					table += "<hr>";
+			    	table += "<div class=\"row\">";
+			    	table += "<div class=\"col-md-12\">";
+			    	table += "<span class=\"glyphicon glyphicon-star\"></span>";
+			    	table += "<span class=\"glyphicon glyphicon-star\"></span>";
+			    	table += "<span class=\"glyphicon glyphicon-star\"></span>";
+			    	table += " <span class=\"glyphicon glyphicon-star\"></span>";
+			    	table += "<span class=\"glyphicon glyphicon-star-empty\"></span>";
+			    	table += el.name + " : " + el.regNo;
+			    	table += "<span class=\"pull-right\">10 days ago</span>";
+			    	table += "<p>This trip was great in terms of services. I would definitely recomend it to someone else.</p>";
+			    	table += "</div>";
+			    	table += "</div>";
+			    	
+			    	table += "<div class=\"text-right\">";
+			    	table += "<a class=\"btn btn-danger\"  onclick=\"company.remove(" + el.id + ")\">Delete</a>";
+			        table += "<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>";
+			        table += "</div>";
+				});
+				
+				me.getEl(me.responseTarget).innerHTML = table;
 			}
 		});
+	},
+	init: function(){
+		this.table("./company/action");
 	}
 };
-
-(function(){
-	App.Cmp.table("./company/action");
-})();

@@ -113,7 +113,7 @@ App.Cmp = {
 			updateTarget: function(resp){
 				JSON.parse(resp).forEach(function(el){
 					console.log(el.name);
-				})
+				});
 			}
 		});
 	}

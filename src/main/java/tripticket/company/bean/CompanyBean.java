@@ -37,13 +37,22 @@ public class CompanyBean implements CompanyBeanI{
 		companyDao.save(company);
 	}
 	
+	public String load(Long id){
+		Company company = companyDao.findById(id);
+		
+		if(company != null)
+			return company.getJson();
+		else
+			return "{}";
+	}
+	
 	public List<Company> list(){
 		return companyDao.list(new Company());
 	}
 	
 	public String listInJson(){
 		Map<String, Object> filter = new HashMap<String, Object>();
-		filter.put("name", "sdadad");
+		//filter.put("name", "sdadad");
 		
 		List<Company> companies = companyDao.list(filter);
 		StringBuilder sb = new StringBuilder();
@@ -53,11 +62,10 @@ public class CompanyBean implements CompanyBeanI{
 		for(Company company : companies){
 			sb.append(company.getJson());
 			
-			if(count <= 1)
-				sb.append(",");
+			count--;
 			
-				count--;
-				
+			if(count >= 1)
+				sb.append(",");
 		}
 		
 		sb.append("]");

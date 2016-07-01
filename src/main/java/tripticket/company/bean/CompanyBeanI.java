@@ -7,6 +7,8 @@ import tripticket.company.model.Company;
 public interface CompanyBeanI {
 
 	void add(Company company);
+	
+	String load(Long id);
 
 	List<Company> list();
 	

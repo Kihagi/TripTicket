@@ -102,6 +102,28 @@ App.Cmp = {
 		});
 		
 	},
+	loadForm : function(id){
+		var me = this;
+		
+		me.ajaxRequest.call({
+			httpMethod: me.httpMethod,
+			httpUrl: me.formUrl + '/load?id=' + id,
+			responseTarget: me.responseTarget,
+			updateTarget: function(resp){
+				me.form();
+				var result = JSON.parse(resp);
+				me.fromFields.forEach(function(el){
+					Object.keys(result).forEach(function(k){
+						if(el.name == k){
+							console.log(el.id + '=' + result[k]);
+							me.getEl(el.id).value = result[k];
+						}
+					  })
+				})
+			}
+		});
+		
+	},
 	tableStore: '',
 	table: function(tableUrl){
 		var me = this;
@@ -149,6 +171,7 @@ App.Cmp = {
 			    	table += "</div>";
 			    	
 			    	table += "<div class=\"text-right\">";
+			    	table += "<a class=\"btn btn-primary\"  onclick=\"company.loadForm(" + el.id + ")\">Edit</a>";
 			    	table += "<a class=\"btn btn-danger\"  onclick=\"company.remove(" + el.id + ")\">Delete</a>";
 			        table += "<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>";
 			        table += "</div>";
@@ -159,6 +182,6 @@ App.Cmp = {
 		});
 	},
 	init: function(){
-		this.table("./company/action");
+		this.table("./company");
 	}
 };

@@ -1,6 +1,6 @@
 var company = App.extend(App.Cmp, {
 	formId: 'company',
-	formUrl: './company/action/*',
+	formUrl: './company',
 	responseTarget: 'ajax-content',
 	fromFields:[{
 		id: 'company-name',
@@ -45,7 +45,7 @@ var company = App.extend(App.Cmp, {
 	}],
 	aftersubmit: function(){
 		var me = this;
-		me.table("./company/action");
+		me.table("./company");
 	},
 	removeRecord: true
 

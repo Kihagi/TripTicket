@@ -2,7 +2,6 @@ package tripticket.common.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,16 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
 import tripticket.company.bean.CompanyBeanI;
 import tripticket.company.model.Company;
 
 @SuppressWarnings("serial")
-@WebServlet("/company/action/*")
+@WebServlet("/company/*")
 public class CompanyAction extends HttpServlet{
-	
-	private Logger log  = Logger.getLogger(getClass());
 	
 	@EJB	
 	private CompanyBeanI companyBean;
@@ -29,11 +24,11 @@ public class CompanyAction extends HttpServlet{
 	 throws ServletException, IOException{
 		String [] pathCmp = request.getRequestURI().split("/");
 		String path = pathCmp[pathCmp.length-1];
-/*		
-		if(path.equalsIgnoreCase("add"))
-			this.add(request, response);
-		else*/
-		this.list(response);
+		
+		if(path.equalsIgnoreCase("load"))
+			this.load(request, response);
+		else
+			this.list(response);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -50,7 +45,6 @@ public class CompanyAction extends HttpServlet{
 	public void doDelete(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		Long companyId = Long.parseLong(request.getParameter("id"));
-		System.out.println("what is the ID ====================== " + companyId);
 		companyBean.delete(companyId);
 		
 	}
@@ -59,6 +53,13 @@ public class CompanyAction extends HttpServlet{
 			throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
         resp.println(companyBean.listInJson());
+	}
+	
+	private void load(HttpServletRequest request,
+			HttpServletResponse response) 
+			throws ServletException, IOException{
+		PrintWriter resp = response.getWriter();
+        resp.println(companyBean.load(Long.parseLong(request.getParameter("id"))));
 	}
 	
 }

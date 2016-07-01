@@ -1,6 +1,8 @@
 package tripticket.company.bean;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -32,7 +34,7 @@ public class CompanyBean implements CompanyBeanI{
 		if(company == null || company.getName() == null)
 			return;
 		
-		companyDao.add(company);
+		companyDao.save(company);
 	}
 	
 	public List<Company> list(){
@@ -40,15 +42,18 @@ public class CompanyBean implements CompanyBeanI{
 	}
 	
 	public String listInJson(){
-		List<Company> companies = this.list();
+		Map<String, Object> filter = new HashMap<String, Object>();
+		filter.put("name", "sdadad");
+		
+		List<Company> companies = companyDao.list(filter);
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		
-		int count = companies.size();
+		int count = companyDao.countAll();
 		for(Company company : companies){
 			sb.append(company.getJson());
 			
-			if(count != 1)
+			if(count <= 1)
 				sb.append(",");
 			
 				count--;

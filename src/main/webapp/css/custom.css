@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+.error_msg{
+	color:#ae0000;
+	margin:3px 0px 0px 5px;	
+}
+
+.warning_brd{
+	border:1px solid #ae0000;	
+}
+
+.success_brd{
+	border:1px solid green;	
+}
+
+

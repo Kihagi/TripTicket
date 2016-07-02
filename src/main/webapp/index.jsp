@@ -12,6 +12,7 @@
 	
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
 
 	<!-- Custom CSS -->
 	<link href="css/shop-item.css" rel="stylesheet">
@@ -117,6 +118,7 @@
 	
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+     <script src="js/custom.js"></script>
     
     
     <script>

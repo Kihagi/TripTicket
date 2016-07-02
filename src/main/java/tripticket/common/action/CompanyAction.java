@@ -35,6 +35,10 @@ public class CompanyAction extends HttpServlet{
 			throws ServletException, IOException{
 		
 		Company company = new Company();
+		
+		if(request.getParameter("id") != null)
+			company.setId(Long.parseLong(request.getParameter("id")));
+		
 		company.setName(request.getParameter("name"));
 		company.setRegNo(request.getParameter("regNo"));
 		

@@ -42,6 +42,12 @@ var company = App.extend(App.Cmp, {
 		label: 'P.O BOX',
 		name: 'box',
 		type: 'text'
+	},{
+		id: 'company-id',
+		label: '',
+		name: 'id',
+		hidden: true,
+		type: 'hidden'
 	}],
 	aftersubmit: function(){
 		var me = this;

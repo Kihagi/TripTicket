@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tripticket.common.model.Address;
 import tripticket.company.bean.CompanyBeanI;
 import tripticket.company.model.Company;
 
 @SuppressWarnings("serial")
 @WebServlet("/company/*")
 public class CompanyAction extends HttpServlet{
+	
+	private Company company;
 	
 	@EJB	
 	private CompanyBeanI companyBean;
@@ -36,11 +39,19 @@ public class CompanyAction extends HttpServlet{
 		
 		Company company = new Company();
 		
-		if(request.getParameter("id") != null)
+		if(request.getParameter("id") != null 
+				&& !request.getParameter("id").equals("undefined"))
 			company.setId(Long.parseLong(request.getParameter("id")));
 		
 		company.setName(request.getParameter("name"));
 		company.setRegNo(request.getParameter("regNo"));
+		
+		company.setAddress(new Address());
+		company.getAddress().setPhoneNo(request.getParameter("phoneNo"));
+		company.getAddress().setEmail(request.getParameter("email"));
+		company.getAddress().setTown(request.getParameter("town"));
+		company.getAddress().setCountry(request.getParameter("country"));
+		company.getAddress().setBox(request.getParameter("box"));
 		
 		companyBean.add(company);
 		
@@ -64,6 +75,14 @@ public class CompanyAction extends HttpServlet{
 			throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
         resp.println(companyBean.load(Long.parseLong(request.getParameter("id"))));
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 	
 }

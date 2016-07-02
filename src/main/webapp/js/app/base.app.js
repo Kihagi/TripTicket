@@ -53,7 +53,7 @@ App.Cmp = {
 					+ '<div class="input-group-addon">' + el.label + '</div>';
 				
 				if(el.type == 'select' && el.options){
-					form += '<select class="form-control">';
+					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '">';
 						el.options.forEach(function(opt){
 							form += '<option value='+ opt.value + '>' + opt.label + '</option>'
 						});
@@ -80,14 +80,17 @@ App.Cmp = {
 		
 		var formValues = me.fromFields.filter(function(el){
 			var formEl = me.getEl(el.id);
-			if(formEl && formEl.value)
-				return el;
+			if(!formEl) return;
+			
+			if(!formEl.value) return;
+			
+			el.value = formEl.value;
+			
+			return el;
 			
 		}).map(function(el){
-			var formEl = me.getEl(el.id);
 			return encodeURIComponent(el.name) + '=' 
-				+ encodeURIComponent(formEl.value);
-			
+				+ encodeURIComponent(el.value);
 		}).join('&');
 		
 		me.ajaxRequest.call({

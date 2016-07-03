@@ -260,7 +260,7 @@ App.Cmp = {
 				
 				var addButton = document.createElement('a');
 				addButton.setAttribute('class', 'btn btn-success');
-				addButton.setAttribute('onclick', 'company.form()');
+				addButton.setAttribute('onclick', me.formId+'.form()');
 				
 				var addLabel = document.createElement('label');
 				addLabel.innerHTML = "Add";
@@ -314,7 +314,7 @@ App.Cmp = {
 						
 						var edit = document.createElement('a');
 						edit.setAttribute('class', 'btn btn-primary btn-xs');
-						edit.setAttribute('onclick', 'company.loadForm('+el.id+')');
+						edit.setAttribute('onclick',  me.formId+'.loadForm('+el.id+')');
 						
 						var editLabel = document.createElement('label');
 						editLabel.innerHTML = "Edit";
@@ -325,7 +325,7 @@ App.Cmp = {
 												
 						var remove = document.createElement('a');
 						remove.setAttribute('class', 'btn btn-danger btn-xs');
-						remove.setAttribute('onclick', 'company.remove('+el.id+')');
+						remove.setAttribute('onclick',  me.formId+'.remove('+el.id+')');
 						
 						var removeLabel = document.createElement('label');
 						removeLabel.innerHTML = "Delete";

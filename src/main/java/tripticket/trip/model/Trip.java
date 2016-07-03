@@ -18,12 +18,12 @@ import tripticket.route.model.Route;
 public class Trip{
 	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
-	private int tripId;
+	private Long id;
 	
-	@Column(name = "depature_time")
+	@Column(name = "depatureTime")
 	private String depatureTime;
 	
-	@Column(name = "arrival_time")
+	@Column(name = "arrivalTime")
 	private String arrivalTime;
 	
 	@Column(name = "route")
@@ -40,12 +40,12 @@ public class Trip{
 	private Route route_id;
 
 	
-	public int getTripId() {
-		return tripId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setTripId(int tripId) {
-		this.tripId = tripId;
+	public void setTripId(Long id) {
+		this.id = id;
 	}
 
 	public String getRoute() {
@@ -86,6 +86,24 @@ public class Trip{
 
 	public void setVehicle(String vehicle) {
 		this.vehicle = vehicle;
+	}
+	
+	public String getJson(){
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+		.append("\"id\": \"").append(getId()).append("\",")
+		.append("\"arrivalTime\": \"").append(getArrivalTime()).append("\",")
+		.append("\"depatureTime\": \"").append(getDepatureTime()).append("\",")
+		.append("\"price\": \"").append(getPrice()).append("\",")
+		.append("\"route\": \"").append(getRoute()).append("\",")
+		.append("\"vehicle\": \"").append(getVehicle()).append("\"")
+	.append("}");
+		
+		return sb.toString();
+		
+		
+		
 	}
 
 }

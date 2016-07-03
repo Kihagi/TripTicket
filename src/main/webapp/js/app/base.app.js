@@ -52,20 +52,20 @@ App.Cmp = {
 					+ '<div class="input-group" id="'+ el.id +'_div">'
 					+ '<div class="input-group-addon">' + el.label + '</div>';
 				console.log(el.id);
+				var fun = "shshs";
 				if(el.type == 'select' && el.options){
-					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '" onchange="CheckEmpty("' + el.id + '");">';
+					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '" onkeyup="CheckEmpty(\''+el.id+'\')">';
 						el.options.forEach(function(opt){
 							form += '<option value='+ opt.value + '>' + opt.label + '</option>'
 						});
 					form += '</select>';
 				}else
-					form += '  <input type="' + el.type + '" name="' 
-						+ el.name + '" class="form-control" id="' + el.id + '" onblur="CheckEmpty("' + el.id + '");">'
+					form += '  <input type="' + el.type + '" name="' + el.name + '" class="form-control" id="' + el.id + '" onkeyup="CheckEmpty(\''+el.id+'\')">';
 					 
 			    form += '</div></div>';
 			})
 			
-		  form +=  '</form><a class="btn btn-success" id="' + me.formId+ '-save">Save</a>';
+		  form +=  '</form><a class="btn btn-success" name="submit" id="' + me.formId+ '-save">Save</a>';
 				
 		  me.updateTarget(form);
 		  
@@ -390,7 +390,6 @@ App.Cmp = {
 };
 
 
-
 //function for displaying warnings
 function displayWarning(field_id, parent_div, message){
 	//prevent duplication of error message using if.. It 
@@ -413,7 +412,7 @@ function displayWarning(field_id, parent_div, message){
 		
 		//after displaying warning, disable submit button
 		
-		var submitButton = document.getElementById('submit');
+		var submitButton = document.getElementById(btn);
 		submitButton.disabled=true;
 		
 	
@@ -430,7 +429,7 @@ function removeWarning(field_id, parent_div){
 	}
 	document.getElementById(field_id).className += " success_brd";
 	
-	var submitButton = document.getElementById('submit');
+	var submitButton = document.getElementById(btn);
 	submitButton.disabled=false;
 	
 }
@@ -439,7 +438,7 @@ function removeWarning(field_id, parent_div){
 function CheckEmpty(field_id){
 	var MyFieldId = document.getElementById(field_id);
 	if(MyFieldId.value == "" || MyFieldId.value == null){
-		displayWarning(field_id, MyFieldId.parentNode.id, "Fill this field. Stop Bullshitting esse");	 
+		displayWarning(field_id, MyFieldId.parentNode.id, "Required");	 
 	}
 	else{
 		removeWarning(field_id, MyFieldId.parentNode.id);
@@ -464,7 +463,7 @@ function ValidatePassword(password){
 	var MyPasswordId = document.getElementById(password);
 	var format = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[A-Z]).*$/;	
 	if(!MyPasswordId.value.match(format)){
-		displayWarning(password, MyPasswordId.parentNode.id, "The password must be fucked up with uppercase, lowercase, numeric and special characters and at least 8 characters long");
+		displayWarning(password, MyPasswordId.parentNode.id, "The password must have uppercase, lowercase, numeric and special characters and at least 8 characters long");
 	}
 	else{
 		removeWarning(password, MyPasswordId.parentNode.id);
@@ -489,7 +488,7 @@ function ConfirmPassword(password, confirm_password){
 function ValidateCheckbox(checkbox){
 	var check_boxId = document.getElementById(checkbox);
 	if(check_boxId.checked == false){
-		displayWarning(checkbox, check_boxId.parentNode.id, "You must Agree Nigger. You are our slave!!");	
+		displayWarning(checkbox, check_boxId.parentNode.id, "Required");	
 	}
 	else{
 		removeWarning(checkbox, check_boxId.parentNode.id);
@@ -500,7 +499,7 @@ function ValidateCheckbox(checkbox){
 function ValidateSelect(selected){
 	var selectedId = document.getElementById(selected);
 	if(selectedId.selectedIndex == 0){
-		displayWarning(selected, selectedId.parentNode.id, "You must tell us where your ass belongs!!");	
+		displayWarning(selected, selectedId.parentNode.id, "Required");	
 			
 	}
 	else{

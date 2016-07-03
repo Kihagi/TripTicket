@@ -6,27 +6,32 @@ var company = App.extend(App.Cmp, {
 		id: 'company-name',
 		label: 'Company Name',
 		name: 'name',
-		type: 'text'
+		type: 'text',
+		required: 'required'
 	},{
 		id: 'company-regno',
 		label: 'Registration #',
 		name: 'regNo',
-		type: 'text'
+		type: 'text',
+		required: 'required'
 	},{
 		id: 'company-phone_no',
 		label: 'Phone #',
 		name: 'phoneNo',
 		type: 'text'
+		//required: 'required'
 	},{
 		id: 'company-email',
 		label: 'Email #',
 		name: 'email',
-		type: 'email'
+		type: 'email',
+		required: 'required'
 	},{
 		id: 'company-town',
 		label: 'Town',
 		name: 'town',
-		type: 'text'
+		type: 'text',
+		required: 'required'
 	},{
 		id: 'company-country',
 		label: 'Country',
@@ -41,13 +46,15 @@ var company = App.extend(App.Cmp, {
 		id: 'company-box',
 		label: 'P.O BOX',
 		name: 'box',
-		type: 'text'
+		type: 'text',
+		required: 'required'
 	},{
 		id: 'company-id',
 		label: '',
 		name: 'id',
 		hidden: true,
-		type: 'hidden'
+		type: 'hidden',
+		required: 'required'
 	}],
 	aftersubmit: function(){
 		var me = this;

@@ -51,16 +51,19 @@ App.Cmp = {
 				form += '<div class="form-group">'
 					+ '<div class="input-group" id="'+ el.id +'_div">'
 					+ '<div class="input-group-addon">' + el.label + '</div>';
-				console.log(el.id);
+				console.log(el.required);
 				var fun = "shshs";
 				if(el.type == 'select' && el.options){
-					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '" onkeyup="CheckEmpty(\''+el.id+'\')">';
+					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '" onkeyup="validation(\''+el.id+'\',\','+el.type+'\',\''+el.required+'\')">';
 						el.options.forEach(function(opt){
 							form += '<option value='+ opt.value + '>' + opt.label + '</option>'
 						});
 					form += '</select>';
 				}else
-					form += '  <input type="' + el.type + '" name="' + el.name + '" class="form-control" id="' + el.id + '" onkeyup="CheckEmpty(\''+el.id+'\')">';
+					form += '  <input type="' + el.type + '" name="' + el.name + '" class="form-control" id="' + el.id + '" onkeyup="validation(\''+el.id+'\',\''+el.type+'\',\''+el.required+'\')">';
+				
+					
+				
 					 
 			    form += '</div></div>';
 			})
@@ -435,6 +438,19 @@ function removeWarning(field_id, parent_div){
 }
 
 
+function validation(field_id, field_type, required){
+	
+	if(field_type == 'email')
+		ValidateEmail(field_id);
+	
+	if(required == 'required')
+		CheckEmpty(field_id);
+		
+	if(field_type == 'select')
+		ValidateSelect(field_id);
+
+}
+
 function CheckEmpty(field_id){
 	var MyFieldId = document.getElementById(field_id);
 	if(MyFieldId.value == "" || MyFieldId.value == null){
@@ -451,7 +467,7 @@ function ValidateEmail(email){
 	var format = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 	
 	if(!MyEmailId.value.match(format)){
-		displayWarning(email, MyEmailId.parentNode.id, "You have a fucked up email!");	 
+		displayWarning(email, MyEmailId.parentNode.id, "Invalid email!");	 
 	}
 	else{
 		removeWarning(email, MyEmailId.parentNode.id);
@@ -476,7 +492,7 @@ function ConfirmPassword(password, confirm_password){
 	var confirmpasswordId	= document.getElementById(confirm_password);
 	
 	if(confirmpasswordId.value != MyPassword){
-		displayWarning(confirm_password, confirmpasswordId.parentNode.id, "Password and Confirm Password must match bitch!!");
+		displayWarning(confirm_password, confirmpasswordId.parentNode.id, "Password and Confirm Password must match");
 		
 	}
 	else{

@@ -42,158 +42,47 @@ App.Cmp = {
 			}else
 	    		xhr.send();
 		},
-		fromFields: [],
+		model: [],
 		form:  function(){
 			var me = this;
 			var form = '<form>';
 			
-			me.fromFields.forEach(function(el){
+			me.model.forEach(function(el){
 				form += '<div class="form-group">'
-					+ '<div class="input-group" id="'+ el.id +'_div">'
+					+ '<div class="input-group">'
 					+ '<div class="input-group-addon">' + el.label + '</div>';
-				console.log(el.required);
-				var fun = "shshs";
+				
 				if(el.type == 'select' && el.options){
-					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '" onkeyup="validation(\''+el.id+'\',\','+el.type+'\',\''+el.required+'\')">';
+					form += '<select class="form-control" name="' + el.name + '" id="' + el.id + '">';
 						el.options.forEach(function(opt){
 							form += '<option value='+ opt.value + '>' + opt.label + '</option>'
 						});
 					form += '</select>';
 				}else
-					form += '  <input type="' + el.type + '" name="' + el.name + '" class="form-control" id="' + el.id + '" onkeyup="validation(\''+el.id+'\',\''+el.type+'\',\''+el.required+'\')">';
-				
-					
-				
+					form += '  <input type="' + el.type + '" name="' 
+						+ el.name + '" class="form-control" id="' + el.id + '">'
 					 
 			    form += '</div></div>';
 			})
 			
-		  form +=  '</form><a class="btn btn-success" name="submit" id="' + me.formId+ '-save">Save</a>';
+		  form +=  '</form><a class="btn btn-success" id="' + me.modelId+ '-save">Save</a>';
 				
-		  me.updateTarget(form);
+		  if(me.updateTarget(form)){
+			  me.model.forEach(function(el){
+				  me.getEl(el.id).addEventListener("keyup", function(){
+					  me.form.validate(el);
+				  });
+			  })
+		  }
 		  
-		  me.getEl(me.formId+ '-save').addEventListener("click", function(){
+		  me.getEl(me.modelId+ '-save').addEventListener("click", function(){
 			  me.submitForm();
 		  });
-			
-			/*
-			var formDiv = document.createElement('div');
-			
-			var form = document.createElement('form');
-			
-			formDiv.appendChild(form);
-			
-			
-			me.fromFields.forEach(function(el){
-				
-				var formGroup = document.createElement('div');
-				formGroup.setAttribute('class', 'form-group');
-				form.appendChild(formGroup);
-				
-				var inputGroup = document.createElement('div');
-				inputGroup.setAttribute('class', 'input-group');
-				formGroup.appendChild(inputGroup);
-				
-				var inputGroupAddon = document.createElement('div');
-				inputGroupAddon.setAttribute('class', 'input-group-addon');
-				inputGroup.appendChild(inputGroupAddon);
-				
-				var inputLabel = document.createElement('label');
-				inputLabel.innerHTML = el.label;
-				inputGroupAddon.appendChild(inputLabel);
-				
-				if(el.type == 'select' && el.options){
-					
-					var selectEl = document.createElement('input');
-					selectEl.setAttribute('class', 'form-control');
-					selectEl.setAttribute('id', el.id);
-					selectEl.setAttribute('name', el.name);
-					inputGroupAddon.appendChild(selectEl);
-					
-						el.options.forEach(function(opt){
-							var selectOption = document.createElement('input');
-							selectOption.setAttribute('value', opt.value);
-							selectEl.appendChild(selectOption);
-							
-							var optionLabel = document.createElement('label');
-							optionLabel.innerHTML = opt.value;
-							selectOption.appendChild(optionLabel);
-						});
-					
-					var spanError = document.createElement('span');
-					spanError.setAttribute('class', 'text-right');
-					spanError.setAttribute('style', 'color:red');
-					spanError.setAttribute('id', el.id+'vError');
-					inputGroupAddon.appendChild(spanError);
-					
-				}else{
-					var inputField = document.createElement('input');
-					inputField.setAttribute('type', el.type);
-					inputField.setAttribute('name', el.name);
-					inputField.setAttribute('id', el.id);
-					inputGroupAddon.appendChild(inputField);
-					
-					
-					var spanError = document.createElement('span');
-					spanError.setAttribute('class', 'text-right');
-					spanError.setAttribute('style', 'color:red');
-					spanError.setAttribute('id', el.id+'vError');
-					inputGroupAddon.appendChild(spanError);
-				}
-					
-			 
-			});
-			
-			var btnSave = document.createElement('a');
-			btnSave.setAttribute('class', 'btn btn-success');
-			btnSave.setAttribute('id', me.formId+ '-save');
-			
-			var saveLabel = document.createElement('label');
-			saveLabel.innerHTML = "Save";
-			btnSave.appendChild(saveLabel);
-			
-			form.appendChild(btnSave);
-			
-			
-			me.getEl(me.responseTarget).appendChild(formDiv);
-		 
-		  me.getEl(me.formId+ '-save').addEventListener("click", function(){
-			  
-			  /*validation
-			  var error = 0;
-			   
-			  me.fromFields.forEach(function(el){
-			    	
-				  var input = document.getElementById(el.id).value;
-			    	
-			    	if (input.length == 0) {
-				    
-				        document.getElementById('' + el.id + 'vError').innerHTML = el.label+" is required";
-				        error++;
-				    } else {
-				     
-				        document.getElementById('' + el.id + 'vError').innerHTML = '';
-				    }
-			    	
-			    
-			    });
-			  /*end of validation
-			    if(error==0)			  
-			    	me.submitForm();
-			    else
-			    	return false;
-			  
-			  
-		  });
-		  */  
-		  
 	},
-	formId: '',
-	formUrl: '',
 	submitForm: function(){
 		var me = this;
 		
-		var formValues = me.fromFields.filter(function(el){
+		var formValues = me.model.filter(function(el){
 			var formEl = me.getEl(el.id);
 			if(!formEl) return;
 			
@@ -210,7 +99,7 @@ App.Cmp = {
 		
 		me.ajaxRequest.call({
 			httpMethod: 'POST',
-			httpUrl: me.formUrl,
+			httpUrl: me.httpUrl,
 			requestParams: formValues,
 			responseTarget: me.responseTarget,
 			updateTarget: function(resp){
@@ -225,12 +114,12 @@ App.Cmp = {
 		
 		me.ajaxRequest.call({
 			httpMethod: me.httpMethod,
-			httpUrl: me.formUrl + '/load?id=' + id,
+			httpUrl: me.httpUrl + '/load?id=' + id,
 			responseTarget: me.responseTarget,
 			updateTarget: function(resp){
 				me.form();
 				var result = JSON.parse(resp);
-				me.fromFields.forEach(function(el){
+				me.model.forEach(function(el){
 					Object.keys(result).forEach(function(k){
 						if(el.name == k){
 							console.log(el.id + '=' + result[k]);
@@ -242,159 +131,113 @@ App.Cmp = {
 		});
 		
 	},
-	tableStore: '',
-	table: function(tableUrl){
+	removeRec: function(id){
 		var me = this;
 		
 		me.ajaxRequest.call({
-			httpMethod: 'GET',
-			httpUrl: tableUrl,
+			httpMethod: 'DELETE',
+			httpUrl: me.httpUrl+'?id=' + id,
 			responseTarget: me.responseTarget,
 			updateTarget: function(resp){
-				
-				var dataDiv = document.createElement('div');
-				
-				var addDiv = document.createElement('div');
-				addDiv.setAttribute('class', 'text-right');
-				dataDiv.appendChild(addDiv);
-				
-				var addButton = document.createElement('a');
-				addButton.setAttribute('class', 'btn btn-success');
-				addButton.setAttribute('onclick', me.formId+'.form()');
-				
-				var addLabel = document.createElement('label');
-				addLabel.innerHTML = "Add";
-				addButton.appendChild(addLabel);
-				
-				addDiv.appendChild(addButton);
-				
-				var table = document.createElement('table');
-				table.setAttribute('class', 'table table-striped responsive-utilities jambo_table');
-				dataDiv.appendChild(table);
-				
-				var tHead = document.createElement('thead');
-				table.appendChild(tHead);
-				
-				var tHeadRow = document.createElement('tr');
-				tHeadRow.setAttribute('class', 'headings');
-				tHead.appendChild(tHeadRow);
-				
-				me.fromFields.forEach(function(model){
-					var headers = document.createElement('th');
-					tHeadRow.appendChild(headers);
-					
-					var headerData = model.label;
-					
-					headers.innerHTML = headerData;
-				
-				});
-								
-				var tbody = document.createElement('tbody');
-				tbody.setAttribute('style', "font-size:12px");
-				table.appendChild(tbody);
-				
-				
-				JSON.parse(resp).forEach(function(el){
-					var dataRow = document.createElement('tr');
-					tbody.appendChild(dataRow);
-					
-						me.fromFields.forEach(function(model){
-							var data = el[model.name];
-							
-							var td = document.createElement('td');
-							td.innerHTML = data;
-							dataRow.appendChild(td);
-											
-							
-							
-						});
-						
-						var td = document.createElement('td');
-						dataRow.appendChild(td);
-						
-						var edit = document.createElement('a');
-						edit.setAttribute('class', 'btn btn-primary btn-xs');
-						edit.setAttribute('onclick',  me.formId+'.loadForm('+el.id+')');
-						
-						var editLabel = document.createElement('label');
-						editLabel.innerHTML = "Edit";
-						edit.appendChild(editLabel);
-						
-						var space = document.createElement('label');
-						space.innerHTML = "  ";
-												
-						var remove = document.createElement('a');
-						remove.setAttribute('class', 'btn btn-danger btn-xs');
-						remove.setAttribute('onclick',  me.formId+'.remove('+el.id+')');
-						
-						var removeLabel = document.createElement('label');
-						removeLabel.innerHTML = "Delete";
-						remove.appendChild(removeLabel);
-						
-						td.appendChild(edit);
-						td.appendChild(space);
-						td.appendChild(remove);
-					
-				});
-				me.getEl(me.responseTarget).appendChild(dataDiv);
-				
-				/*var table = '<table class="table">';
-				table += '<tr>';
-				
-				me.fromFields.forEach(function(model){
-					table += '<th>' + model.label + '</th>';
-				});
-				table += '</tr>';
-				
-				JSON.parse(resp).forEach(function(el){
-					table += '<tr>';
-						me.fromFields.forEach(function(model){
-							table += '<td>' + el[model.name] + '</td>';
-						});
-					table += '</tr>';
-				});
-				
-				table += '</table>';
-				
-				var table = "<div class=\"text-right\">";
-				table += "<a class=\"btn btn-success\"  onclick=\"company.form()\">Add</a>";
-				table += "</div>";
+				me.init();
+			}
+		});
 		
-				JSON.parse(resp).forEach(function(el){
-					table += "<hr>";
-			    	table += "<div class=\"row\">";
-			    	table += "<div class=\"col-md-12\">";
-			    	table += "<span class=\"glyphicon glyphicon-star\"></span>";
-			    	table += "<span class=\"glyphicon glyphicon-star\"></span>";
-			    	table += "<span class=\"glyphicon glyphicon-star\"></span>";
-			    	table += " <span class=\"glyphicon glyphicon-star\"></span>";
-			    	table += "<span class=\"glyphicon glyphicon-star-empty\"></span>";
-			    	table += el.name + " : " + el.regNo;
-			    	table += "<span class=\"pull-right\">10 days ago</span>";
-			    	table += "<p>This trip was great in terms of services. I would definitely recomend it to someone else.</p>";
-			    	table += "</div>";
-			    	table += "</div>";
-			    	
-			    	table += "<div class=\"text-right\">";
-			    	table += "<a class=\"btn btn-primary\"  onclick=\"company.loadForm(" + el.id + ")\">Edit</a>";
-			    	table += "<a class=\"btn btn-danger\"  onclick=\"company.remove(" + el.id + ")\">Delete</a>";
-			        table += "<a class=\"btn btn-success\"  onclick=\"tripLocation.list()\">location</a>";
-			        table += "</div>";
+	},
+	listView: function(){
+		var me = this;
+		
+		me.ajaxRequest.call({
+			httpMethod: me.httpMethod,
+			httpUrl: me.httpUrl,
+			responseTarget: me.responseTarget,
+			updateTarget: function(resp){
+					var listView = "<div class=\"text-right\">";
+					listView += "<a class=\"btn btn-success\"  onclick=\"company.form()\">Add</a>";
+					listView += "</div>";
+					
+					var jsonRecords = JSON.parse(resp);
+			
+					jsonRecords.forEach(function(el){
+						var editId = me.modelId + "-edit-" + el.id;
+						var delId = me.modelId + "-del-" + el.id;
+						
+						listView += "<hr>";
+						listView += "<div class=\"row\">";
+						listView += "<div class=\"col-md-12\">";
+						listView += "<span class=\"glyphicon glyphicon-star\"></span>";
+						listView += "<span class=\"glyphicon glyphicon-star\"></span>";
+						listView += "<span class=\"glyphicon glyphicon-star\"></span>";
+						listView += " <span class=\"glyphicon glyphicon-star\"></span>";
+						listView += "<span class=\"glyphicon glyphicon-star-empty\"></span>";
+						listView += el.name + " : " + el.regNo;
+						listView += "<span class=\"pull-right\">10 days ago</span>";
+						listView += "<p>This trip was great in terms of services. I would definitely recomend it to someone else.</p>";
+						listView += "</div>";
+						listView += "</div>";
+						listView += "<div class=\"text-right\">";
+						listView += "<a class=\"btn btn-primary\"  id=\"" + editId + "\">Edit</a>";
+						listView += " | <a class=\"btn btn-danger\"  id=\"" + delId + "\">Delete</a>";
+						listView += "</div>";
 				});
 				
-				me.getEl(me.responseTarget).innerHTML = table;
-				*/
+				if(me.getEl(me.responseTarget).innerHTML = listView){
+						jsonRecords.forEach(function(el){
+							var editId = me.modelId + "-edit-" + el.id;
+							var delId = me.modelId + "-del-" + el.id;
+								
+							me.getEl(editId).addEventListener('click', function(){
+								me.loadForm(el.id);
+							});
+							
+							me.getEl(delId).addEventListener('click', function(){
+								me.removeRec(el.id);
+							});
+					});
+				}
 			}
 		});
 	},
 	init: function(){
-		this.table("./company");
+		this.listView(this.httpUrl);
 	}
 };
 
 
+App.Cmp.form.validate = function(el){
+	var valid = {
+			validEmail: true,
+			required: true,
+			validSelect: true
+	};
+	
+	if(el.type == 'email'){
+		valid.validEmail = ValidateEmail(el.id);
+		valid.message = '';
+	}
+	
+	if(el.required == 'required')
+		valid.required = CheckEmpty(el.id);
+		
+	if(el.type == 'select')
+		valid.validSelect = ValidateSelect(el.id);
+		
+	this.displayWarning.call(valid, el);
+
+}
+
+App.Cmp.form.CheckEmpty = function(field_id){
+	var MyFieldId = document.getElementById(field_id);
+	if(MyFieldId.value == "" || MyFieldId.value == null){
+		this.displayWarning(field_id, MyFieldId.parentNode.id, "Required");	 
+	}
+	else{
+		this.removeWarning(field_id, MyFieldId.parentNode.id);
+	}
+}
+
 //function for displaying warnings
-function displayWarning(field_id, parent_div, message){
+App.Cmp.form.displayWarning = function(field_id, parent_div, message){
 	//prevent duplication of error message using if.. It 
 	var x = document.getElementById(parent_div).querySelectorAll(".error_msg").length; //gets the number of p elements(with class 'error_msg') that are already present in the parent element
 	if(x == 0)
@@ -423,7 +266,7 @@ function displayWarning(field_id, parent_div, message){
 }
 
 //remove the warning
-function removeWarning(field_id, parent_div){
+App.Cmp.form.removeWarning = function(field_id, parent_div){
 	var error_element = document.getElementById(parent_div).querySelectorAll(".error_msg");
 	if(error_element.length > 0){
 		error_element[0].parentNode.removeChild(error_element[0]);
@@ -437,37 +280,13 @@ function removeWarning(field_id, parent_div){
 	
 }
 
-
-function validation(field_id, field_type, required){
-	
-	if(field_type == 'email')
-		ValidateEmail(field_id);
-	
-	if(required == 'required')
-		CheckEmpty(field_id);
-		
-	if(field_type == 'select')
-		ValidateSelect(field_id);
-
-}
-
-function CheckEmpty(field_id){
-	var MyFieldId = document.getElementById(field_id);
-	if(MyFieldId.value == "" || MyFieldId.value == null){
-		displayWarning(field_id, MyFieldId.parentNode.id, "Required");	 
-	}
-	else{
-		removeWarning(field_id, MyFieldId.parentNode.id);
-	}
-}
-
 //email
-function ValidateEmail(email){
+App.Cmp.form.ValidateEmail = function(email){
 	var MyEmailId = document.getElementById(email);
 	var format = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 	
 	if(!MyEmailId.value.match(format)){
-		displayWarning(email, MyEmailId.parentNode.id, "Invalid email!");	 
+		this.displayWarning(email, MyEmailId.parentNode.id, "Invalid email!");	 
 	}
 	else{
 		removeWarning(email, MyEmailId.parentNode.id);
@@ -475,51 +294,51 @@ function ValidateEmail(email){
 }
 
 //password
-function ValidatePassword(password){
+App.Cmp.form.ValidatePassword = function(password){
 	var MyPasswordId = document.getElementById(password);
 	var format = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[A-Z]).*$/;	
 	if(!MyPasswordId.value.match(format)){
-		displayWarning(password, MyPasswordId.parentNode.id, "The password must have uppercase, lowercase, numeric and special characters and at least 8 characters long");
+		this.displayWarning(password, MyPasswordId.parentNode.id, "The password must have uppercase, lowercase, numeric and special characters and at least 8 characters long");
 	}
 	else{
-		removeWarning(password, MyPasswordId.parentNode.id);
+		this.removeWarning(password, MyPasswordId.parentNode.id);
 	}
 }
 
 //confirm password
-function ConfirmPassword(password, confirm_password){
+App.Cmp.form.ConfirmPassword = function(password, confirm_password){
 	var MyPassword = document.getElementById(password).value;
 	var confirmpasswordId	= document.getElementById(confirm_password);
 	
 	if(confirmpasswordId.value != MyPassword){
-		displayWarning(confirm_password, confirmpasswordId.parentNode.id, "Password and Confirm Password must match");
+		this.displayWarning(confirm_password, confirmpasswordId.parentNode.id, "Password and Confirm Password must match");
 		
 	}
 	else{
-		removeWarning(confirm_password, confirmpasswordId.parentNode.id);
+		this.removeWarning(confirm_password, confirmpasswordId.parentNode.id);
 	}
 }
 
 //checkboxes
-function ValidateCheckbox(checkbox){
+App.Cmp.form.ValidateCheckbox = function(checkbox){
 	var check_boxId = document.getElementById(checkbox);
 	if(check_boxId.checked == false){
-		displayWarning(checkbox, check_boxId.parentNode.id, "Required");	
+		this.displayWarning(checkbox, check_boxId.parentNode.id, "Required");	
 	}
 	else{
-		removeWarning(checkbox, check_boxId.parentNode.id);
+		this.removeWarning(checkbox, check_boxId.parentNode.id);
 	}
 }
 
 //validate selects
-function ValidateSelect(selected){
+App.Cmp.form.ValidateSelect = function(selected){
 	var selectedId = document.getElementById(selected);
 	if(selectedId.selectedIndex == 0){
-		displayWarning(selected, selectedId.parentNode.id, "Required");	
+		this.displayWarning(selected, selectedId.parentNode.id, "Required");	
 			
 	}
 	else{
-		removeWarning(selected, selectedId.parentNode.id);
+		this.removeWarning(selected, selectedId.parentNode.id);
 	}
 	
 }

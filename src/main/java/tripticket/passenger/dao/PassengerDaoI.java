@@ -4,17 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import tripticket.generic.dao.GenericDaoI;
 import tripticket.passenger.model.Passenger;
 
-public interface PassengerDaoI {
+public interface PassengerDaoI extends GenericDaoI<Passenger, Long> {
 
-	Passenger load(Passenger passenger);
-
-	Passenger add(Passenger passenger);
-
-	List<Passenger> list(Passenger filter);
-
-	void delete(Long passengerId);
-
-	void setEntityManager(EntityManager emanager);
 }

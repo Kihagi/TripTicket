@@ -42,6 +42,89 @@ App.Cmp = {
 			}else
 	    		xhr.send();
 		},
+		isNull: true,
+		checkNull : function() {
+			var me = this;
+			me.model.forEach(function(el) {
+				if (el.required == "required"){
+				var comp= document.getElementById(el.id).value;
+						if ( comp == "" || comp == null) {
+							var context = this;
+							me.ajaxRequest.call({
+										updateTarget : function() {
+											context.document.getElementById("formValidation").innerHTML = "Fill in all the form details";
+											
+										},
+										httpMethod : 'POST',
+										httpUrl : "./company"
+									});
+							me.isNull = true;
+						} 
+						else {
+							me.isNull = false;
+						}
+			} });
+				
+				return me.isNull;
+			
+		},
+		isEmail: true,
+		validateEmail: function (){
+			
+			var me = this;
+			me.model.forEach(function(el) {
+			if (el.type == 'email'){
+				 var context = this;
+					var regular= /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+					var email = document.getElementById(el.id).value
+						var validEmail = regular.test(email);
+					// console.log(validEmail)
+						if (validEmail== false){
+						    	me.ajaxRequest.call({				
+									updateTarget: function(){
+										context.document.getElementById('emailValidation').innerHTML="Email format is not correct!!";
+										},
+									httpMethod: 'POST',
+									httpUrl:"./company"
+								}); 
+						    	me.isEmail = false;
+						    }
+						else{
+							me.isEmail = true;
+						}
+					}
+		});
+			
+			return me.isEmail
+		},
+		isNumber: true, 
+			validateNumber: function(){
+				var me = this;
+				me.model.forEach(function(el) {
+				if (el.type == 'number'){
+					 var context = this;
+						var regular=/^\s*(\+|-)?\d+\s*$/;
+						var number = document.getElementById(el.id).value
+							var validNumber = regular.test(number);
+					
+							if (validNumber== false){
+							    	me.ajaxRequest.call({				
+										updateTarget: function(){
+											context.document.getElementById('formValidation').innerHTML="Enter a number where required";
+											},
+										httpMethod: 'POST',
+										httpUrl: "./company"
+									}); 
+							    	me.isNumber = false;
+							    }
+							else{
+								me.isNumber= true;
+							}
+						}
+			});
+			
+			return me.isNumber;
+		},
 		model: [],
 		form:  function(){
 			var me = this;
@@ -65,23 +148,28 @@ App.Cmp = {
 			    form += '</div></div>';
 			})
 			
-		  form +=  '</form><a class="btn btn-success" id="' + me.modelId+ '-save">Save</a>';
+		 form += '<h4 id="formValidation" class="text-center text-danger "></h4><h4 id="emailValidation" class="text-center text-danger "></h4><div id="mailValidation" class="text-center"></div></form><a class="btn btn-success" id="'
+				+ me.modelId + '-save">Save</a>';
+
 				
-		  if(me.updateTarget(form)){
+/*		  if(me.updateTarget(form)){
 			  me.model.forEach(function(el){
 				  me.getEl(el.id).addEventListener("keyup", function(){
 					  me.form.validate(el);
 				  });
 			  })
-		  }
-		  
+		  }*/
+			me.updateTarget(form);
 		  me.getEl(me.modelId+ '-save').addEventListener("click", function(){
-			  me.submitForm();
+			  me.checkNull();
+			  me.validateNumber();
+			  me.validateEmail();
+			 me.submitForm();
 		  });
 	},
 	submitForm: function(){
 		var me = this;
-		
+		if (me.isNull== false && me.isEmail == true && me.isNumber == true){
 		var formValues = me.model.filter(function(el){
 			var formEl = me.getEl(el.id);
 			if(!formEl) return;
@@ -107,7 +195,7 @@ App.Cmp = {
 					me.aftersubmit();
 			}
 		});
-		
+		}
 	},
 	loadForm : function(id){
 		var me = this;
@@ -201,6 +289,9 @@ App.Cmp = {
 	
 	init: function(){
 		this.listView(this.httpUrl);
+	},
+	list: function (){
+		this.listView(this.httpUrl);
 	}
 };
 
@@ -257,7 +348,7 @@ App.Cmp.form.displayWarning = function(field_id, parent_div, message){
 	}
 }
 
-App.Cmp.form.validate = function(el){
+/*App.Cmp.form.validate = function(el){
 	var valid = {
 			validEmail: true,
 			required: true,
@@ -395,3 +486,4 @@ App.Cmp.form.ValidateSelect = function(selected){
 	}
 	
 }
+*/

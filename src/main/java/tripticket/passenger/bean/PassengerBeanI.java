@@ -9,5 +9,11 @@ public interface PassengerBeanI {
 	void add(Passenger passenger);
 	
 	List <Passenger> list();
+	
+	String listInJson();
+	
+	boolean  delete(Long id);
+	
+	String load(Long id);
 
 }

@@ -51,10 +51,10 @@
                     <a href="#" class="list-group-item " onclick="trip.aftersubmit()">Trip</a>
                     <a href="#" class="list-group-item " onclick="triplocation.aftersubmit()">Locations</a>
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.list()"> Passenger</a>
+                    <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
+                    <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.show()"> Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
                     <a href="#" class="list-group-item " onclick="person.list()">Persons</a>
-                   
-
                     <a href="#" class="list-group-item " onclick="parcel.list()">Parcel</a>
 
                 </div>

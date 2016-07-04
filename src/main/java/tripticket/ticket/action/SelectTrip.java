@@ -32,7 +32,7 @@ public class SelectTrip extends HttpServlet {
 	    	resp.println("<section>");
 		    resp.println("<ul id=\"da-thumbs\" class=\"da-thumbs\">");
 		    		resp.println("<li>");
-			    		resp.println("Trip ID 		: " + trip.getTripId());
+			    		resp.println("Trip ID 		: " + trip.getId());
 			    		resp.println("<br>");
 						resp.println("Depature Time : " + trip.getDepatureTime());
 						resp.println("<br>");

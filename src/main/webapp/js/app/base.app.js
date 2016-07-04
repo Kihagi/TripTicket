@@ -387,6 +387,22 @@ App.Cmp = {
 			}
 		});
 	},
+	
+	loadUrl:'',
+	formUrl:'',
+	remove: function (delUrl){
+		var me  = this;
+		
+		me.ajaxRequest.call({
+			httpMethod: 'DELETE',
+			httpUrl:me.httpUrl + '?id='+delUrl,
+			async: true,
+			updateTarget: function(resp){
+				me.init;
+			}			
+		});
+	},
+	
 	init: function(){
 		this.table("./company");
 	}

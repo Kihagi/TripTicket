@@ -1,18 +1,20 @@
 
 var trip = App.extend(App.Cmp, {
-	formId: 'trip',
-	formUrl: './trips',
+	modelId: 'trip',
+	httpUrl: './trip',
 	responseTarget: 'ajax-content',
-	fromFields:[{
-		id: 'depatureTime',
-		label: 'Depature Time',
-		name: 'depatureTime',
-		type: 'text'
-	},{
+	model:[{
 		id: 'arrivalTime',
 		label: 'Arrival Time',
 		name: 'arrivalTime',
-		type: 'text'
+		type: 'text',
+		required : 'required'
+	},{
+		id: 'depatureTime',
+		label: 'Depature Time',
+		name: 'depatureTime',
+		type: 'text',
+		required : 'required'
 	},{
 		id: 'vehicle',
 		label: 'Vehicle',
@@ -38,7 +40,8 @@ var trip = App.extend(App.Cmp, {
 		id: 'price',
 		label: 'Price',
 		name: 'price',
-		type: 'number'
+		type: 'number',
+		required : 'required'
 	},{
 		id: 'id',
 		label: '',
@@ -49,13 +52,15 @@ var trip = App.extend(App.Cmp, {
 	}],
 	aftersubmit: function(){
 		var me = this;
-		me.table("./trips");
+		trip.init();
 	},
 	
 
 });
 
-
+//(function(){
+//	trip.init();
+//})();
 
 //
 //

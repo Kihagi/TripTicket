@@ -13,7 +13,7 @@ import tripticket.trip.bean.TripBeanI;
 import tripticket.trip.model.Trip;
 
 @SuppressWarnings("serial")
-@WebServlet("/trips/*")
+@WebServlet("/trip/*")
 public class TripAction extends HttpServlet {
 	
 	private Trip trip;
@@ -43,9 +43,8 @@ public class TripAction extends HttpServlet {
 				&& !request.getParameter("id").equals("undefined"))
 			trip.setTripId(Long.parseLong(request.getParameter("id")));
 		
-		
-		trip.setDepatureTime(request.getParameter("depatureDate"));
-		trip.setArrivalTime(request.getParameter("arrivalDate"));
+		trip.setArrivalTime(request.getParameter("arrivalTime"));
+		trip.setDepatureTime(request.getParameter("depatureTime"));
 		trip.setRoute(request.getParameter("route"));
 		trip.setVehicle(request.getParameter("vehicle"));
 		trip.setPrice(Double.parseDouble(request.getParameter("price")));

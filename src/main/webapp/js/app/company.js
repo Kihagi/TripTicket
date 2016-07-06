@@ -18,8 +18,8 @@ var company = App.extend(App.Cmp, {
 		id: 'company-phone_no',
 		label: 'Phone #',
 		name: 'phoneNo',
-		type: 'text'
-		//required: 'required'
+		type: 'text',
+		required: 'required'
 	},{
 		id: 'company-email',
 		label: 'Email #',
@@ -53,12 +53,12 @@ var company = App.extend(App.Cmp, {
 		label: '',
 		name: 'id',
 		hidden: true,
-		type: 'hidden',
-		required: 'required'
+		type: 'hidden'
+		//required: 'required'
 	}],
 	aftersubmit: function(){
 		var me = this;
-		company.init();
+	company.init();
 	},
 	removeRecord: true
 

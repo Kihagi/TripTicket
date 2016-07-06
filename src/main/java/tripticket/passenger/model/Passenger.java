@@ -25,7 +25,7 @@ public class Passenger implements Serializable {
 	private String lastname;
 	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	public String getFirstname() {
 		return firstname;
@@ -43,12 +43,23 @@ public class Passenger implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"id\": \"").append(getId()).append("\",")
+			.append("\"firstname\": \"").append(getFirstname()).append("\",")
+			.append("\"lastname\": \"").append(getLastname()).append("\"")
+		.append("}");
+		
+		return sb.toString();
+		
 	}
 	
 	

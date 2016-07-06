@@ -42,6 +42,89 @@ App.Cmp = {
 			}else
 	    		xhr.send();
 		},
+		isNull: true,
+		checkNull : function() {
+			var me = this;
+			me.model.forEach(function(el) {
+				if (el.required == "required"){
+				var comp= document.getElementById(el.id).value;
+						if ( comp == "" || comp == null) {
+							var context = this;
+							me.ajaxRequest.call({
+										updateTarget : function() {
+											context.document.getElementById("formValidation").innerHTML = "Fill in all the form details";
+											
+										},
+										httpMethod : 'POST',
+										httpUrl : "./company"
+									});
+							me.isNull = true;
+						} 
+						else {
+							me.isNull = false;
+						}
+			} });
+				
+				return me.isNull;
+			
+		},
+		isEmail: true,
+		validateEmail: function (){
+			
+			var me = this;
+			me.model.forEach(function(el) {
+			if (el.type == 'email'){
+				 var context = this;
+					var regular= /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+					var email = document.getElementById(el.id).value
+						var validEmail = regular.test(email);
+					// console.log(validEmail)
+						if (validEmail== false){
+						    	me.ajaxRequest.call({				
+									updateTarget: function(){
+										context.document.getElementById('emailValidation').innerHTML="Email format is not correct!!";
+										},
+									httpMethod: 'POST',
+									httpUrl:"./company"
+								}); 
+						    	me.isEmail = false;
+						    }
+						else{
+							me.isEmail = true;
+						}
+					}
+		});
+			
+			return me.isEmail
+		},
+		isNumber: true, 
+			validateNumber: function(){
+				var me = this;
+				me.model.forEach(function(el) {
+				if (el.type == 'number'){
+					 var context = this;
+						var regular=/^\s*(\+|-)?\d+\s*$/;
+						var number = document.getElementById(el.id).value
+							var validNumber = regular.test(number);
+					
+							if (validNumber== false){
+							    	me.ajaxRequest.call({				
+										updateTarget: function(){
+											context.document.getElementById('formValidation').innerHTML="Enter a number where required";
+											},
+										httpMethod: 'POST',
+										httpUrl: "./company"
+									}); 
+							    	me.isNumber = false;
+							    }
+							else{
+								me.isNumber= true;
+							}
+						}
+			});
+			
+			return me.isNumber;
+		},
 		model: [],
 		form:  function(){
 			var me = this;
@@ -65,23 +148,28 @@ App.Cmp = {
 			    form += '</div></div>';
 			})
 			
-		  form +=  '</form><a class="btn btn-success" id="' + me.modelId+ '-save">Save</a>';
+		 form += '<h4 id="formValidation" class="text-center text-danger "></h4><h4 id="emailValidation" class="text-center text-danger "></h4><div id="mailValidation" class="text-center"></div></form><a class="btn btn-success" id="'
+				+ me.modelId + '-save">Save</a>';
+
 				
-		  if(me.updateTarget(form)){
+/*		  if(me.updateTarget(form)){
 			  me.model.forEach(function(el){
 				  me.getEl(el.id).addEventListener("keyup", function(){
 					  me.form.validate(el);
 				  });
 			  })
-		  }
-		  
+		  }*/
+			me.updateTarget(form);
 		  me.getEl(me.modelId+ '-save').addEventListener("click", function(){
-			  me.submitForm();
+			  me.checkNull();
+			  me.validateNumber();
+			  me.validateEmail();
+			 me.submitForm();
 		  });
 	},
 	submitForm: function(){
 		var me = this;
-		
+		if (me.isNull== false && me.isEmail == true && me.isNumber == true){
 		var formValues = me.model.filter(function(el){
 			var formEl = me.getEl(el.id);
 			if(!formEl) return;
@@ -107,7 +195,7 @@ App.Cmp = {
 					me.aftersubmit();
 			}
 		});
-		
+		}
 	},
 	loadForm : function(id){
 		var me = this;
@@ -198,13 +286,69 @@ App.Cmp = {
 			}
 		});
 	},
+	
 	init: function(){
+		this.listView(this.httpUrl);
+	},
+	list: function (){
 		this.listView(this.httpUrl);
 	}
 };
 
-
 App.Cmp.form.validate = function(el){
+	var validEmailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+	
+	var submitButton = document.getElementById(btn);
+	submitButton.disabled=true;
+	
+	if(el.required == true && el.value == null || el.value == ""){
+		this.displayWarning(el.id, el.value.parentNode.id, "Required");	
+	}
+	if(el.type == 'email' && el.value != validEmailformat){
+		this.displayWarning(el.id, el.value.parentNode.id, "invalid email format");	
+	}
+	
+	if(el.type == 'number'){
+		var regular=/^\s*(\+|-)?\d+\s*$/;
+		var number = document.getElementById(el.id).value
+		var validNumber = regular.test(number);
+		if(validNumber == false)
+			this.displayWarning(el.id, el.value.parentNode.id, "enter a number");	
+	}
+			
+	if(el.type == 'password' && el.value.length <= 7){
+		this.displayWarning(el.id, el.value.parentNode.id, "must be 8 or more characters");	
+	} else{
+		var password = document.getElementById(password).value;
+		var confirmpassword	= document.getElementById(confirm_password).value;
+			if(password != confirmpassword)
+				this.displayWarning(el.id, el.value.parentNode.id, "password mismatch");		
+			}
+	
+	submitButton.disabled=false;
+				
+	}
+
+App.Cmp.form.displayWarning = function(field_id, parent_div, message){
+	var x = document.getElementById(parent_div).querySelectorAll(".error_msg").length; //gets the number of p elements(with class 'error_msg') that are already present in the parent element
+	if(x == 0)
+	{
+		var paragraph = document.createElement("p");
+		paragraph.setAttribute('class', 'error_msg');
+		
+		var error_msg = document.createTextNode(message);
+		paragraph.appendChild(error_msg);
+		
+		var parentDiv = document.getElementById(parent_div);
+		parentDiv.appendChild(paragraph);
+		
+		var field_id = document.getElementById(field_id);
+		field_id.className += " warning_brd"; 
+	
+	}
+}
+
+/*App.Cmp.form.validate = function(el){
 	var valid = {
 			validEmail: true,
 			required: true,
@@ -342,3 +486,4 @@ App.Cmp.form.ValidateSelect = function(selected){
 	}
 	
 }
+*/

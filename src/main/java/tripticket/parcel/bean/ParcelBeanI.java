@@ -9,5 +9,11 @@ public interface ParcelBeanI {
 	void add(Parcel parcel);
 
 	List<Parcel> list();
+	
+	boolean delete (Long id);
+	
+	String listInJson();
+
+	String load(Long id);
 
 }

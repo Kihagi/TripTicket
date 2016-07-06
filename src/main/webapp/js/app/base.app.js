@@ -42,30 +42,68 @@ App.Cmp = {
 			}else
 	    		xhr.send();
 		},
-		isNull: true,
+		FieldNull: true,
 		checkNull : function() {
 			var me = this;
 			me.model.forEach(function(el) {
 				if (el.required == "required"){
 				var comp= document.getElementById(el.id).value;
+					comp.className="warning";
 						if ( comp == "" || comp == null) {
 							var context = this;
 							me.ajaxRequest.call({
 										updateTarget : function() {
 											context.document.getElementById("formValidation").innerHTML = "Fill in all the form details";
+										    //context.document.getElementById(el.id).style.backgroundColor ="#f5dddd";
+										    context.document.getElementById("comp").className = "danger";											 
+											
+											
 											
 										},
 										httpMethod : 'POST',
 										httpUrl : "./company"
 									});
-							me.isNull = true;
+							me.FieldNull = true;
 						} 
 						else {
-							me.isNull = false;
+							me.FieldNull = false;
 						}
 			} });
 				
-				return me.isNull;
+				return me.FieldNull;
+			
+		},
+		TextNull: true,
+		validateText : function() {
+			var me = this;
+			
+			me.model.forEach(function(el) {
+				if (el.type == "text"){
+					var context=this;
+					var regularText=/^[a-zA-Z ]*$/;
+					var text= document.getElementById(el.id).value;
+					var validText=regularText.test(text);
+				
+						if (validText==false) {
+							var context = this;
+							me.ajaxRequest.call({
+										updateTarget : function() {
+											context.document.getElementById("formValidation").innerHTML = "Please insert valid text";
+										    context.document.getElementById(el.id).style.backgroundColor ="#f5dddd";
+											 	
+											
+										},
+										httpMethod : 'POST',
+										httpUrl : "./company"
+									});
+							me.TextNull = false;
+						} 
+						else {
+							me.TextNull = false;
+						}
+			} });
+				
+				return me.TextNull;
 			
 		},
 		isEmail: true,
@@ -78,11 +116,20 @@ App.Cmp = {
 					var regular= /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 					var email = document.getElementById(el.id).value
 						var validEmail = regular.test(email);
-					// console.log(validEmail)
-						if (validEmail== false){
+					if (email.lenght==0 ||email==""){
+				    	me.ajaxRequest.call({				
+							updateTarget: function(){
+								context.document.getElementById('emailValidation').innerHTML="Email cannot be blank";
+								},
+							httpMethod: 'POST',
+							httpUrl:"./company"
+						}); 
+				    	me.isEmail = false;
+				    }	
+					else if (validEmail== false){
 						    	me.ajaxRequest.call({				
 									updateTarget: function(){
-										context.document.getElementById('emailValidation').innerHTML="Email format is not correct!!";
+										context.document.getElementById('emailValidation').innerHTML="Email format is not correct";
 										},
 									httpMethod: 'POST',
 									httpUrl:"./company"
@@ -111,6 +158,7 @@ App.Cmp = {
 							    	me.ajaxRequest.call({				
 										updateTarget: function(){
 											context.document.getElementById('formValidation').innerHTML="Enter a number where required";
+											
 											},
 										httpMethod: 'POST',
 										httpUrl: "./company"
@@ -143,33 +191,28 @@ App.Cmp = {
 					form += '</select>';
 				}else
 					form += '  <input type="' + el.type + '" name="' 
-						+ el.name + '" class="form-control" id="' + el.id + '">'
+						+ el.name + '" class="form-control" id="' + el.id + '"><label id="errorMessage"></label>'
 					 
 			    form += '</div></div>';
 			})
 			
-		 form += '<h4 id="formValidation" class="text-center text-danger "></h4><h4 id="emailValidation" class="text-center text-danger "></h4><div id="mailValidation" class="text-center"></div></form><a class="btn btn-success" id="'
+		 form += '<h5 id="formValidation" class="text-center text-danger "></h5><h5 id="emailValidation" class="text-center text-danger "></h5><div id="mailValidation" class="text-center"></div></form><a class="btn btn-success" id="'
 				+ me.modelId + '-save">Save</a>';
 
 				
-/*		  if(me.updateTarget(form)){
-			  me.model.forEach(function(el){
-				  me.getEl(el.id).addEventListener("keyup", function(){
-					  me.form.validate(el);
-				  });
-			  })
-		  }*/
+
 			me.updateTarget(form);
 		  me.getEl(me.modelId+ '-save').addEventListener("click", function(){
 			  me.checkNull();
 			  me.validateNumber();
+			  me.validateText();
 			  me.validateEmail();
 			 me.submitForm();
 		  });
 	},
 	submitForm: function(){
 		var me = this;
-		if (me.isNull== false && me.isEmail == true && me.isNumber == true){
+		if (me.FieldNull== false && me.isEmail == true && me.isNumber == true){
 		var formValues = me.model.filter(function(el){
 			var formEl = me.getEl(el.id);
 			if(!formEl) return;
@@ -197,6 +240,46 @@ App.Cmp = {
 		});
 		}
 	},
+/*	validateNumber:function(){
+				var me = this;
+				me.model.forEach(function(el) {
+				if (el.type == 'number'){
+					 var context = this;
+						var regular=/^\s*(\+|-)?\d+\s*$/;
+						var number = document.getElementById(el.id).value
+							var validNumber = regular.test(number);
+					
+							if (validNumber== false || number.lenght==0){
+							    PromptMessage("Enter a valid name", "errorMessage","red");
+							    return false;
+										
+							    }
+							else{
+								PromptMessage("valid input ", "errorMessage","green");
+								return true;
+							}
+						}
+			});
+			
+			
+			
+		},*/
+		/*me.model.forEach(function(el){
+			var name=document.getElementById(el.id);
+			if(name.lenght==null){
+				PromptMessage("Enter a valid name", "errorMessage","red");
+				
+			}else{
+				PromptMessage("valid input ", "errorMessage","green");
+			}
+	}	
+	},
+	PromptMessage:fucntion(message, location, color){
+		document.getElementById().innerHTML=messaage;
+		document.getElementById().style.color=color;
+	},*/
+	
+	
 	loadForm : function(id){
 		var me = this;
 		
@@ -286,7 +369,6 @@ App.Cmp = {
 			}
 		});
 	},
-	
 	init: function(){
 		this.listView(this.httpUrl);
 	},
@@ -295,58 +377,6 @@ App.Cmp = {
 	}
 };
 
-App.Cmp.form.validate = function(el){
-	var validEmailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-	
-	var submitButton = document.getElementById(btn);
-	submitButton.disabled=true;
-	
-	if(el.required == true && el.value == null || el.value == ""){
-		this.displayWarning(el.id, el.value.parentNode.id, "Required");	
-	}
-	if(el.type == 'email' && el.value != validEmailformat){
-		this.displayWarning(el.id, el.value.parentNode.id, "invalid email format");	
-	}
-	
-	if(el.type == 'number'){
-		var regular=/^\s*(\+|-)?\d+\s*$/;
-		var number = document.getElementById(el.id).value
-		var validNumber = regular.test(number);
-		if(validNumber == false)
-			this.displayWarning(el.id, el.value.parentNode.id, "enter a number");	
-	}
-			
-	if(el.type == 'password' && el.value.length <= 7){
-		this.displayWarning(el.id, el.value.parentNode.id, "must be 8 or more characters");	
-	} else{
-		var password = document.getElementById(password).value;
-		var confirmpassword	= document.getElementById(confirm_password).value;
-			if(password != confirmpassword)
-				this.displayWarning(el.id, el.value.parentNode.id, "password mismatch");		
-			}
-	
-	submitButton.disabled=false;
-				
-	}
-
-App.Cmp.form.displayWarning = function(field_id, parent_div, message){
-	var x = document.getElementById(parent_div).querySelectorAll(".error_msg").length; //gets the number of p elements(with class 'error_msg') that are already present in the parent element
-	if(x == 0)
-	{
-		var paragraph = document.createElement("p");
-		paragraph.setAttribute('class', 'error_msg');
-		
-		var error_msg = document.createTextNode(message);
-		paragraph.appendChild(error_msg);
-		
-		var parentDiv = document.getElementById(parent_div);
-		parentDiv.appendChild(paragraph);
-		
-		var field_id = document.getElementById(field_id);
-		field_id.className += " warning_brd"; 
-	
-	}
-}
 
 /*App.Cmp.form.validate = function(el){
 	var valid = {
@@ -367,9 +397,7 @@ App.Cmp.form.displayWarning = function(field_id, parent_div, message){
 		valid.validSelect = ValidateSelect(el.id);
 		
 	this.displayWarning.call(valid, el);
-
 }
-
 App.Cmp.form.CheckEmpty = function(field_id){
 	var MyFieldId = document.getElementById(field_id);
 	if(MyFieldId.value == "" || MyFieldId.value == null){
@@ -379,7 +407,6 @@ App.Cmp.form.CheckEmpty = function(field_id){
 		this.removeWarning(field_id, MyFieldId.parentNode.id);
 	}
 }
-
 //function for displaying warnings
 App.Cmp.form.displayWarning = function(field_id, parent_div, message){
 	//prevent duplication of error message using if.. It 
@@ -408,7 +435,6 @@ App.Cmp.form.displayWarning = function(field_id, parent_div, message){
 	
 	}
 }
-
 //remove the warning
 App.Cmp.form.removeWarning = function(field_id, parent_div){
 	var error_element = document.getElementById(parent_div).querySelectorAll(".error_msg");
@@ -423,7 +449,6 @@ App.Cmp.form.removeWarning = function(field_id, parent_div){
 	submitButton.disabled=false;
 	
 }
-
 //email
 App.Cmp.form.ValidateEmail = function(email){
 	var MyEmailId = document.getElementById(email);
@@ -436,7 +461,6 @@ App.Cmp.form.ValidateEmail = function(email){
 		removeWarning(email, MyEmailId.parentNode.id);
 	}
 }
-
 //password
 App.Cmp.form.ValidatePassword = function(password){
 	var MyPasswordId = document.getElementById(password);
@@ -448,7 +472,6 @@ App.Cmp.form.ValidatePassword = function(password){
 		this.removeWarning(password, MyPasswordId.parentNode.id);
 	}
 }
-
 //confirm password
 App.Cmp.form.ConfirmPassword = function(password, confirm_password){
 	var MyPassword = document.getElementById(password).value;
@@ -462,7 +485,6 @@ App.Cmp.form.ConfirmPassword = function(password, confirm_password){
 		this.removeWarning(confirm_password, confirmpasswordId.parentNode.id);
 	}
 }
-
 //checkboxes
 App.Cmp.form.ValidateCheckbox = function(checkbox){
 	var check_boxId = document.getElementById(checkbox);
@@ -473,7 +495,6 @@ App.Cmp.form.ValidateCheckbox = function(checkbox){
 		this.removeWarning(checkbox, check_boxId.parentNode.id);
 	}
 }
-
 //validate selects
 App.Cmp.form.ValidateSelect = function(selected){
 	var selectedId = document.getElementById(selected);

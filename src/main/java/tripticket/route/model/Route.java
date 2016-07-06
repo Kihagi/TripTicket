@@ -1,5 +1,7 @@
 package tripticket.route.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +14,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "route_routes")
-public class Route {
+public class Route implements Serializable{
 	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Column(name = "from_location")
 	private Long  fromLocationId;
 	
@@ -70,6 +80,22 @@ public class Route {
 	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
+	
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"id\": \"").append(getId()).append("\",")
+			.append("\"fromLocationId\": \"").append(getFromLocationId()).append("\",")
+			.append("\"distance\": \"").append(getDistance()).append("\",")
+			.append("\"companyId\": \"").append(getCompanyId()).append("\",")
+			.append("\"Approximate Time\": \"").append(getApproxTime()).append("\",")
+			.append("\"toLocation\": \"").append(getToLocationId()).append("\"")
+		.append("}");
+		
+		return sb.toString();
+		
+	}
+	
 	
 }
 

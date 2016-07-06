@@ -13,11 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //import org.apache.log4j.Logger;
 
+
+
+
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import tripticket.parcel.bean.ParcelBeanI;
 import tripticket.parcel.model.Parcel;
 
 @SuppressWarnings("serial")
-@WebServlet("/parcel/action/*")
+@WebServlet("/parcel/*")
 
 public class ParcelAction extends HttpServlet{
 	
@@ -28,16 +34,30 @@ public class ParcelAction extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	 throws ServletException, IOException{
 		
-		//String [] pathPcl = request.getRequestURI().split("/");
-		//String path = pathPcl[pathPcl.length-1];
+		String [] pathCmp = request.getRequestURI().split("/");
+		String path = pathCmp[pathCmp.length-1];
+		
+		if(path.equalsIgnoreCase("load"))
+			this.load(request, response);
 
 		this.list(response);
        
+	}
+	private void load(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		PrintWriter resp=response.getWriter();
+		 resp.println(parcelBean.load(Long.parseLong(request.getParameter("id"))));
+		
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		
 		Parcel parcel = new Parcel();
+		if(request.getParameter("id") != null 
+				&& !request.getParameter("id").equals("undefined"))
+			parcel.setParcelId(Long.parseLong(request.getParameter("id")));
+			
+			
 		parcel.setParcelTo(request.getParameter("parcelTo"));
 		parcel.setParcelFrom(request.getParameter("parcelFrom"));
 		parcel.setParcelDescription(request.getParameter("parcelDescription"));
@@ -52,9 +72,10 @@ public class ParcelAction extends HttpServlet{
 	private void list(HttpServletResponse response) 
 			throws ServletException, IOException{
 		PrintWriter resp = response.getWriter();
-	    List<Parcel> parcels = parcelBean.list();
-	    
-        resp.println("<div class=\"text-right\">");
+	    resp.println(parcelBean.listInJson());
+		
+		 
+		 /* resp.println("<div class=\"text-right\">");
         resp.println("<a class=\"btn btn-success\"  onclick=\"parcel.add()\">Add Parcel</a>");
         resp.println("</div>");
         for(Parcel parcel : parcels){
@@ -67,10 +88,18 @@ public class ParcelAction extends HttpServlet{
 	    	resp.println("Route:  "+parcel.getRoute()+"<br>");
 	    	resp.println("Cost:  "+ parcel.getParcelcost()+"<br>");
 	    	resp.println("</div>");
-	    	resp.println("</div>");
+	    	resp.println("</div>");*/
 	    
 	    }
+        
+        public void doDelete(HttpServletRequest request, HttpServletResponse response) 
+    			throws ServletException, IOException {
+        	Long parcelId = Long.parseLong(request.getParameter("id"));
+        	parcelBean.delete(parcelId);
+        	
+        }
+        
 	
-	}
+	
 	
 }

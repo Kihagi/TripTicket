@@ -18,7 +18,7 @@ var company = App.extend(App.Cmp, {
 		id: 'company-phone_no',
 		label: 'Phone #',
 		name: 'phoneNo',
-		type: 'text',
+		type: 'number',
 		required: 'required'
 	},{
 		id: 'company-email',

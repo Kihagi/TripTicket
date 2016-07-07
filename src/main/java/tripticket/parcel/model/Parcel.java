@@ -101,5 +101,19 @@ public class Parcel implements Serializable {
 		this.route = route;
 	}
 
+	public Object getJson() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"parcelId\": \"").append(getParcelId()).append("\",")
+			.append("\"name\": \"").append(getParcelTo()).append("\",")
+			.append("\"parcelFrom\": \"").append(getParcelFrom()).append("\",")
+			.append("\"parcelDescription\": \"").append(getParcelDescription()).append("\",")
+			.append("\"route\": \"").append(getRoute()).append("\",")
+			.append("\"parcelcost\": \"").append(getParcelcost()).append("\"")
+		.append("}");
+		
+		return sb.toString();
+	}
+
 	
 }

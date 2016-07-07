@@ -1,6 +1,6 @@
 var route = App.extend(App.Cmp, {
 	formId: 'route-save',
-	formUrl: './route/action/add',
+	formUrl: './route',
 	responseTarget: 'ajax-content',
 	fromFields:[{
 			id: 'from-location',
@@ -27,6 +27,18 @@ var route = App.extend(App.Cmp, {
 			label: 'routeCompany',
 			name: 'companyId',
 			type: 'number'
-		}]
-		
+		},
+		{
+			id: 'route-id',
+			label: '',
+			name: 'id',
+			type: 'hidden'
+		}],
+		aftersubmit: function(){
+			var me = this;
+			me.table("./route");
+		},
+		removeRec: true
+	
 });
+		

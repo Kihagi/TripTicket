@@ -1,13 +1,12 @@
 package tripticket.parcel.dao;
 
-import java.util.List;
 
-import javax.persistence.EntityManager;
 
+import tripticket.generic.dao.GenericDaoI;
 import tripticket.parcel.model.Parcel;
 
-public interface ParcelDaoI {
-	
+public interface ParcelDaoI extends GenericDaoI<Parcel, Long>{
+	/*
 	Parcel add(Parcel parcel);
 	
 	Parcel load(Parcel parcel);
@@ -16,7 +15,7 @@ public interface ParcelDaoI {
 	
 	void delete(Long parcelId);
 
-	void setEm(EntityManager em);
+	void setEm(EntityManager em);*/
 	
 
 }

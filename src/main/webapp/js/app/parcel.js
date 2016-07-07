@@ -1,5 +1,66 @@
-var parcel = {
-		list: function(){
+var parcel = App.extend(App.Cmp, {
+		formId:'parcel',
+		formUrl:'./parcel',
+		responseTarget:'ajax-content',
+		fromFields:[{
+			id:'parcel-to',
+			label:'Parcel To',
+			name:'parcelTo',
+			type:'text',
+			
+		},{
+			id:'parcel-from',
+			label:'Parcel From',
+			name:'parcelFrom',
+			type:'text'
+		},{
+			id:'parcel-description',
+			label:'Parcel Description',
+			name:'parcelDescription',
+			type:'text'
+		},{
+			id: 'parcel-route',
+			label: 'Parcel Route',
+			name: 'route',
+			type: 'select',
+			options: [
+			    {label: 'Nairobi-Mombasa', value:'NAI-MBSA'}, 
+		        {label: 'Nairobi-Kisumu', value:'NAI-KIS'}, 
+		        {label: 'Nairobi-Nakuru', value:'NAI-NKR'},
+		        {label: 'Nairobi-Machakos', value:'NAI-MCHKS'}
+		     ]
+		},{
+			id:'parcel-cost',
+			label:'Parcel Cost',
+			name:'parcelCost',
+			type:'number'
+		},{
+			id:'parcel-id',
+			label:'',
+			name:'id',
+			hidden:'true',
+			type:'hidden'
+		}],
+			aftersubmit: function(){
+				var me = this;
+				me.table("./parcel");
+			},
+			
+			
+		
+	});
+
+	/*(function(){
+		parcel.init();
+	})();*/
+		
+
+/*afterRemove: function(){
+var me = this;
+me.table("./parcel");
+},*/
+	
+	/*list: function(){
 	    	var ajax = new XMLHttpRequest();
 	    	
 	    	ajax.onreadystatechange = function(){
@@ -70,3 +131,4 @@ var parcel = {
 
 }
 
+*/

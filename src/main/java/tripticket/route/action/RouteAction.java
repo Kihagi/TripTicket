@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,7 @@ import tripticket.route.model.Route;
  */
 
 @SuppressWarnings("Serial")
-@WebServlet("/route/action/*")
+@WebServlet("/route/*")
 public class RouteAction extends HttpServlet{
 	
 	private Logger log  = Logger.getLogger(getClass());
@@ -43,8 +44,12 @@ public class RouteAction extends HttpServlet{
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
+		Route route = new Route();	
+		if (request.getParameter("id") !=null
+				&& !request.getParameter("id").equals("undefined"))
+				route.setToLocationId(Long.parseLong(request.getParameter("id")));
 		
-			Route route = new Route();
+		
 			route.setApproxTime(Double.parseDouble(request.getParameter("ApproxTime")));
 			route.setCompanyId(Long.parseLong(request.getParameter("companyId")));
 			route.setDistance(Double.parseDouble(request.getParameter("distance")));
@@ -59,10 +64,11 @@ public class RouteAction extends HttpServlet{
 		
 	private void list(HttpServletResponse response) 
 			throws ServletException, IOException{
-			PrintWriter resp = response.getWriter();
-			List<Route> routes = routeBean.list();
+		PrintWriter resp = response.getWriter();
+        resp.println(routeBean.listInJson());
+			
 	    
-	    resp.println("<div class=\"text-right\">");
+/*	    resp.println("<div class=\"text-right\">");
         resp.println("<a class=\"btn btn-success\"  onclick=\"route.form()\">Add Route</a>");
         resp.println("</div>");
         
@@ -83,7 +89,28 @@ public class RouteAction extends HttpServlet{
 	    	resp.println("</div>");
 	    	resp.println("</div>");
 	    	
-	    }
+	    }*/
+		
+	}
+	@SuppressWarnings("unused")
+	private void load(HttpServletRequest request,
+			HttpServletResponse response) 
+			throws ServletException, IOException{
+		PrintWriter resp = response.getWriter();
+        resp.println(routeBean.load(Long.parseLong(request.getParameter("id"))));
+	}
+
+/*	public Route getCompany() {
+		return Route;
+	}
+
+	public void setRoute(Route route {
+		this.route = route;
+	}*/
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		Long routeId = Long.parseLong(request.getParameter("id"));
+		routeBean.delete(routeId);
 		
 	}
 	

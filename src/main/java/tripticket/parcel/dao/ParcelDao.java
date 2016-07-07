@@ -1,15 +1,11 @@
 package tripticket.parcel.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
+import tripticket.generic.dao.GenericDao;
 import tripticket.parcel.model.Parcel;
 
-public class ParcelDao implements ParcelDaoI{
+public class ParcelDao extends GenericDao<Parcel, Long> implements ParcelDaoI{
 	
-	private EntityManager em;
+	/*private EntityManager em;
 
 	
 	public Parcel add(Parcel parcel) {
@@ -41,7 +37,7 @@ public class ParcelDao implements ParcelDaoI{
 	public void setEm(EntityManager em) {
 		this.em=em;
 		
-	}
+	}*/
 	
 	
 

@@ -21,6 +21,12 @@ var triplocation = App.extend(App.Cmp, {
 		name: 'descr',
 		type: 'text',
 		required: 'required'
+	},{
+		id: 'company-id',
+		label: '',
+		name: 'id',
+		hidden: true,
+		type: 'hidden'
 	}],
 	removeRecord: true
 });

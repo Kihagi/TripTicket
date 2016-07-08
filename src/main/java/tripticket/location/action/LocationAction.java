@@ -35,6 +35,11 @@ public class LocationAction extends HttpServlet{
 			throws ServletException, IOException{
 		
 		Location location = new Location();
+		
+		if(request.getParameter("id") != null 
+				&& !request.getParameter("id").equals("undefined"))
+			location.setId(Integer.parseInt(request.getParameter("id")));
+		
 		location.setName(request.getParameter("name"));
 		location.setLocNo(request.getParameter("number"));
 		location.setDescr(request.getParameter("Description"));

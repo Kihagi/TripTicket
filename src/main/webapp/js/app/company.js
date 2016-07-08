@@ -56,7 +56,6 @@ var company = App.extend(App.Cmp, {
 		name: 'id',
 		hidden: true,
 		type: 'hidden'
-		//required: 'required'
 	}],
 	removeRecord: true
 

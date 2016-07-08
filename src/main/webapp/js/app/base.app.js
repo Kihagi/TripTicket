@@ -50,9 +50,6 @@ App.Cmp = {
 		me.numberChecker();
 		me.mailChecker();
 		me.submitForm();
-
-		console.log(me.Null);
-		console.log("IN VALIDATE");
 	},
 	number : true,
 	numberChecker : function() {
@@ -72,9 +69,7 @@ App.Cmp = {
 
 					me.ajaxRequest.call({
 						updateTarget : function() {
-
-							me.commonError("Incorrect Number format", el.id,
-									fieldId);
+							me.commonError("Incorrect Number format", el.id, fieldId);
 
 						},
 						httpMethod : 'POST',
@@ -240,11 +235,9 @@ App.Cmp = {
 
 				return el;
 
-			}).map(
-					function(el) {
-						return encodeURIComponent(el.name) + '='
-								+ encodeURIComponent(el.value);
-					}).join('&');
+			}).map(function(el) {
+				return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
+			}).join('&');
 
 			me.ajaxRequest.call({
 				httpMethod : 'POST',

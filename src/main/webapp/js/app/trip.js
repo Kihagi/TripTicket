@@ -3,7 +3,7 @@ var trip = App.extend(App.Cmp, {
 	modelId: 'trip',
 	httpUrl: './trip',
 	responseTarget: 'ajax-content',
-	columnModel : ['arrivalTime','depatureTime','vehicle','route','price'],
+	columnModel : ['arrivalTime','depatureTime','route','price'],
 	columnSeparator: ' ** ',
 	model:[{
 		id: 'arrivalTime',
@@ -39,7 +39,7 @@ var trip = App.extend(App.Cmp, {
 		name: 'id',
 		hidden: true,
 		type: 'hidden',
-		required: 'required'
+		
 	}],
 	aftersubmit: function(){
 		var me = this;
@@ -65,7 +65,6 @@ var trip = App.extend(App.Cmp, {
 			});
 			
 			route.model[0].options = options;
-			route.model[1].options = options;
 		}
 	})
 })();	

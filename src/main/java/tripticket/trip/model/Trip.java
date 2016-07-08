@@ -77,7 +77,7 @@ public class Trip{
 		.append("\"arrivalTime\": \"").append(getArrivalTime()).append("\",")
 		.append("\"depatureTime\": \"").append(getDepatureTime()).append("\",")
 		.append("\"price\": \"").append(getPrice()).append("\",")
-		.append("\"route\": \"").append(getRoute()).append("\",")
+		.append("\"route\": \"").append(getRoute()).append("\"")
 	.append("}");
 		
 		return sb.toString();

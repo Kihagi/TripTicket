@@ -2,6 +2,8 @@ var vehicle = App.extend(App.Cmp, {
 	modelId: 'vehicle',
 	httpUrl: './vehicle',
 	responseTarget: 'ajax-content',
+	columnModel : ['type','regNo','size'],
+	columnSeparator: ' ** ',
 	model:[{
 		id: 'vehicle-type',
 		label: 'Type',
@@ -34,7 +36,7 @@ var vehicle = App.extend(App.Cmp, {
 		name: 'id',
 		hidden: true,
 		type: 'hidden',
-		required: 'required'
+		
 	}],
 	aftersubmit: function(){
 		var me = this;

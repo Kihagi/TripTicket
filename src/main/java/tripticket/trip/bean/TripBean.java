@@ -52,6 +52,8 @@ public class TripBean implements TripBeanI {
 
 	public String listInJson() {
 		Map<String, Object> filter = new HashMap<String, Object>();
+		
+		
 		List<Trip> trips = tripDao.list(filter);
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");

@@ -1,39 +1,47 @@
-var vehicle = {
-		list: function(){
-	    	var ajax = new XMLHttpRequest();
-	    	
-	    	ajax.onreadystatechange = function(){
-	    		
-	    		if(ajax.readyState == 4){
-	    			if(ajax.status == 200){
-	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
-	    			}
-	    		}
-	    	}
-	    	
-	    	ajax.open("GET", "./vehicle", true);
-	    	ajax.send();
-		},
-		add: function(){
-	    	var ajax = new XMLHttpRequest();
-	    	
-	    	ajax.onreadystatechange = function(){
-	    		
-	    		if(ajax.readyState == 4){
-	    			if(ajax.status == 200){
-	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
-	    			}
-	    		}
-	    	}
-	    	
-	    	ajax.open("GET", "./vehicle/add.jsp", true);
-	    	ajax.send();
-		},
-		remove: function(){
-			console.log("this removes company");
-		}
-}
+var vehicle = App.extend(App.Cmp, {
+	modelId: 'vehicle',
+	httpUrl: './vehicle',
+	responseTarget: 'ajax-content',
+	model:[{
+		id: 'vehicle-type',
+		label: 'Type',
+		name: 'type',
+		type: 'select',
+		options: [
+	            {label: 'BUS', value:'BS'}, 
+    	        {label: 'NISSAN', value:'NS'},
+    	   ]
+	},{
+		id: 'vehicle-regno',
+		label: 'Number',
+		name: 'regNo',
+		type: 'text',
+		required : 'required'
+	},{
+		id: 'vehicle-size',
+		label: 'Size',
+		name: 'size',
+		type: 'select',
+		options: [
+	          	{label: '14 Seater', value:'14'},	
+	            {label: '14 Seater', value:'14'}, 
+		        {label: '32 Seater', value:'32'},
+		        {label: '45 Seater', value:'45'},
+		        {label: '52 Seater', value:'52'},
+    	   ]
+	},{
+		id: 'id',
+		name: 'id',
+		hidden: true,
+		type: 'hidden',
+		required: 'required'
+	}],
+	aftersubmit: function(){
+		var me = this;
+		trip.init();
+	},
+	
 
-
+});
 
 

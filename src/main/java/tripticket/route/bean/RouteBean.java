@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import tripticket.company.model.Company;
 import tripticket.route.dao.RouteDaoI;
 import tripticket.route.model.Route;
 
@@ -32,7 +31,7 @@ public class RouteBean implements RouteBeanI{
 	}
 
 	public void add(Route route) {
-		if(route == null || route.getFromLocationId() == null)
+		if(route == null)
 			return;
 		routeDao.save(route);
 		

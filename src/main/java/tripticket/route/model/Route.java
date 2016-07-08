@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import trioticket.location.model.Location;
 
 /*
  * @Sam Kiragu
@@ -18,6 +22,25 @@ public class Route implements Serializable{
 	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@ManyToOne
+	private Location from;
+	
+	@Transient
+	private Long fromId;
+	
+	@ManyToOne
+	private Location to;
+	
+	@Transient
+	private Long toId;
+	
+	@Column(name = "approx_distance")
+	private Double distance;
+	
+	@Column(name = "approx_time")
+	private Double approxTime;
+	
 	public Long getId() {
 		return id;
 	}
@@ -26,35 +49,36 @@ public class Route implements Serializable{
 		this.id = id;
 	}
 
-	@Column(name = "from_location")
-	private Long  fromLocationId;
-	
-	@Column(name = "to_location")
-	private Long toLocationId;
-	
-	@Column(name = "approx_distance")
-	private Double distance;
-	
-	@Column(name = "approx_time")
-	private Double ApproxTime;
-	
-	@Column(name = "comp_id")
-	private Long companyId;
-	
-	public Long getFromLocationId() {
-		return fromLocationId;
+	public Location getFrom() {
+		return from;
 	}
 
-	public void setFromLocationId(Long fromLocationId) {
-		this.fromLocationId = fromLocationId;
+	public void setFrom(Location from) {
+		this.from = from;
 	}
 
-	public Long getToLocationId() {
-		return toLocationId;
+	public Long getFromId() {
+		return fromId;
 	}
 
-	public void setToLocationId(Long toLocationId) {
-		this.toLocationId = toLocationId;
+	public void setFromId(Long fromId) {
+		this.fromId = fromId;
+	}
+
+	public Location getTo() {
+		return to;
+	}
+
+	public void setTo(Location to) {
+		this.to = to;
+	}
+
+	public Long getToId() {
+		return toId;
+	}
+
+	public void setToId(Long toId) {
+		this.toId = toId;
 	}
 
 	public Double getDistance() {
@@ -66,30 +90,22 @@ public class Route implements Serializable{
 	}
 
 	public Double getApproxTime() {
-		return ApproxTime;
+		return approxTime;
 	}
 
 	public void setApproxTime(Double approxTime) {
-		ApproxTime = approxTime;
-	}
-
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
+		this.approxTime = approxTime;
 	}
 	
 	public String getJson(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("{")
 			.append("\"id\": \"").append(getId()).append("\",")
-			.append("\"fromLocationId\": \"").append(getFromLocationId()).append("\",")
-			.append("\"distance\": \"").append(getDistance()).append("\",")
-			.append("\"companyId\": \"").append(getCompanyId()).append("\",")
-			.append("\"Approximate Time\": \"").append(getApproxTime()).append("\",")
-			.append("\"toLocation\": \"").append(getToLocationId()).append("\"")
+			.append("\"from\": \"").append(getFrom()).append("\",")
+			.append("\"fromId\": \"").append(getFromId()).append("\",")
+			.append("\"to\": \"").append(getTo()).append("\",")
+			.append("\"toId\": \"").append(getToId()).append("\",")
+			.append("\"approxTime\": \"").append(getApproxTime()).append("\"")
 		.append("}");
 		
 		return sb.toString();

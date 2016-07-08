@@ -26,7 +26,6 @@ public class Location {
 	@Column(name = "loc_number", unique = true)
 	private String locNo;
 	
-
 	public String getLocNo() {
 		return locNo;
 	}
@@ -57,6 +56,19 @@ public class Location {
 
 	public void setId(int id) {
 		this.Id = id;
+	}
+	
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"id\": \"").append(getId()).append("\",")
+			.append("\"name\": \"").append(getName()).append("\",")
+			.append("\"descr\": \"").append(getDescr()).append("\",")
+			.append("\"loc_number\": \"").append(getLocNo()).append("\"");
+		sb.append("}");
+		
+		return sb.toString();
+		
 	}
 
 }

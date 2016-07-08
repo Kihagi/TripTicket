@@ -1,6 +1,8 @@
 package tripticket.location.bean;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -33,13 +35,46 @@ public class LocationBean implements LocationBeanI {
 		if(location == null || location.getName() == null)
 			return;
 		
-		locationDao.add(location);
+		locationDao.save(location);
 		
 	}
+	
+	public String load(Long id){
+		Location location = locationDao.findById(id);
+		
+		if(location != null)
+			return location.getJson();
+		else
+			return "{}";
+	}
 
+	public String listInJson(){
+		Map<String, Object> filter = new HashMap<String, Object>();
+		//filter.put("name", "sdadad");
+		
+		List<Location> locations = locationDao.list(filter);
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		
+		int count = locationDao.countAll();
+		for(Location location : locations){
+			sb.append(location.getJson());
+			
+			count--;
+			
+			if(count >= 1)
+				sb.append(",");
+		}
+		
+		sb.append("]");
+		
+		return sb.toString();
+	}
+	
 	public List<Location> list() {
 		return locationDao.list(new Location());
 	}
+	
 	
 	public boolean delete(Long id) {
 		locationDao.delete(id);

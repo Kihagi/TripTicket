@@ -1,21 +1,9 @@
 package tripticket.location.dao;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import trioticket.location.model.Location;
+import tripticket.generic.dao.GenericDaoI;
 
-public interface LocationDaoI {
-	
-	Location add(Location location);
-	
-	Location remove(Location location);
-	
-	List<Location> list(Location filter);
 
-	void setEm(EntityManager em);
+public interface LocationDaoI extends GenericDaoI<Location, Long>{
 	
-	void delete(Long locationId);
-
 }

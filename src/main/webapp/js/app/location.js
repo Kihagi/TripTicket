@@ -1,23 +1,25 @@
 var triplocation = App.extend(App.Cmp, {
-	formId: 'location',
-	formUrl: './location',
-	loadUrl: './location/?id=',
+	modelId: 'location',
+	httpUrl: './location',
 	responseTarget: 'ajax-content',
-	fromFields: [{
-		id: 'loc_Id',
-		label: 'Location Number',
+	model: [{
+		id: 'location-no',
+		label: 'Location #',
 		name: 'locNo',
 		type: 'text',
+		required: 'required'
 	},{
-		id: 'loc_Name',
+		id: 'location-name',
 		label: 'Location Name',
 		name: 'name',
 		type: 'text',
+		required: 'required'
 	},{
-		id: 'loc_Descr',
+		id: 'location-descr',
 		label: 'Description',
-		name: 'Descr',
+		name: 'descr',
 		type: 'text',
+		required: 'required'
 	}]
 });
 		

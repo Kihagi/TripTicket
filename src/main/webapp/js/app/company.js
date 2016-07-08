@@ -56,10 +56,6 @@ var company = App.extend(App.Cmp, {
 		type: 'hidden'
 		//required: 'required'
 	}],
-	aftersubmit: function(){
-		var me = this;
-	company.init();
-	},
 	removeRecord: true
 
 });

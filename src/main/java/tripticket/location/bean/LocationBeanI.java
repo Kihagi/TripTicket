@@ -12,4 +12,8 @@ public interface LocationBeanI {
 	
 	boolean delete(Long id);
 
+	String listInJson();
+
+	String load(Long id);
+
 }

@@ -45,13 +45,11 @@
 
             <div class="col-md-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active" onclick="company.aftersubmit()">Companies</a>
-                    <a href="#" class="list-group-item" onclick="route.list()">Routes</a>
+                    <a href="#" class="list-group-item active" onclick="company.init()">Companies</a>
+                    <a href="#" class="list-group-item " onclick="triplocation.init()">Locations</a>
+                    <a href="#" class="list-group-item" onclick="route.init()">Routes</a>
                     <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
                     <a href="#" class="list-group-item " onclick="trip.aftersubmit()">Trip</a>
-                    <a href="#" class="list-group-item " onclick="triplocation.aftersubmit()">Locations</a>
-                    <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.list()"> Passenger</a>
-                    <a href="#" class="list-group-item " onclick="tripLocation.list()">Locations</a>
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.show()"> Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
                     <a href="#" class="list-group-item " onclick="person.list()">Persons</a>

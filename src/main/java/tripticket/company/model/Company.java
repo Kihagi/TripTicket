@@ -87,8 +87,17 @@ public class Company implements Serializable{
 			.append("\"id\": \"").append(getId()).append("\",")
 			.append("\"name\": \"").append(getName()).append("\",")
 			.append("\"regNo\": \"").append(getRegNo()).append("\",")
-			.append("\"desc\": \"").append(getDesc()).append("\"")
-		.append("}");
+			.append("\"desc\": \"").append(getDesc()).append("\"");
+		
+		if(getAddress() != null){
+			sb.append(",\"phoneNo\": \"").append(getAddress().getPhoneNo()).append("\",")
+			.append("\"email\": \"").append(getAddress().getEmail()).append("\",")
+			.append("\"town\": \"").append(getAddress().getTown()).append("\",")
+			.append("\"country\": \"").append(getAddress().getCountry()).append("\",")
+			.append("\"box\": \"").append(getAddress().getBox()).append("\"");
+		}
+			
+		sb.append("}");
 		
 		return sb.toString();
 		

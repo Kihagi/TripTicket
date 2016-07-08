@@ -39,7 +39,7 @@ public class LocationBean implements LocationBeanI {
 		
 	}
 	
-	public String load(Long id){
+	public String load(int id){
 		Location location = locationDao.findById(id);
 		
 		if(location != null)
@@ -76,7 +76,7 @@ public class LocationBean implements LocationBeanI {
 	}
 	
 	
-	public boolean delete(Long id) {
+	public boolean delete(int id) {
 		locationDao.delete(id);
 		
 		return true;

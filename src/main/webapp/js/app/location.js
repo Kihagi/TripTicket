@@ -2,6 +2,7 @@ var triplocation = App.extend(App.Cmp, {
 	modelId: 'location',
 	httpUrl: './location',
 	responseTarget: 'ajax-content',
+	columnModel: ['name'],
 	model: [{
 		id: 'location-no',
 		label: 'Location #',
@@ -20,6 +21,7 @@ var triplocation = App.extend(App.Cmp, {
 		name: 'descr',
 		type: 'text',
 		required: 'required'
-	}]
+	}],
+	removeRecord: true
 });
 		

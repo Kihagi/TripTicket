@@ -20,7 +20,7 @@ public interface GenericDaoI<T, ID extends Serializable> {
 
 	void delete(ID id);
 	
-	T findById(Long id);
+	T findById(ID id);
 	
 	int countAll();
 

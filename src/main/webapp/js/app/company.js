@@ -2,6 +2,8 @@ var company = App.extend(App.Cmp, {
 	modelId: 'company',
 	httpUrl: './company',
 	responseTarget: 'ajax-content',
+	columnModel: ['name', 'regNo'],
+	columnSeperator: ' - Registration #: ',
 	model:[{
 		id: 'company-name',
 		label: 'Company Name',

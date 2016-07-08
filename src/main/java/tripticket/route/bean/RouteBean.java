@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import trioticket.location.model.Location;
 import tripticket.route.dao.RouteDaoI;
 import tripticket.route.model.Route;
 
@@ -20,19 +21,26 @@ import tripticket.route.model.Route;
 public class RouteBean implements RouteBeanI{
 	
 	@PersistenceContext
-	private EntityManager emm;
+	private EntityManager em;
 	
 	@Inject
 	private RouteDaoI routeDao;
 	
 	@PostConstruct
 	public void init(){
-		routeDao.setEm(emm);
+		routeDao.setEm(em);
 	}
 
 	public void add(Route route) {
 		if(route == null)
 			return;
+		
+		if(route.getFromId() != null)
+			route.setFrom(em.getReference(Location.class, route.getFromId().intValue()));
+		
+		if(route.getToId() != null)
+			route.setTo(em.getReference(Location.class, route.getToId().intValue()));
+		
 		routeDao.save(route);
 		
 	}

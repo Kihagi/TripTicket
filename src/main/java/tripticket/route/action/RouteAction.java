@@ -2,19 +2,14 @@ package tripticket.route.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.ejb.EJB;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
-import tripticket.company.model.Company;
 import tripticket.route.bean.RouteBeanI;
 import tripticket.route.model.Route;
 
@@ -45,18 +40,22 @@ public class RouteAction extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		Route route = new Route();	
-		/*if (request.getParameter("id") !=null
+		if(request.getParameter("id") != null 
 				&& !request.getParameter("id").equals("undefined"))
-				route.setToLocationId(Long.parseLong(request.getParameter("id")));
+			route.setId(Long.parseLong(request.getParameter("id")));
 		
+		if(request.getParameter("fromId") != null 
+				&& !request.getParameter("fromId").equals("undefined"))
+			route.setFromId(Long.parseLong(request.getParameter("fromId")));
 		
-			route.setApproxTime(Double.parseDouble(request.getParameter("ApproxTime")));
-			route.setCompanyId(Long.parseLong(request.getParameter("companyId")));
-			route.setDistance(Double.parseDouble(request.getParameter("distance")));
-			route.setFromLocationId(Long.parseLong(request.getParameter("fromLocationId")));
-			route.setToLocationId(Long.parseLong(request.getParameter("toLocationId")));*/
+		if(request.getParameter("toId") != null 
+				&& !request.getParameter("toId").equals("undefined"))
+			route.setToId(Long.parseLong(request.getParameter("toId")));
+		
+		route.setApproxTime(Double.parseDouble(request.getParameter("approxTime")));
+		route.setDistance(Double.parseDouble(request.getParameter("distance")));
 			
-			routeBean.add(route);
+		routeBean.add(route);
 			
 			
 	}

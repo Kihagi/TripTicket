@@ -101,10 +101,10 @@ public class Route implements Serializable{
 		StringBuilder sb = new StringBuilder();
 		sb.append("{")
 			.append("\"id\": \"").append(getId()).append("\",")
-			.append("\"from\": \"").append(getFrom()).append("\",")
-			.append("\"fromId\": \"").append(getFromId()).append("\",")
-			.append("\"to\": \"").append(getTo()).append("\",")
-			.append("\"toId\": \"").append(getToId()).append("\",")
+			.append("\"from\": \"").append(getFrom() == null ? "N/A" : getFrom().getName()).append("\",")
+			.append("\"fromId\": \"").append(getFrom() == null ? null : getFrom().getId()).append("\",")
+			.append("\"to\": \"").append(getTo() == null ? "N/A" : getTo().getName()).append("\",")
+			.append("\"toId\": \"").append(getTo() == null ? null : getTo().getId()).append("\",")
 			.append("\"approxTime\": \"").append(getApproxTime()).append("\"")
 		.append("}");
 		

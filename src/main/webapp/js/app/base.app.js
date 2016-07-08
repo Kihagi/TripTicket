@@ -37,8 +37,7 @@ App.Cmp = {
 
 		xhr.open(me.httpMethod, me.httpUrl, me.async);
 		if (me.requestParams) {
-			xhr.setRequestHeader('Content-Type',
-					'application/x-www-form-urlencoded');
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 			xhr.send(me.requestParams);
 		} else
 			xhr.send();
@@ -319,7 +318,23 @@ App.Cmp = {
 					listView += "<span class=\"glyphicon glyphicon-star\"></span>";
 					listView += " <span class=\"glyphicon glyphicon-star\"></span>";
 					listView += "<span class=\"glyphicon glyphicon-star-empty\"></span>";
-					listView += el.name + " : " + el.regNo;
+					
+					if(me.columnModel)
+						var columnSeperator = ' ';
+						if(me.columnSeperator) 
+							columnSeperator = me.columnSeperator;
+						
+						var colSize = me.columnModel.length;
+						
+						me.columnModel.forEach(function(elCol){
+							listView += el[elCol];
+							
+							colSize--;
+							
+							if(colSize != 0)
+								listView += columnSeperator;
+						});
+					
 					listView += "<span class=\"pull-right\">10 days ago</span>";
 					listView += "<p>This trip was great in terms of services. I would definitely recomend it to someone else.</p>";
 					listView += "</div>";

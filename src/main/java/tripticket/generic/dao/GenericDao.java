@@ -66,7 +66,7 @@ public class GenericDao<T, ID extends Serializable> implements GenericDaoI<T, ID
 		em.remove(em.find(persistentClass, id));
 	}
 	
-	public T findById(Long id){
+	public T findById(ID id){
 		return em.find(persistentClass, id);
 	}
 	

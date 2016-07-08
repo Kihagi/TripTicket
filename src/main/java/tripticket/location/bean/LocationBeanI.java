@@ -10,10 +10,10 @@ public interface LocationBeanI {
 
 	List<Location> list();
 	
-	boolean delete(Long id);
+	boolean delete(int id);
 
 	String listInJson();
 
-	String load(Long id);
+	String load(int id);
 
 }

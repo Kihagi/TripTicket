@@ -1,134 +1,97 @@
 var parcel = App.extend(App.Cmp, {
-		formId:'parcel',
-		formUrl:'./parcel',
-		responseTarget:'ajax-content',
-		fromFields:[{
-			id:'parcel-to',
-			label:'Parcel To',
+		modelId:'parcel',
+		httpUrl: './parcel',
+		responseTarget: 'ajax-content',
+		columnModel: ['parcelTo', 'parcelFrom'],
+		columnSeperator: ' To ',
+		model:[{
+			id:'parcel-sender',
+			label:'Sender',
 			name:'parcelTo',
 			type:'text',
+			required:'required'
 			
 		},{
-			id:'parcel-from',
-			label:'Parcel From',
+			id:'parcel-recipient ',
+			label:'Recipient ',
 			name:'parcelFrom',
-			type:'text'
+			type:'text',
+			required:'required'
 		},{
 			id:'parcel-description',
 			label:'Parcel Description',
 			name:'parcelDescription',
-			type:'text'
-		},{
-			id: 'parcel-route',
-			label: 'Parcel Route',
-			name: 'route',
+			type:'text',
+			required:'required'
+		}, /*{
+			id: 'parcel-from',
+			label: 'From',
+			name: 'fromId',
 			type: 'select',
-			options: [
-			    {label: 'Nairobi-Mombasa', value:'NAI-MBSA'}, 
-		        {label: 'Nairobi-Kisumu', value:'NAI-KIS'}, 
-		        {label: 'Nairobi-Nakuru', value:'NAI-NKR'},
-		        {label: 'Nairobi-Machakos', value:'NAI-MCHKS'}
-		     ]
+			options:[],
+			required: 'required'
 		},{
-			id:'parcel-cost',
-			label:'Parcel Cost',
-			name:'parcelCost',
-			type:'number'
-		},{
+			id: 'parcel-to',
+			label: 'To',
+			name: 'toId',
+			type: 'select',
+			options: [],
+			required: 'required'
+		},*/{
+			id : 'parcel-route',
+			label : 'Parcel Route',
+			name : 'route',
+			type : 'select',
+			options : [ {
+				label : 'Nairobi-Mombasa',
+				value : 'NAI-MBSA'
+			}, {
+				label : 'Nairobi-Kisumu',
+				value : 'NAI-KIS'
+			}, {
+				label : 'Nairobi-Nakuru',
+				value : 'NAI-NKR'
+			}, {
+				label : 'Nairobi-Machakos',
+				value : 'NAI-MCHKS'
+			} ]
+		}, {
+		id : 'parcel-cost',
+		label : 'Parcel Cost',
+		name : 'parcelCost',
+		type : 'number',
+		required : 'required'
+	}, {
 			id:'parcel-id',
 			label:'',
 			name:'id',
 			hidden:'true',
-			type:'hidden'
+			type:'hidden',
+			
 		}],
-			aftersubmit: function(){
-				var me = this;
-				me.table("./parcel");
-			},
-			
-			
-		
+		removeRecord: true	
 	});
 
-	/*(function(){
-		parcel.init();
-	})();*/
-		
-
-/*afterRemove: function(){
-var me = this;
-me.table("./parcel");
-},*/
+(function(){
 	
-	/*list: function(){
-	    	var ajax = new XMLHttpRequest();
-	    	
-	    	ajax.onreadystatechange = function(){
-	    		
-	    		if(ajax.readyState == 4){
-	    			if(ajax.status == 200){
-	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
-	    			}
-	    		}
-	    	}
-	    	
-	    	ajax.open("GET", "./parcel/action", true);
-	    	ajax.send();
-		},
-		add: function(){
-	    	var ajax = new XMLHttpRequest();
-	    	
-	    	ajax.onreadystatechange = function(){
-	    		
-	    		if(ajax.readyState == 4){
-	    			if(ajax.status == 200){
-	    				document.getElementById('ajax-content').innerHTML = ajax.responseText;
-	    			}
-	    		}
-	    	}
-	    	
-	    	ajax.open("GET", "./parcel/addParcel.jsp", true);
-	    	ajax.send();
-		},
-		
-		save: function(){
-			var me = this;
-	    	var ajax = new XMLHttpRequest();
-	    	
-	    	var parcTo = document.getElementById('parcel-to').value;
-	    	var parcFrom = document.getElementById('parcel-from').value;
-	    	var parcDescription = document.getElementById('parcel-description').value;
-	    	var parcRoute = document.getElementById('parcel-route').value;
-	    	var parcCost = document.getElementById('parcel-cost').value;
-	    	
-	    	var params = 'parcelTo=' + encodeURIComponent(parcTo) 
-	    		+ '&parcelFrom=' + encodeURIComponent(parcFrom)
-	    		+ '&parcelDescription=' + encodeURIComponent(parcDescription)
-	    		+ '&parcelRoute=' + encodeURIComponent(parcRoute)
-	    		+ '&parcelCost=' + encodeURIComponent(parcCost);
-	    		
-	    	
-	     console.log(params);
-	    	
-	    	ajax.onreadystatechange = function(){
-	    		
-	    		if(ajax.readyState == 4){
-	    			if(ajax.status == 200){
-	    				me.list();
-	    			}
-	    		}
-	    	}
-	    	
-	    	ajax.open("POST", "./parcel/action/add", true);
-	    	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	    	ajax.send(params);
-		},
-		remove: function(){
-			console.log("this removes parcel");
+	parcel.ajaxRequest.call({
+		httpMethod : 'GET',
+		httpUrl : './location',
+		updateTarget : function(resp) {
+			var options = [];
+			console.log(resp);
+			JSON.parse(resp).forEach(function(el){
+				options.push({
+					label: el.name,
+					value: el.id
+				});
+			});
+			
+			parcel.model[0].options = options;
+			parcel.model[1].options = options;
+			
+			
+			
 		}
-
-
-
-}
-
-*/
+	})
+})();

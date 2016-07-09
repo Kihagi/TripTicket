@@ -53,7 +53,7 @@
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.show()"> Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
                     <a href="#" class="list-group-item " onclick="person.list()">Persons</a>
-                    <a href="#" class="list-group-item " onclick="parcel.list()">Parcel</a>
+                    <a href="#" class="list-group-item " onclick="parcel.init()">Parcel</a>
 
                 </div>
                  

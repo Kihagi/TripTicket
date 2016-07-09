@@ -104,6 +104,7 @@
 									<div class="form-group">
 										<input type="text" name="id" required id="regid" tabindex="1" class="form-control" placeholder="ID/Passport" value="">
 									</div>
+	
 									<div class="form-group">
 										<input type="text" name="username" required id="regusername" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>

@@ -18,25 +18,59 @@ public class Vehicle {
 	private Long id;
 
 	@Column(unique = true)
-	private String reg_no;
+	private String regNo;
+	
+	@Column(name = "type")
+	private String type;
 
-	@Column
-	@Enumerated(EnumType.STRING)
-	private Capacity capacity;
+	@Column(name = "size")
+	private String size;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 	public String getReg_no() {
-		return reg_no;
+		return regNo;
 	}
 
-	public void setReg_no(String reg_no) {
-		this.reg_no = reg_no;
+	public void setReg_no(String regNo) {
+		this.regNo = regNo;
+	}
+	
+
+	public String getType() {
+		return type;
 	}
 
-	public Capacity getCapacity() {
-		return capacity;
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"id\": \"").append(getId()).append("\",")
+			.append("\"type\": \"").append(getType()).append("\",")
+			.append("\"regNo\": \"").append(getReg_no()).append("\",")
+			.append("\"size\": \"").append(getSize()).append("\"")
+		.append("}");
+		
+		return sb.toString();
+		
 	}
 
-	public void setCapacity(Capacity capacity) {
-		this.capacity = capacity;
-	}
+	
 }

@@ -13,7 +13,7 @@ public class GenericDao<T, ID extends Serializable> implements GenericDaoI<T, ID
 
 	private final Class<T> persistentClass;
 	
-	private EntityManager em;
+	protected EntityManager em;
 	
 	public void setEm(EntityManager em){
 		this.em = em;

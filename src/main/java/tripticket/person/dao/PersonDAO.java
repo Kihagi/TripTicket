@@ -8,41 +8,17 @@ import javax.persistence.Query;
 import org.hibernate.criterion.Restrictions;
 
 import tripticket.common.model.User;
+import tripticket.generic.dao.GenericDao;
 import tripticket.person.model.Person;
 
-public class PersonDAO implements PersonDaoI{
-	
-	private EntityManager manager;
-
-	public Person view(Person person) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public User create(User user) {
-		return manager.merge(user);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Person> list(Person filter) {
-		return manager.createQuery("from Person p").getResultList();
-	}
-
-	public void delete(Long personId) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public Person create(Person person) {
-		return manager.merge(person);
-	}
+public class PersonDAO extends GenericDao <Person, Long> implements PersonDaoI{
 
 	public Boolean login(String username, String password) {
 		
 
 		String hql = "FROM Person p WHERE p.user.username=:username "
 				+ "and p.user.password=:pwd";
-		Query query = manager.createQuery(hql)
+		Query query = em.createQuery(hql)
 				.setParameter("username", username)
 				.setParameter("pwd", password);
 
@@ -55,11 +31,6 @@ public class PersonDAO implements PersonDaoI{
 			return false;
 		else
 			return true;
-	}
-
-	public void setEm(EntityManager manager) {
-		this.manager = manager;
-		
 	}
 
 	

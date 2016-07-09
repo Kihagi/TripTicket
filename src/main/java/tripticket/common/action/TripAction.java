@@ -46,7 +46,6 @@ public class TripAction extends HttpServlet {
 		trip.setArrivalTime(request.getParameter("arrivalTime"));
 		trip.setDepatureTime(request.getParameter("depatureTime"));
 		trip.setRoute(request.getParameter("route"));
-		trip.setVehicle(request.getParameter("vehicle"));
 		trip.setPrice(Double.parseDouble(request.getParameter("price")));
 		
 		tripBean.add(trip);

@@ -38,6 +38,7 @@ public class LocationAction extends HttpServlet{
 		
 		if(request.getParameter("id") != null 
 				&& !request.getParameter("id").equals("undefined"))
+			
 			location.setId(Integer.parseInt(request.getParameter("id")));
 		
 		location.setName(request.getParameter("name"));

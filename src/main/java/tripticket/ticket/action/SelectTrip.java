@@ -40,7 +40,7 @@ public class SelectTrip extends HttpServlet {
 						resp.println("<br>");
 						resp.println("Route 	 	: " + trip.getRoute());
 						resp.println("<br>");
-						resp.println("Vehicle No	: " + trip.getVehicle());
+						//resp.println("Vehicle No	: " + trip.getVehicle());
 						
 						resp.println("<h2> Fare : $" + trip.getPrice() + "</h2>");
 						

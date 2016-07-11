@@ -1,19 +1,8 @@
 package tripticket.vehicle.dao;
 
-import java.util.List;
-
-
+import tripticket.generic.dao.GenericDaoI;
 import tripticket.vehicle.model.Vehicle;
 
-public interface VehicleDaoI {
+public interface VehicleDaoI  extends GenericDaoI<Vehicle, Long>{
 	
-
-	Vehicle add(Vehicle vehicle);
-	
-	Vehicle load(Vehicle vehicle);
-	
-	List<Vehicle> list(Vehicle filter);
-	
-	void delete(Long VehicleId);
-
 }

@@ -10,6 +10,17 @@ public class User {
 	
 	@Column
 	private String password;
+	
+	@Column
+	private String usertype;
+
+	public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
 
 	public String getUsername() {
 		return username;

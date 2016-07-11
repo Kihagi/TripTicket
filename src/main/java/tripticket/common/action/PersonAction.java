@@ -26,39 +26,12 @@ public class PersonAction extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		this.list(resp);
 	
 	}
 
 	private void list(HttpServletResponse response) throws ServletException, IOException{
-		PrintWriter resp = response.getWriter();
-	    List<Person> persons = personBean.list();
-	    
-        resp.println("<div class=\"text-right\">");
-        resp.println("<a class=\"btn btn-success\"  onclick=\"person.add()\">Add</a>");
-        resp.println("</div>");
-        
-	    for(Person person : persons){
-	    	resp.println("<hr>");
-	    	resp.println("<div class=\"row\">");
-	    	resp.println("<div class=\"col-md-12\">");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println(" <span class=\"glyphicon glyphicon-star\"></span>");
-	    	resp.println("<span class=\"glyphicon glyphicon-star-empty\"></span>");
-	    	resp.println(person.getFirstname()+ person.getLastname() + " : " + person.getId());
-	    	
-	    	resp.println("</div>");
-	    	resp.println("</div>");
-	    	
-	    	resp.println("<div class=\"text-right\">");
-	    	resp.println("<a class=\"btn btn-danger\"  onclick=\"person.remove(" + person.getId() + ")\">Delete</a><br/>");
-	        resp.println("<span class=\"pull-right\">Status: Active</span>");
-	        resp.println("</div>");
-	    }
+
 	}
 
 	@Override

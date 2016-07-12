@@ -145,22 +145,23 @@ App.Cmp = {
 		var NumberOfchildren = parentDiv.childNodes.length;// gets the number
 		// of children
 
-		console.log(NumberOfchildren);
+		/*console.log(NumberOfchildren);
 		if (NumberOfchildren <= 3)// ensures repetition of multiclick errors
 			// is avoided
 			parentDiv.appendChild(para);
-
+		*/
+		
 		document.getElementById(myId).style.backgroundColor = "#f5dddd";
 		document.getElementById(myId).style.borderColor = "red";
 		document.getElementById(myId).style.color = "red";
 	},
 
 	commonOkay : function(myId) {
-		if (document.getElementById("para") != null) {
+		/*if (document.getElementById("para") != null) {
 			var element = document.getElementById("para");
 			element.outerHTML = "";
 			delete element;
-		}
+		}*/
 
 		document.getElementById(myId).style.backgroundColor = "#e1ffdc";
 		document.getElementById(myId).style.borderColor = "#1b9506";

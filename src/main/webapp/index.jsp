@@ -48,7 +48,7 @@
                     <a href="#" class="list-group-item active" onclick="company.init()">Companies</a>
                     <a href="#" class="list-group-item " onclick="triplocation.init()">Locations</a>
                     <a href="#" class="list-group-item" onclick="route.init()">Routes</a>
-                    <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
+                    <a href="#" class="list-group-item" onclick="ticket.init()">Ticket</a>
                     <a href="#" class="list-group-item " onclick="trip.aftersubmit()">Trip</a>
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.show()"> Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>

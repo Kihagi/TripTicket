@@ -40,8 +40,22 @@ public class Trip{
 	private Route route_id;
 
 	
+	
+	
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Route getRoute_id() {
+		return route_id;
+	}
+
+	public void setRoute_id(Route route_id) {
+		this.route_id = route_id;
 	}
 
 	public void setTripId(Long id) {

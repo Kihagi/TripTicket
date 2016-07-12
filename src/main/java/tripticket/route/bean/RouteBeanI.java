@@ -18,5 +18,4 @@ public interface RouteBeanI {
 	
 	String listInJson();
 	String load(Long id);
-
 }

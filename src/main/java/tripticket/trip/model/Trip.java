@@ -32,6 +32,10 @@ public class Trip{
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void setTripId(Long id) {
 		this.id = id;
 	}

@@ -16,7 +16,7 @@ import tripticket.company.dao.CompanyDaoI;
 import tripticket.company.model.Company;
 
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionManagement(TransactionManagementType.BEAN)
 public class CompanyBean implements CompanyBeanI{
 	
 	@PersistenceContext

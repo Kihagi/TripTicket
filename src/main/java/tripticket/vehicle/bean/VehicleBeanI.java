@@ -9,5 +9,11 @@ public interface VehicleBeanI {
 	void add(Vehicle vehicle);
 
 	List<Vehicle> list();
+	
+	String listInJson();
+	
+	boolean delete(Long id);
+	
+	String load(Long id);	
 
 }

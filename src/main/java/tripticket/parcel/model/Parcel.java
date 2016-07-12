@@ -1,5 +1,6 @@
 package tripticket.parcel.model;
 
+import trioticket.location.model.Location;
 import tripticket.route.model.Route;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -26,7 +28,7 @@ public class Parcel implements Serializable {
 	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Long parcelId;
+	private Long id;
 	
 	@Column(name = "parcel_to")
 	private String parcelTo;
@@ -47,12 +49,44 @@ public class Parcel implements Serializable {
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "route_id")
     private Route routeId;
+    
+    
+    @ManyToOne
+	private Location from;
+    
+    @ManyToOne
+	private Location to;
+    
+
+	@Transient
+    private Long toId;
+    
+    @Transient
+    private Long fromId;
+    
+    
 	
 	
 	
 	
 	
 	
+	public Long getToId() {
+		return toId;
+	}
+
+	public void setToId(Long toId) {
+		this.toId = toId;
+	}
+
+	public Long getFromId() {
+		return fromId;
+	}
+
+	public void setFromId(Long fromId) {
+		this.fromId = fromId;
+	}
+
 	public Double getParcelcost() {
 		return parcelcost;
 	}
@@ -61,12 +95,12 @@ public class Parcel implements Serializable {
 		this.parcelcost = parcelcost;
 	}
 
-	public Long getParcelId() {
-		return parcelId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setParcelId(Long parcelId) {
-		this.parcelId = parcelId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getParcelTo() {
@@ -100,12 +134,27 @@ public class Parcel implements Serializable {
 	public void setRoute(String route) {
 		this.route = route;
 	}
+	 public Location getFrom() {
+			return from;
+		}
 
-	public Object getJson() {
+	public void setFrom(Location from) {
+			this.from = from;
+		}
+
+	public Location getTo() {
+			return to;
+		}
+
+	public void setTo(Location to) {
+			this.to = to;
+		}
+
+/*	public String getJson() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{")
 			.append("\"parcelId\": \"").append(getParcelId()).append("\",")
-			.append("\"name\": \"").append(getParcelTo()).append("\",")
+			.append("\"parcelTo\": \"").append(getParcelTo()).append("\",")
 			.append("\"parcelFrom\": \"").append(getParcelFrom()).append("\",")
 			.append("\"parcelDescription\": \"").append(getParcelDescription()).append("\",")
 			.append("\"route\": \"").append(getRoute()).append("\",")
@@ -113,7 +162,26 @@ public class Parcel implements Serializable {
 		.append("}");
 		
 		return sb.toString();
-	}
+	}*/
+	public String getJson(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("{")
+			.append("\"id\": \"").append(getId()).append("\",")
+			.append("\"parcelTo\": \"").append(getParcelTo()).append("\",")
+			.append("\"parcelFrom\": \"").append(getParcelFrom()).append("\",")
+			.append("\"parcelDescription\": \"").append(getParcelDescription()).append("\",")
+			
+			.append("\"from\": \"").append(getFrom() == null ? "N/A" : getFrom().getName()).append("\",")
+			.append("\"fromId\": \"").append(getFrom() == null ? null : getFrom().getId()).append("\",")
+			.append("\"to\": \"").append(getTo() == null ? "N/A" : getTo().getName()).append("\",")
+			.append("\"toId\": \"").append(getTo() == null ? null : getTo().getId()).append("\",")
+			.append("\"route\": \"").append(getRoute()).append("\",")
+			.append("\"parcelcost\": \"").append(getParcelcost()).append("\"");
+		sb.append("}");
+		
+		return sb.toString();
+	
 
 	
+}
 }

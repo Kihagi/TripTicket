@@ -5,6 +5,8 @@ import tripticket.parcel.model.Parcel;
 
 public class ParcelDao extends GenericDao<Parcel, Long> implements ParcelDaoI{
 	
+	
+}
 	/*private EntityManager em;
 
 	
@@ -41,4 +43,4 @@ public class ParcelDao extends GenericDao<Parcel, Long> implements ParcelDaoI{
 	
 	
 
-}
+

@@ -12,11 +12,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import trioticket.location.model.Location;
 import tripticket.company.dao.CompanyDao;
 import tripticket.company.model.Company;
 import tripticket.parcel.dao.ParcelDao;
 import tripticket.parcel.dao.ParcelDaoI;
 import tripticket.parcel.model.Parcel;
+import tripticket.route.model.Route;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -36,10 +38,20 @@ public class ParcelBean implements ParcelBeanI{
 
 	
 	public void add(Parcel parcel){
-		if(parcel == null || parcel.getParcelTo() == null ||parcel.getParcelFrom() == null)
+		/*if(parcel == null || parcel.getParcelTo() == null ||parcel.getParcelFrom() == null)
 			return;
 		
 		//parcelDao.add(parcel);
+*/		
+		if(parcel == null)
+			return;
+		
+		if(parcel.getFromId() != null)
+			parcel.setFrom(em.getReference(Location.class, parcel.getFromId().intValue()));
+		
+		if(parcel.getToId() != null)
+			parcel.setTo(em.getReference(Location.class, parcel.getToId().intValue()));
+		
 		parcelDao.save(parcel);
 	}
 	
@@ -55,7 +67,7 @@ public class ParcelBean implements ParcelBeanI{
 	}
 
 
-	public String listInJson(){
+	public String listInJson() {
 		Map<String, Object> filter = new HashMap<String, Object>();
 		
 		
@@ -67,24 +79,24 @@ public class ParcelBean implements ParcelBeanI{
 		for(Parcel parcel : parcels){
 			sb.append(parcel.getJson());
 			
-			if(count <= 1)
-				sb.append(",");
+			count--;
 			
-				count--;
-				
+			if(count >= 1)
+				sb.append(",");
 		}
 		
 		sb.append("]");
 		
 		return sb.toString();
+		
 	}
 
 
-	public String load(Long id) {
+	public String load(Long id){
 		Parcel parcel = parcelDao.findById(id);
 		
 		if(parcel != null)
-			return (String) parcel.getJson();
+			return parcel.getJson();
 		else
 			return "{}";
 	}	

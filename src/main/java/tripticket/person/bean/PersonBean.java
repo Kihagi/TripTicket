@@ -29,7 +29,7 @@ public class PersonBean implements PersonBeanI {
 		if(person == null)
 			return;
 		
-		personDao.create(person);
+		personDao.save(person);
 	}
 
 	public Boolean login(String username, String password) {

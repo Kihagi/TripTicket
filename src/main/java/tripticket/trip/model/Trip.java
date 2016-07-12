@@ -1,16 +1,12 @@
 package tripticket.trip.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import tripticket.route.model.Route;
 
 
 @Entity
@@ -29,18 +25,8 @@ public class Trip{
 	@Column(name = "route")
 	private String route;
 	
-	@Column(name = "vehicle")
-	private String vehicle;
-	
 	@Column(name = "price",columnDefinition = "DOUBLE")
 	private double price;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "route_id")
-	private Route route_id;
-
-	
-	
 	
 	public Long getId() {
 		return id;
@@ -48,14 +34,6 @@ public class Trip{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Route getRoute_id() {
-		return route_id;
-	}
-
-	public void setRoute_id(Route route_id) {
-		this.route_id = route_id;
 	}
 
 	public void setTripId(Long id) {
@@ -94,13 +72,6 @@ public class Trip{
 		this.arrivalTime = arrivalTime;
 	}
 
-	public String getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(String vehicle) {
-		this.vehicle = vehicle;
-	}
 	
 	public String getJson(){
 		
@@ -110,8 +81,7 @@ public class Trip{
 		.append("\"arrivalTime\": \"").append(getArrivalTime()).append("\",")
 		.append("\"depatureTime\": \"").append(getDepatureTime()).append("\",")
 		.append("\"price\": \"").append(getPrice()).append("\",")
-		.append("\"route\": \"").append(getRoute()).append("\",")
-		.append("\"vehicle\": \"").append(getVehicle()).append("\"")
+		.append("\"route\": \"").append(getRoute()).append("\"")
 	.append("}");
 		
 		return sb.toString();

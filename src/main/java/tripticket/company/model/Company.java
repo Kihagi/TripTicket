@@ -8,19 +8,47 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import tripticket.common.model.Address;
 
+@NamedQueries({
+	@NamedQuery(
+			name = Company.NQ_ALL,
+			query = "FROM Company c"
+	),
+	@NamedQuery(
+			name = Company.NQ_FINDBYID,
+			query = "FROM Company c WHERE c.id=:id"
+	)
+})
 @Entity
 @Table(name = "comp_companies")
+@XmlRootElement
+@JsonInclude(Include.NON_EMPTY)
 public class Company implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Transient
+	public static final String NQ_ALL = "Company.All";
+	
+	@Transient
+	public static final String NQ_FINDBYID = "Company.findById";
 
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotNull
 	@Column(unique = true)
 	private String name;
 	
@@ -58,6 +86,9 @@ public class Company implements Serializable{
 	}
 
 	public Address getAddress() {
+		if(address ==  null)
+			address = new Address();
+		
 		return address;
 	}
 
@@ -81,6 +112,7 @@ public class Company implements Serializable{
 		this.desc = desc;
 	}
 	
+	@JsonIgnore
 	public String getJson(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("{")

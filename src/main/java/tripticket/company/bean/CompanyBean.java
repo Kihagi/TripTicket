@@ -38,7 +38,7 @@ public class CompanyBean implements CompanyBeanI{
 	}
 	
 	public String load(Long id){
-		Company company = companyDao.findById(id);
+		Company company = companyDao.findByIdNq(id);
 		
 		if(company != null)
 			return company.getJson();
@@ -54,7 +54,8 @@ public class CompanyBean implements CompanyBeanI{
 		Map<String, Object> filter = new HashMap<String, Object>();
 		//filter.put("name", "sdadad");
 		
-		List<Company> companies = companyDao.list(filter);
+		//List<Company> companies = companyDao.list(filter);
+		List<Company> companies = companyDao.sqlList();
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		

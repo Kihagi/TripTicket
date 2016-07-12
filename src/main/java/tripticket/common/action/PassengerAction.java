@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tripticket.common.model.Address;
 import tripticket.passenger.bean.PassengerBeanI;
 import tripticket.passenger.model.Passenger;
 
@@ -40,6 +41,14 @@ public class PassengerAction extends HttpServlet {
 		Passenger passenger = new Passenger();
 		passenger.setFirstname(req.getParameter("firstname"));
 		passenger.setLastname(req.getParameter("lastname"));
+		passenger.setIdentification(req.getParameter("idNumber"));
+		passenger.setAddress(new Address());
+		
+		passenger.getAddress().setEmail(req.getParameter("email"));
+		passenger.getAddress().setBox(req.getParameter("box"));
+		passenger.getAddress().setPhoneNo(req.getParameter("phoneNumber"));
+		passenger.getAddress().setTown(req.getParameter("town"));
+	
 		passengerBean.add(passenger);
 	}
 

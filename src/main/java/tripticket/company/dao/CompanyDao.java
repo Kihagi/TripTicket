@@ -1,5 +1,6 @@
 package tripticket.company.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class CompanyDao extends GenericDao<Company, Long> implements CompanyDaoI
 		Company company;
 		for(Object [] result : results){
 			company = new Company();
-			if(result[0] != null)company.setId( (Long) result[0]);
+			if(result[0] != null)company.setId( ((BigInteger) result[0]).longValue());
 			if(result[1] != null)company.setName( (String) result[1]);
 			companies.add(company);
 		}

@@ -48,17 +48,12 @@
                     <a href="#" class="list-group-item active" onclick="company.init()">Companies</a>
                     <a href="#" class="list-group-item " onclick="triplocation.init()">Locations</a>
                     <a href="#" class="list-group-item" onclick="route.init()">Routes</a>
-                    <a href="#" class="list-group-item" onclick="ticketCompanies()">Ticket</a>
+                    <a href="#" class="list-group-item" onclick="ticket.init()">Ticket</a>
                     <a href="#" class="list-group-item  glyphicon glyphicon-user" onclick="passenger.init()"> Passenger</a>
                     <a href="#" class="list-group-item " onclick="vehicle.list()">Vehicle</a>
-
-                    <a href="#" class="list-group-item " onclick="person.list()">Persons</a>
-                   
-
-
-                    <a href="#" class="list-group-item " onclick="trip.init()">Trip</a>
- 
-                    <a href="#" class="list-group-item " onclick="vehicle.init()">Vehicle</a>
+					<a href="#" class="list-group-item " onclick="person.list()">Persons</a>
+                   	<a href="#" class="list-group-item " onclick="trip.init()">Trip</a>
+ 					<a href="#" class="list-group-item " onclick="vehicle.init()">Vehicle</a>
                     <a href="#" class="list-group-item " onclick="parcel.init()">Parcel</a>
 
 

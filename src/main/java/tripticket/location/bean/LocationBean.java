@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +26,9 @@ public class LocationBean implements LocationBeanI {
 	@Inject 
 	private LocationDaoI locationDao;
 	
+	@Inject
+	private Event<Location> event;
+	
 	@PostConstruct
 	public void init(){
 		locationDao.setEm(em);
@@ -35,7 +39,8 @@ public class LocationBean implements LocationBeanI {
 		if(location == null || location.getName() == null)
 			return;
 		
-		locationDao.save(location);
+		location = locationDao.save(location);
+		event.fire(location);
 		
 	}
 	

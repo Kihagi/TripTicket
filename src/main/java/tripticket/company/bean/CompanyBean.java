@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,7 +35,7 @@ public class CompanyBean implements CompanyBeanI{
 		if(company == null || company.getName() == null)
 			return;
 		
-		companyDao.save(company);
+		company = companyDao.save(company);
 	}
 	
 	public String load(Long id){
